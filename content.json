@@ -94,7 +94,7 @@
       ]
     },
     {
-      "title": "Tier-1 Industrial Closures",
+      "title": "Major Industrial Closures",
       "meta": "VIC & NT | 2024 to Present",
       "preview": "Project Engineer overseeing heavy structural dismantling and design compliance at ExxonMobil and Rio Tinto.",
       "tags": ["Heavy Civil", "Remediation", "Contracts"],
@@ -173,5 +173,5 @@
     "linkedin": "https://www.linkedin.com/in/ganesh-kalal/"
   },
 
-  "downloadCvUrl": "CV_Ganesh.pdf"
+  "profilePhotoUrl": "./profile.png"
 }
