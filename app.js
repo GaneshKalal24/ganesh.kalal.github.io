@@ -4,169 +4,293 @@ async function loadContent() {
   return await res.json();
 }
 
-function setText(id, value) {
-  const el = document.getElementById(id);
-  if (el) el.textContent = value || "";
+function $(id){ return document.getElementById(id); }
+
+function setText(id, value){
+  const el = $(id);
+  if (el) el.textContent = value ?? "";
 }
 
-function setLink(id, href) {
-  const el = document.getElementById(id);
+function setLink(id, href){
+  const el = $(id);
   if (!el) return;
-  if (!href) {
-    el.style.display = "none";
-    return;
-  }
+  if (!href) { el.style.display = "none"; return; }
   el.href = href;
 }
 
-function makeItem({ title, meta, bullets }) {
-  const wrap = document.createElement("div");
-  wrap.className = "item";
+function createPill(text){
+  const s = document.createElement("span");
+  s.className = "pill";
+  s.textContent = text;
+  return s;
+}
+
+function createStat(label, value){
+  const d = document.createElement("div");
+  d.className = "stat";
+  const strong = document.createElement("strong");
+  strong.textContent = value;
+  const span = document.createElement("span");
+  span.textContent = label;
+  d.appendChild(strong);
+  d.appendChild(span);
+  return d;
+}
+
+function createBentoCard(item, onClick){
+  const card = document.createElement("div");
+  card.className = "card bento-card";
+  card.tabIndex = 0;
 
   const top = document.createElement("div");
-  top.className = "top";
+  top.className = "bento-top";
 
-  const t = document.createElement("div");
-  t.className = "title";
-  t.textContent = title || "";
+  const title = document.createElement("div");
+  title.className = "bento-title";
+  title.textContent = item.title;
 
-  const m = document.createElement("div");
-  m.className = "meta";
-  m.textContent = meta || "";
+  const meta = document.createElement("div");
+  meta.className = "bento-meta";
+  meta.textContent = item.meta || "Details";
 
-  top.appendChild(t);
-  top.appendChild(m);
+  top.appendChild(title);
+  top.appendChild(meta);
 
-  wrap.appendChild(top);
+  const text = document.createElement("div");
+  text.className = "bento-text";
+  text.textContent = item.preview || "";
 
-  if (Array.isArray(bullets) && bullets.length) {
-    const ul = document.createElement("ul");
-    bullets.forEach(b => {
-      const li = document.createElement("li");
-      li.textContent = b;
-      ul.appendChild(li);
-    });
-    wrap.appendChild(ul);
-  }
-  return wrap;
+  card.appendChild(top);
+  card.appendChild(text);
+
+  const open = () => onClick(item);
+  card.addEventListener("click", open);
+  card.addEventListener("keydown", (e) => { if (e.key === "Enter") open(); });
+
+  return card;
 }
 
-function renderList(listId, items) {
-  const ul = document.getElementById(listId);
-  if (!ul) return;
-  ul.innerHTML = "";
-  (items || []).forEach(text => {
+function createProjectCard(p, onClick){
+  const card = document.createElement("div");
+  card.className = "card project-card";
+  card.tabIndex = 0;
+
+  const top = document.createElement("div");
+  top.className = "bento-top";
+
+  const title = document.createElement("div");
+  title.className = "bento-title";
+  title.textContent = p.title;
+
+  const meta = document.createElement("div");
+  meta.className = "bento-meta";
+  meta.textContent = p.meta || "";
+
+  top.appendChild(title);
+  top.appendChild(meta);
+
+  const text = document.createElement("div");
+  text.className = "bento-text";
+  text.textContent = p.preview || "";
+
+  const tags = document.createElement("div");
+  tags.className = "project-tags";
+  (p.tags || []).forEach(t => {
+    const tag = document.createElement("span");
+    tag.className = "tag";
+    tag.textContent = t;
+    tags.appendChild(tag);
+  });
+
+  card.appendChild(top);
+  card.appendChild(text);
+  if ((p.tags || []).length) card.appendChild(tags);
+
+  const open = () => onClick(p);
+  card.addEventListener("click", open);
+  card.addEventListener("keydown", (e) => { if (e.key === "Enter") open(); });
+
+  return card;
+}
+
+function createTimelineItem(t){
+  const card = document.createElement("div");
+  card.className = "card time-item";
+
+  const row = document.createElement("div");
+  row.className = "row";
+
+  const role = document.createElement("div");
+  role.className = "role";
+  role.textContent = t.roleCompany;
+
+  const when = document.createElement("div");
+  when.className = "when";
+  when.textContent = t.dates;
+
+  row.appendChild(role);
+  row.appendChild(when);
+
+  const where = document.createElement("div");
+  where.className = "where";
+  where.textContent = t.location || "";
+
+  const ul = document.createElement("ul");
+  (t.bullets || []).forEach(b => {
     const li = document.createElement("li");
-    li.textContent = text;
+    li.textContent = b;
     ul.appendChild(li);
   });
+
+  card.appendChild(row);
+  if (t.location) card.appendChild(where);
+  if ((t.bullets || []).length) card.appendChild(ul);
+
+  return card;
 }
 
-function renderStack(stackId, items, mapper) {
-  const el = document.getElementById(stackId);
-  if (!el) return;
-  el.innerHTML = "";
-  (items || []).forEach(it => el.appendChild(mapper(it)));
+function openModal({ kicker, title, text, bullets }){
+  const modal = $("modal");
+  $("modalKicker").textContent = kicker || "";
+  $("modalTitle").textContent = title || "";
+  $("modalText").textContent = text || "";
+
+  const ul = $("modalList");
+  ul.innerHTML = "";
+  (bullets || []).forEach(b => {
+    const li = document.createElement("li");
+    li.textContent = b;
+    ul.appendChild(li);
+  });
+
+  modal.setAttribute("aria-hidden", "false");
+  document.body.style.overflow = "hidden";
 }
 
-function renderChips(chips) {
-  const el = document.getElementById("chips");
+function closeModal(){
+  const modal = $("modal");
+  modal.setAttribute("aria-hidden", "true");
+  document.body.style.overflow = "";
+}
+
+function renderSimpleList(id, items){
+  const el = $(id);
   if (!el) return;
   el.innerHTML = "";
-  (chips || []).forEach(c => {
-    const chip = document.createElement("span");
-    chip.className = "chip";
-    chip.textContent = c;
-    el.appendChild(chip);
+  (items || []).forEach(x => {
+    const li = document.createElement("li");
+    li.textContent = x;
+    el.appendChild(li);
   });
 }
 
-function renderContact(contact) {
-  const el = document.getElementById("contact");
-  if (!el) return;
-  el.innerHTML = "";
-
-  const blocks = [
-    contact?.location ? `📍 ${contact.location}` : null,
-    contact?.phone ? `📞 ${contact.phone}` : null,
-    contact?.email ? `✉️ ${contact.email}` : null,
-  ].filter(Boolean);
-
-  blocks.forEach(line => {
-    const div = document.createElement("div");
-    div.textContent = line;
-    el.appendChild(div);
-  });
-
-  if (contact?.email) {
-    const a = document.createElement("a");
-    a.href = `mailto:${contact.email}`;
-    a.textContent = "Email me";
-    el.appendChild(a);
-  }
-
-  if (contact?.linkedin) {
-    const a = document.createElement("a");
-    a.href = contact.linkedin;
-    a.target = "_blank";
-    a.rel = "noopener";
-    a.textContent = "View LinkedIn";
-    el.appendChild(a);
-  }
-}
-
-(async function init() {
-  try {
+(async function init(){
+  try{
     const data = await loadContent();
 
     setText("name", data.name);
-    setText("headline", data.headline);
-    setText("summary", data.summary);
-
-    // Top buttons
-    if (data.contact?.email) setLink("emailLink", `mailto:${data.contact.email}`);
-    else setLink("emailLink", null);
+    setText("portraitName", data.name);
+    setText("tagline", data.tagline);
+    setText("portraitRole", data.role);
+    setText("kicker", data.kicker);
+    setText("heroTitle", data.heroTitle);
+    setText("heroSubtitle", data.heroSubtitle);
+    setText("aboutLead", data.aboutLead);
+    setText("aboutStory", data.aboutStory);
+    setText("signatureLine", data.signatureLine);
 
     setLink("linkedinLink", data.contact?.linkedin || null);
+    setLink("contactLinkedinBtn", data.contact?.linkedin || null);
+
+    if (data.contact?.email){
+      setLink("emailLink", `mailto:${data.contact.email}`);
+      setLink("contactEmailBtn", `mailto:${data.contact.email}`);
+    } else {
+      setLink("emailLink", null);
+      setLink("contactEmailBtn", null);
+    }
+
     setLink("downloadCvLink", data.downloadCvUrl || null);
 
-    renderChips(data.highlightChips);
-    renderList("skills", data.skills);
+    // Pills
+    const pillRow = $("pillRow");
+    pillRow.innerHTML = "";
+    (data.pills || []).forEach(p => pillRow.appendChild(createPill(p)));
 
-    renderStack("projects", data.projects, p =>
-      makeItem({
-        title: p.title,
-        meta: p.meta,
-        bullets: p.bullets
-      })
-    );
+    // Stats
+    const stats = $("stats");
+    stats.innerHTML = "";
+    (data.stats || []).forEach(s => stats.appendChild(createStat(s.label, s.value)));
 
-    renderStack("experience", data.experience, e =>
-      makeItem({
-        title: e.roleCompany,
-        meta: e.dates,
-        bullets: e.bullets
-      })
-    );
+    // About lists
+    renderSimpleList("knownFor", data.knownFor);
+    renderSimpleList("tools", data.tools);
 
-    renderStack("education", data.education, ed =>
-      makeItem({
-        title: ed.title,
-        meta: ed.meta,
-        bullets: ed.bullets
-      })
-    );
+    // Bento
+    const bento = $("bentoGrid");
+    bento.innerHTML = "";
+    (data.bento || []).forEach(item => {
+      bento.appendChild(createBentoCard(item, (x) => {
+        openModal({
+          kicker: "Explore",
+          title: x.title,
+          text: x.fullText || x.preview || "",
+          bullets: x.bullets || []
+        });
+      }));
+    });
 
-    renderContact(data.contact);
+    // Projects
+    const projects = $("projectsGrid");
+    projects.innerHTML = "";
+    (data.projects || []).forEach(p => {
+      projects.appendChild(createProjectCard(p, (x) => {
+        openModal({
+          kicker: x.meta || "Project",
+          title: x.title,
+          text: x.fullText || x.preview || "",
+          bullets: x.bullets || []
+        });
+      }));
+    });
+
+    // Timeline
+    const tl = $("timelineList");
+    tl.innerHTML = "";
+    (data.timeline || []).forEach(t => tl.appendChild(createTimelineItem(t)));
+
+    // Contact
+    const c = $("contactLines");
+    c.innerHTML = "";
+    const lines = [
+      data.contact?.location ? `📍 ${data.contact.location}` : null,
+      data.contact?.phone ? `📞 ${data.contact.phone}` : null,
+      data.contact?.email ? `✉️ ${data.contact.email}` : null
+    ].filter(Boolean);
+
+    lines.forEach(line => {
+      const d = document.createElement("div");
+      d.textContent = line;
+      c.appendChild(d);
+    });
 
     const year = new Date().getFullYear();
-    setText("footerText", `© ${year} ${data.name || ""} — Hosted on GitHub Pages`);
-  } catch (err) {
-    console.error(err);
+    setText("footerText", `© ${year} ${data.name} — Personal website hosted on GitHub Pages`);
+
+    // Modal close wiring
+    document.querySelectorAll("[data-close='1']").forEach(el => {
+      el.addEventListener("click", closeModal);
+    });
+    document.addEventListener("keydown", (e) => {
+      if (e.key === "Escape") closeModal();
+    });
+
+  } catch (e){
+    console.error(e);
     document.body.innerHTML = `
       <div style="max-width:900px;margin:40px auto;padding:16px;color:#fff;font-family:system-ui">
         <h2>Site error</h2>
-        <p>Could not load <code>content.json</code>. Make sure the file exists in the same folder as <code>index.html</code>.</p>
+        <p>Could not load <code>content.json</code>. Make sure it is in the same folder as <code>index.html</code>.</p>
       </div>`;
   }
 })();
