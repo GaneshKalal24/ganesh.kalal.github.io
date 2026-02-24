@@ -3,69 +3,199 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Ganesh Kalal | Digital CV</title>
+  <title>Ganesh Kalal | Project Engineer</title>
   <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
-  <header class="topbar">
-    <div class="container">
-      <div class="brand">
-        <div class="avatar" aria-hidden="true">GK</div>
-        <div>
-          <h1 id="name">Ganesh Kalal</h1>
-          <p id="headline" class="muted">Project Engineer – Civil & Infrastructure</p>
-        </div>
-      </div>
+  <!-- Top Nav -->
+  <header class="nav">
+    <div class="wrap nav-inner">
+      <a class="logo" href="#top" aria-label="Go to top">
+        <span class="logo-badge">GK</span>
+        <span class="logo-text">
+          <strong id="name">Ganesh Kalal</strong>
+          <span id="tagline">Project Engineer — Civil & Infrastructure</span>
+        </span>
+      </a>
 
-      <nav class="actions">
-        <a id="emailLink" class="btn" href="#">Email</a>
-        <a id="linkedinLink" class="btn btn-ghost" href="#" target="_blank" rel="noopener">LinkedIn</a>
-        <a id="downloadCvLink" class="btn btn-primary" href="#" target="_blank" rel="noopener">Download CV</a>
+      <nav class="nav-links">
+        <a href="#about">About</a>
+        <a href="#bento">Explore</a>
+        <a href="#projects">Projects</a>
+        <a href="#timeline">Timeline</a>
+        <a href="#contact">Contact</a>
       </nav>
+
+      <div class="nav-cta">
+        <a id="linkedinLink" class="btn btn-ghost" href="#" target="_blank" rel="noopener">LinkedIn</a>
+        <a id="emailLink" class="btn btn-primary" href="#">Email</a>
+      </div>
     </div>
   </header>
 
-  <main class="container grid">
-    <section class="card">
-      <h2>Summary</h2>
-      <p id="summary" class="lead"></p>
-      <div class="chips" id="chips"></div>
+  <main id="top">
+    <!-- Hero -->
+    <section class="hero">
+      <div class="wrap hero-grid">
+        <div class="hero-left">
+          <div class="kicker" id="kicker">Melbourne, VIC • Demolition • Remediation • Civil Works</div>
+          <h1 id="heroTitle">I deliver complex demolition & civil works — safely, compliantly, and on program.</h1>
+          <p id="heroSubtitle" class="sub">
+            Project Engineer with strong site delivery experience across demolition, remediation and civil infrastructure.
+            I coordinate subcontractors, manage QA/QC systems, and work with authorities to achieve safe outcomes in live environments.
+          </p>
+
+          <div class="hero-actions">
+            <a class="btn btn-primary" href="#projects">View Projects</a>
+            <a class="btn" href="#about">My Story</a>
+            <a id="downloadCvLink" class="btn btn-ghost" href="#" target="_blank" rel="noopener">Download CV</a>
+          </div>
+
+          <div class="stats" id="stats"></div>
+        </div>
+
+        <div class="hero-right">
+          <div class="portrait-card">
+            <div class="portrait-top">
+              <div class="portrait-avatar" aria-hidden="true">GK</div>
+              <div>
+                <div class="portrait-name" id="portraitName">Ganesh Kalal</div>
+                <div class="portrait-role" id="portraitRole">Project Engineer</div>
+              </div>
+            </div>
+
+            <div class="portrait-body">
+              <div class="pill-row" id="pillRow"></div>
+              <div class="quote" id="signatureLine">
+                “I like structured planning, clean QA, and calm site control — even on high-risk jobs.”
+              </div>
+            </div>
+
+            <div class="portrait-footer">
+              <a class="chiplink" href="#contact">Let’s talk</a>
+              <a class="chiplink" href="#bento">Explore my work</a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="hero-glow" aria-hidden="true"></div>
     </section>
 
-    <section class="card">
-      <h2>Core Skills</h2>
-      <ul id="skills" class="list"></ul>
+    <!-- About -->
+    <section id="about" class="section">
+      <div class="wrap">
+        <div class="section-head">
+          <h2>About</h2>
+          <p class="muted" id="aboutLead">
+            A short story-style overview — like a personal website, not a CV.
+          </p>
+        </div>
+
+        <div class="about-grid">
+          <div class="card">
+            <h3>My story</h3>
+            <p id="aboutStory" class="text">
+              I’m a Project Engineer focused on demolition, remediation and civil delivery. I enjoy planning complicated work,
+              setting up safe systems (SWMS, permits, traffic/pedestrian control), and running site execution with clear QA and reporting.
+            </p>
+          </div>
+
+          <div class="card">
+            <h3>What I’m known for</h3>
+            <ul class="list" id="knownFor"></ul>
+          </div>
+
+          <div class="card">
+            <h3>Tools & systems</h3>
+            <ul class="list" id="tools"></ul>
+          </div>
+        </div>
+      </div>
     </section>
 
-    <section class="card">
-      <h2>Key Projects</h2>
-      <div id="projects" class="stack"></div>
+    <!-- Bento Explore -->
+    <section id="bento" class="section">
+      <div class="wrap">
+        <div class="section-head">
+          <h2>Explore</h2>
+          <p class="muted">Tap a card. This is the “celebrity website” feel — interactive, story-driven sections.</p>
+        </div>
+
+        <div class="bento" id="bentoGrid"></div>
+      </div>
     </section>
 
-    <section class="card">
-      <h2>Experience</h2>
-      <div id="experience" class="stack"></div>
+    <!-- Projects -->
+    <section id="projects" class="section">
+      <div class="wrap">
+        <div class="section-head">
+          <h2>Featured Projects</h2>
+          <p class="muted">Short, punchy, with expandable details — not a long CV dump.</p>
+        </div>
+
+        <div class="projects" id="projectsGrid"></div>
+      </div>
     </section>
 
-    <section class="card">
-      <h2>Education & Certifications</h2>
-      <div id="education" class="stack"></div>
+    <!-- Timeline -->
+    <section id="timeline" class="section">
+      <div class="wrap">
+        <div class="section-head">
+          <h2>Timeline</h2>
+          <p class="muted">A quick story of where you’ve been — feels more like a personal site.</p>
+        </div>
+
+        <div class="timeline" id="timelineList"></div>
+      </div>
     </section>
 
-    <section class="card">
-      <h2>Contact</h2>
-      <div class="contact" id="contact"></div>
-      <p class="muted small">
-        Tip: Share this link with recruiters. Update content anytime by editing <code>content.json</code>.
-      </p>
+    <!-- Contact -->
+    <section id="contact" class="section">
+      <div class="wrap">
+        <div class="section-head">
+          <h2>Contact</h2>
+          <p class="muted">Fastest ways to reach me.</p>
+        </div>
+
+        <div class="contact-grid">
+          <div class="card">
+            <h3>Details</h3>
+            <div class="contact-lines" id="contactLines"></div>
+          </div>
+
+          <div class="card">
+            <h3>Message</h3>
+            <p class="muted text">
+              This website is hosted on GitHub Pages (static). If you want, I can later add a simple form that opens your email with a pre-filled message.
+            </p>
+            <div class="contact-actions">
+              <a id="contactEmailBtn" class="btn btn-primary" href="#">Email me</a>
+              <a id="contactLinkedinBtn" class="btn" href="#" target="_blank" rel="noopener">LinkedIn</a>
+            </div>
+          </div>
+        </div>
+
+        <footer class="footer">
+          <div class="muted small" id="footerText"></div>
+        </footer>
+      </div>
     </section>
   </main>
 
-  <footer class="footer">
-    <div class="container muted small">
-      <span id="footerText">© </span>
+  <!-- Modal -->
+  <div class="modal" id="modal" aria-hidden="true">
+    <div class="modal-backdrop" data-close="1"></div>
+    <div class="modal-card" role="dialog" aria-modal="true" aria-label="Details">
+      <button class="modal-x" aria-label="Close" data-close="1">×</button>
+      <div class="modal-content">
+        <div class="modal-kicker" id="modalKicker"></div>
+        <h3 class="modal-title" id="modalTitle"></h3>
+        <p class="modal-text" id="modalText"></p>
+        <ul class="modal-list" id="modalList"></ul>
+      </div>
     </div>
-  </footer>
+  </div>
 
   <script src="app.js"></script>
 </body>
