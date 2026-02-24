@@ -1,218 +1,94 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Ganesh Kalal | Project Engineer</title>
-  <link rel="stylesheet" href="styles.css" />
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Ganesh Kalal | Civil & Structural Engineer</title>
+    <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-  <header class="nav">
+
+<div id="scrollBar" class="scroll-progress"></div>
+
+<div class="bg-animation">
+    <div class="grid-overlay"></div>
+    <div class="glow-orb orb-1"></div>
+    <div class="glow-orb orb-2"></div>
+</div>
+
+<nav class="nav">
     <div class="wrap nav-inner">
-      <a class="logo" href="#top" aria-label="Go to top">
-        <span class="logo-badge">GK</span>
-        <span class="logo-text">
-          <strong id="name">Ganesh Kalal</strong>
-          <span id="tagline">Project Engineer in Civil, Demolition and Remediation</span>
-        </span>
-      </a>
-
-      <!-- Mobile controls -->
-      <div class="nav-mobile">
-        <button id="themeToggle" class="btn btn-ghost btn-icon" type="button" aria-label="Theme">
-          <span id="themeIconMobile" class="icon" aria-hidden="true"></span>
+        <div class="logo">
+            <div class="logo-badge">GK</div>
+            <div class="logo-text">
+                <strong id="navName">Ganesh Kalal</strong>
+            </div>
+        </div>
+        <button id="themeToggle" class="btn btn-icon theme-toggle-btn" aria-label="Toggle Theme">
+            <span id="themeIcon">🌓</span>
         </button>
-
-        <button id="navToggle" class="btn btn-ghost nav-toggle" type="button" aria-label="Open menu" aria-expanded="false">
-          Menu
-        </button>
-      </div>
-
-      <!-- Desktop nav -->
-      <nav class="nav-links nav-links-desktop">
-        <a href="#about">About</a>
-        <a href="#bento">Explore</a>
-        <a href="#projects">Projects</a>
-        <a href="#timeline">Timeline</a>
-        <a href="#contact">Contact</a>
-      </nav>
-
-      <!-- Desktop controls (THIS is what shows on desktop) -->
-      <div class="nav-cta nav-cta-desktop">
-        <button id="themeToggleDesktop" class="btn btn-ghost btn-icon" type="button" aria-label="Theme">
-          <span id="themeIconDesktop" class="icon" aria-hidden="true"></span>
-        </button>
-
-        <a id="linkedinLink" class="btn btn-ghost" href="#" target="_blank" rel="noopener">LinkedIn</a>
-        <a id="emailLink" class="btn btn-primary" href="#">Email</a>
-      </div>
     </div>
+</nav>
 
-    <!-- Mobile dropdown menu -->
-    <div id="mobileMenu" class="mobile-menu" aria-hidden="true">
-      <div class="wrap mobile-menu-inner">
-        <nav class="mobile-links">
-          <a href="#about" class="mobile-link">About</a>
-          <a href="#bento" class="mobile-link">Explore</a>
-          <a href="#projects" class="mobile-link">Projects</a>
-          <a href="#timeline" class="mobile-link">Timeline</a>
-          <a href="#contact" class="mobile-link">Contact</a>
-        </nav>
-
-        <div class="mobile-cta">
-          <a id="mobileLinkedinLink" class="btn btn-ghost" href="#" target="_blank" rel="noopener">LinkedIn</a>
-          <a id="mobileEmailLink" class="btn btn-primary" href="#">Email</a>
+<div class="wrap main-content">
+    <header class="hero reveal">
+        <span id="kicker" class="kicker"></span>
+        <h1 id="heroTitle" class="gradient-text"></h1>
+        <p id="heroSubtitle" class="sub"></p>
+        
+        <div class="hero-actions">
+            <a id="downloadCvLink" href="#" target="_blank" class="btn btn-primary pulse-btn" style="display:none;">Download CV</a>
+            <a id="linkedinLink" href="#" target="_blank" class="btn">Connect on LinkedIn</a>
         </div>
-      </div>
+
+        <div id="stats" class="stats"></div>
+    </header>
+
+    <section class="section">
+        <div class="section-head reveal">
+            <h2>Engineering Approach</h2>
+            <p class="muted">How I deliver complex infrastructure.</p>
+        </div>
+        <div id="bentoGrid" class="bento"></div>
+    </section>
+
+    <section class="section">
+        <div class="section-head reveal">
+            <h2>Major Project Delivery</h2>
+            <p class="muted">High-stakes civil, structural, and decommissioning works.</p>
+        </div>
+        <div id="projectsGrid" class="projects"></div>
+    </section>
+
+    <section class="section">
+        <div class="section-head reveal">
+            <h2>Career Progression</h2>
+            <p class="muted">My journey across Tier-1 and Tier-2 environments.</p>
+        </div>
+        <div id="timelineList" class="timeline"></div>
+    </section>
+
+    <footer class="footer reveal">
+        <div id="contactLines" class="contact-lines"></div>
+        <div class="signature">
+            <em id="signatureLine"></em>
+        </div>
+    </footer>
+</div>
+
+<div id="modal" class="modal" aria-hidden="true">
+    <div class="modal-backdrop" id="modalBackdrop"></div>
+    <div class="modal-card">
+        <button id="closeModalBtn" class="modal-x" aria-label="Close">✕</button>
+        <div class="modal-content">
+            <span id="modalKicker" class="modal-kicker"></span>
+            <h2 id="modalTitle" class="modal-title gradient-text"></h2>
+            <p id="modalText" class="modal-text"></p>
+            <ul id="modalList" class="modal-list"></ul>
+        </div>
     </div>
-  </header>
+</div>
 
-  <main id="top">
-    <section class="hero">
-      <div class="wrap hero-grid">
-        <div class="hero-left">
-          <div class="kicker" id="kicker">Melbourne VIC, Safety, QA, Procurement, Delivery</div>
-          <h1 id="heroTitle">I deliver complex demolition and civil works safely, compliantly and on program.</h1>
-          <p id="heroSubtitle" class="sub"></p>
-
-          <div class="hero-actions">
-            <a class="btn btn-primary" href="#projects">View Projects</a>
-            <a class="btn" href="#about">My Story</a>
-            <a id="downloadCvLink" class="btn btn-ghost" href="#" target="_blank" rel="noopener">Download CV</a>
-          </div>
-
-          <div class="stats" id="stats"></div>
-        </div>
-
-        <div class="hero-right">
-          <div class="portrait-card">
-            <div class="portrait-top">
-              <div class="portrait-photo-wrap">
-                <img id="profilePhoto" class="portrait-photo" src="./profile.png" alt="Ganesh Kalal" />
-              </div>
-              <div>
-                <div class="portrait-name" id="portraitName">Ganesh Kalal</div>
-                <div class="portrait-role" id="portraitRole">Project Engineer</div>
-              </div>
-            </div>
-
-            <div class="portrait-body">
-              <div class="pill-row" id="pillRow"></div>
-              <div class="quote" id="signatureLine"></div>
-            </div>
-
-            <div class="portrait-footer">
-              <a class="chiplink" href="#contact">Let’s talk</a>
-              <a class="chiplink" href="#bento">Explore my work</a>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div class="hero-glow" aria-hidden="true"></div>
-    </section>
-
-    <section id="about" class="section">
-      <div class="wrap">
-        <div class="section-head">
-          <h2>About</h2>
-          <p class="muted" id="aboutLead"></p>
-        </div>
-
-        <div class="about-grid">
-          <div class="card">
-            <h3>My story</h3>
-            <p id="aboutStory" class="text"></p>
-          </div>
-
-          <div class="card">
-            <h3>What I am known for</h3>
-            <ul class="list" id="knownFor"></ul>
-          </div>
-
-          <div class="card">
-            <h3>Tools and systems</h3>
-            <ul class="list" id="tools"></ul>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section id="bento" class="section">
-      <div class="wrap">
-        <div class="section-head">
-          <h2>Explore</h2>
-          <p class="muted">Tap a card to open details</p>
-        </div>
-        <div class="bento" id="bentoGrid"></div>
-      </div>
-    </section>
-
-    <section id="projects" class="section">
-      <div class="wrap">
-        <div class="section-head">
-          <h2>Featured Projects</h2>
-          <p class="muted">Key work with numbers and outcomes</p>
-        </div>
-        <div class="projects" id="projectsGrid"></div>
-      </div>
-    </section>
-
-    <section id="timeline" class="section">
-      <div class="wrap">
-        <div class="section-head">
-          <h2>Timeline</h2>
-          <p class="muted">Roles and delivery focus</p>
-        </div>
-        <div class="timeline" id="timelineList"></div>
-      </div>
-    </section>
-
-    <section id="contact" class="section">
-      <div class="wrap">
-        <div class="section-head">
-          <h2>Contact</h2>
-          <p class="muted">Fastest ways to reach me</p>
-        </div>
-
-        <div class="contact-grid">
-          <div class="card">
-            <h3>Details</h3>
-            <div class="contact-lines" id="contactLines"></div>
-          </div>
-
-          <div class="card">
-            <h3>Message</h3>
-            <p class="muted text">
-              This website is hosted on GitHub Pages. Email is the quickest way to reach me.
-            </p>
-            <div class="contact-actions">
-              <a id="contactEmailBtn" class="btn btn-primary" href="#">Email me</a>
-              <a id="contactLinkedinBtn" class="btn" href="#" target="_blank" rel="noopener">LinkedIn</a>
-            </div>
-          </div>
-        </div>
-
-        <footer class="footer">
-          <div class="muted small" id="footerText"></div>
-        </footer>
-      </div>
-    </section>
-  </main>
-
-  <div class="modal" id="modal" aria-hidden="true">
-    <div class="modal-backdrop" data-close="1"></div>
-    <div class="modal-card" role="dialog" aria-modal="true" aria-label="Details">
-      <button class="modal-x" aria-label="Close" data-close="1">×</button>
-      <div class="modal-content">
-        <div class="modal-kicker" id="modalKicker"></div>
-        <h3 class="modal-title" id="modalTitle"></h3>
-        <p class="modal-text" id="modalText"></p>
-        <ul class="modal-list" id="modalList"></ul>
-      </div>
-    </div>
-  </div>
-
-  <script src="app.js"></script>
+<script src="app.js"></script>
 </body>
 </html>
