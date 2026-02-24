@@ -1,13 +1,13 @@
 {
   "name": "Ganesh Kalal (MIEAust)",
   "role": "Project Engineer",
-  "tagline": "Civil & Structural Engineer | Major Infrastructure & Industrial Delivery",
+  "tagline": "Civil & Structural Engineer | Major Infrastructure Delivery",
   "kicker": "Melbourne VIC • Structural Design • QA Compliance • Project Delivery",
 
   "profilePhotoUrl": "./profile.png",
 
-  "heroTitle": "Delivering complex civil, structural, and infrastructure works safely, compliantly, and on program.",
-  "heroSubtitle": "Civil and Structural Engineer with 5+ years of experience delivering major infrastructure, telecom, and industrial projects across Tier-1 and Tier-2 environments. Specializing in structural design review, subcontractor management, tender evaluation, and rigorous QA supervision. Member of Engineers Australia, progressing toward the NER pathway.",
+  "heroTitle": "Delivering major civil, structural, and transport infrastructure with rigorous QA and engineering precision.",
+  "heroSubtitle": "Civil and Structural Engineer with over 5 years of experience delivering major transport infrastructure, telecom upgrades, and heavy industrial projects across Tier-1 and Tier-2 environments. Specializing in structural design review, subcontractor management, tender evaluation, and stringent QA supervision. Member of Engineers Australia, progressing toward the NER pathway.",
   "signatureLine": "Clear sequence. Strong controls. Clean QA. Deliver it right.",
 
   "pills": [
@@ -15,7 +15,7 @@
     "Infrastructure Delivery",
     "QA & Compliance",
     "Procurement & Contracts",
-    "Industrial Decommissioning"
+    "Heavy Civil Works"
   ],
 
   "stats": [
@@ -25,7 +25,7 @@
   ],
 
   "aboutLead": "A professional portfolio of my engineering experience, presented simply and clearly.",
-  "aboutStory": "I am a Melbourne-based Civil and Structural Engineer with a proven track record across diverse sectors—from metro rail and freeway upgrades to 5G telecom infrastructure and major industrial closures. I focus on structural integrity, meticulous planning, subcontractor coordination, and quality verification to deliver safe, compliant outcomes in complex, high-risk environments.",
+  "aboutStory": "I am a Melbourne-based Civil and Structural Engineer with a proven track record across diverse sectors—from metro rail and freeway upgrades to 5G telecom infrastructure and major industrial works. I focus on structural integrity, meticulous planning, subcontractor coordination, and quality verification to deliver safe, compliant outcomes in complex, high-risk environments.",
 
   "knownFor": [
     "Structural design and analysis for civil, telecom, and infrastructure assets",
@@ -83,6 +83,32 @@
 
   "projects": [
     {
+      "title": "Mumbai Metro Line 4 & 5",
+      "meta": "Mumbai, India, 2018 to 2019",
+      "preview": "Civil Site Engineer overseeing QA/QC, elevated viaducts, and underground tunnel (TBM) interfaces for a major rail network.",
+      "tags": ["Civil", "Rail Infrastructure", "QA/QC"],
+      "fullText": "Supported independent verification and QA/QC functions during the construction of elevated viaducts, metro stations, and deep foundation works in dense urban environments.",
+      "bullets": [
+        "Supervised concrete QA/QC including slump testing, cube sampling, and dimensional checks for piers and foundations",
+        "Conducted pile integrity and dynamic load testing for deep foundation works",
+        "Monitored tunnel alignment (TBM), excavation safety, and installation of precast bridge elements",
+        "Collaborated with engineers and surveyors to review ITPs and close out non-conformance reports (NCRs)"
+      ]
+    },
+    {
+      "title": "West Gate Freeway Upgrade",
+      "meta": "Melbourne, 2022 to 2023",
+      "preview": "Structural design support and construction oversight for RCC crash barriers and precast noise walls.",
+      "tags": ["Roads", "Concrete QA", "VicRoads"],
+      "fullText": "Delivered structural design support and site supervision, ensuring works met stringent VicRoads standards and AS 5100 under live-traffic conditions.",
+      "bullets": [
+        "Reviewed shop drawings and supervised concrete pours and panel installations",
+        "Conducted QA including concrete testing and reinforcement verification",
+        "Delivered civil works to VicRoads standards and AS 5100 requirements",
+        "Achieved zero non-conformances across 100+ structural installations"
+      ]
+    },
+    {
       "title": "National 5G Telecom Upgrade",
       "meta": "Victoria, 2023 to 2024, $50 Million",
       "preview": "Led structural design coordination for 150+ tower upgrades and completed 100+ site inspections.",
@@ -96,42 +122,16 @@
       ]
     },
     {
-      "title": "West Gate Freeway Upgrade",
-      "meta": "Melbourne, 2022 to 2023",
-      "preview": "Structural design support and construction oversight for RCC crash barriers and precast noise walls.",
-      "tags": ["Civil", "Concrete QA", "VicRoads"],
-      "fullText": "Delivered structural design support and site supervision, ensuring works met stringent VicRoads standards and AS 5100 under live-traffic conditions.",
+      "title": "Rio Tinto & ExxonMobil Industrial Projects",
+      "meta": "VIC & NT, 2024 to Present",
+      "preview": "Project Engineer overseeing heavy structural dismantling, remediation, and design compliance on major Tier-1 industrial closures.",
+      "tags": ["Heavy Civil", "Remediation", "Contracts"],
+      "fullText": "Supporting the engineering delivery of Australia's largest industrial closure projects. Managed procurement documentation, structural design package reviews, and complex contractor coordination.",
       "bullets": [
-        "Reviewed shop drawings and supervised concrete pours and panel installations",
-        "Conducted QA including concrete testing and reinforcement verification",
-        "Delivered civil works to VicRoads standards and AS 5100 requirements",
-        "Achieved zero non-conformances across 100+ structural installations"
-      ]
-    },
-    {
-      "title": "Rio Tinto Gove Industrial Closure",
-      "meta": "Gove NT, 2024 to 2025, $300 Million",
-      "preview": "Project Engineer overseeing heavy structural dismantling, remediation, and design compliance verification.",
-      "tags": ["Heavy Civil", "Remediation", "QA"],
-      "fullText": "Supporting the engineering delivery of Australia's largest industrial closure. Managed procurement documentation, structural design package reviews, and complex contractor coordination.",
-      "bullets": [
-        "Prepared procurement documentation for heavy civil and dismantling packages",
         "Reviewed structural design packages for AS 3600 and AS 4100 compliance",
-        "Managed contractor coordination and strict quality/safety verification",
-        "Supported progress claims across multiple specialized subcontractors"
-      ]
-    },
-    {
-      "title": "ExxonMobil Refinery Decommissioning",
-      "meta": "Altona VIC, 2024 to Present, $65 Million",
-      "preview": "Project Engineer managing subcontractor packages, on-site civil works, procurement, and structural planning.",
-      "tags": ["Decommissioning", "Industrial", "Contracts"],
-      "fullText": "Engineering delivery support for complex refinery closure packages including procurement, design review, site supervision, and maintaining operations alongside live fuel import lines.",
-      "bullets": [
         "Prepared SOW/RFQ packages and evaluated 15+ tender submissions technically",
-        "Reviewed and approved contractor structural designs and technical queries",
         "Negotiated and justified contract variations totaling $8M+",
-        "Coordinated statutory approvals with local authorities and councils"
+        "Managed contractor coordination and strict quality/safety verification for heavy civil works"
       ]
     }
   ],
@@ -142,7 +142,7 @@
       "dates": "02 2024 to Present",
       "location": "Altona VIC / Gove NT",
       "bullets": [
-        "Planned sequencing and delivery of heavy civil and structural decommissioning on $100M+ industrial projects",
+        "Planned sequencing and delivery of heavy civil and structural works on $100M+ industrial projects",
         "Prepared SOW, RFQ, ITPs and managed technical queries, RFIs, and engineering coordination",
         "Produced weekly progress reporting including cost, schedule, and risk; supported statutory approvals",
         "Conducted site inspections, verified hold points, led safety audits, and supported budget variations"
@@ -171,13 +171,24 @@
       ]
     },
     {
-      "roleCompany": "Civil Site Engineer, Mumbai Metro Line 4 & 5",
+      "roleCompany": "Graduate Civil Engineer, Structcom Consulting Engineers",
+      "dates": "06 2020 to 10 2021",
+      "location": "Caulfield VIC",
+      "bullets": [
+        "Supported structural design and drafting for community centres, public transport assets, and residential structures",
+        "Designed civil stormwater and On-Site Detention (OSD) systems to meet local council requirements",
+        "Conducted asset inspections and developed rectification strategies for municipal infrastructure",
+        "Coordinated statutory approvals with councils and developers, organizing land surveys and geotechnical inputs"
+      ]
+    },
+    {
+      "roleCompany": "Civil Site Engineer, Tata Projects (Mumbai Metro Line 4 & 5)",
       "dates": "02 2018 to 07 2019",
       "location": "Mumbai, India",
       "bullets": [
         "Supported independent verification and QA/QC teams on massive elevated viaduct and station construction",
         "Performed concrete QA/QC (slump testing, cube sampling) and dimensional checks for piers and foundations",
-        "Conducted pile integrity and dynamic load testing for deep foundation works",
+        "Conducted Pile Integrity Testing (PIT) and Dynamic Load Testing (DLT) for deep foundation works",
         "Monitored tunnel alignment (TBM), excavation safety, and installation of precast bridge elements"
       ]
     }
