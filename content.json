@@ -1,59 +1,114 @@
 {
   "name": "Ganesh Kalal",
-  "headline": "Project Engineer – Civil & Infrastructure",
-  "summary": "Project Engineer with experience across demolition, remediation and civil works. Strong focus on safety, QA/QC, planning, stakeholder coordination and site delivery. Comfortable working with subcontractors, consultants and authorities to deliver safe, compliant outcomes.",
-  "highlightChips": [
-    "Demolition & Remediation",
-    "QA/QC & ITPs",
-    "Permits & Stakeholders",
-    "Program & Cost Control",
-    "Site Supervision"
+  "role": "Project Engineer",
+  "tagline": "Project Engineer — Civil, Demolition & Remediation",
+  "kicker": "Melbourne, VIC • Demolition • Remediation • Civil Works",
+
+  "heroTitle": "I deliver complex demolition & civil works — safely, compliantly, and on program.",
+  "heroSubtitle": "Project Engineer with strong site delivery experience across demolition, remediation and civil infrastructure. I coordinate subcontractors, manage QA/QC systems, and work with authorities to achieve safe outcomes in live environments.",
+
+  "signatureLine": "“I like structured planning, clean QA, and calm site control — even on high-risk jobs.”",
+
+  "pills": ["Safety-first delivery", "QA/QC systems", "Stakeholders & permits", "Subcontractor control", "Program discipline"],
+
+  "stats": [
+    { "label": "Core focus", "value": "Demolition & Remediation" },
+    { "label": "Strength", "value": "Safety + QA + Planning" },
+    { "label": "Style", "value": "Calm site control" }
   ],
-  "skills": [
-    "Site engineering, set-out coordination, and subcontractor management",
-    "Method statements, SWMS, risk assessments and permit-to-work processes",
-    "QA/QC documentation: ITPs, checklists, lot tracking, NCRs and close-out",
-    "Civil works coordination: excavation, services, concrete and reinstatement",
-    "Reporting: daily diaries, progress updates, RFIs and variations"
+
+  "aboutLead": "This page is written like a personal website — story-driven, clear, and easy to explore.",
+  "aboutStory": "I’m a Project Engineer focused on demolition, remediation and civil delivery. I enjoy planning complicated work, building safe systems (SWMS, permits, traffic/pedestrian control), and running site execution with clear QA, communication and reporting. I work closely with subcontractors, consultants and authorities to deliver compliant outcomes in live environments.",
+
+  "knownFor": [
+    "Structured planning and staged demolition sequencing",
+    "Strong documentation: SWMS, ITPs, inspections, close-out",
+    "Clear subcontractor coordination and site control",
+    "Safety-first approach in high-risk environments",
+    "Stakeholder coordination and compliance mindset"
   ],
+
+  "tools": [
+    "ITPs, checklists, lot tracking, NCRs and close-out packs",
+    "Daily diaries, progress reporting, RFIs and variations",
+    "Permits, exclusions zones, traffic and pedestrian management",
+    "Waste tracking and compliant disposal documentation"
+  ],
+
+  "bento": [
+    {
+      "title": "How I run a site",
+      "meta": "My delivery system",
+      "preview": "I keep site control calm: plan → brief → execute → inspect → close out.",
+      "fullText": "My site approach is simple and repeatable: define hazards and controls, lock in a realistic sequence, brief crews clearly, keep QA records tight, and close out every task properly.",
+      "bullets": [
+        "Prestart brief + daily constraints check",
+        "Clear exclusion zones and access control",
+        "QA checks built into the sequence",
+        "Daily diary + photos + look-ahead"
+      ]
+    },
+    {
+      "title": "Safety & compliance",
+      "meta": "High-risk work",
+      "preview": "I prioritise hazard control, permits and clear communication in live environments.",
+      "fullText": "Demolition and remediation require disciplined control of hazards, permits and interfaces. I focus on practical controls and clear site rules so everyone goes home safe.",
+      "bullets": [
+        "SWMS and task briefings",
+        "Permit-to-work mindset",
+        "Interfaces: public, adjacent assets, services",
+        "Stop-work authority when controls slip"
+      ]
+    },
+    {
+      "title": "QA/QC",
+      "meta": "Clean records",
+      "preview": "I keep QA simple: ITP → check → record → close.",
+      "fullText": "Good QA is easy to follow. I keep ITPs practical, record inspections consistently and close NCRs quickly to avoid end-of-job panic.",
+      "bullets": [
+        "ITPs and inspection checklists",
+        "Lot tracking and evidence packs",
+        "NCR and corrective actions",
+        "Handover-ready closeout"
+      ]
+    }
+  ],
+
   "projects": [
     {
-      "title": "Key Projects (Sample)",
+      "title": "Staged demolition works (Sample)",
       "meta": "Melbourne, VIC",
+      "preview": "Planned staged sequencing, managed subcontractors, and maintained safety and QA records.",
+      "tags": ["Demolition", "Staging", "Live site"],
+      "fullText": "Delivered staged demolition with a focus on safe execution and minimal disruption. Coordinated crews, access, exclusions and documentation.",
       "bullets": [
-        "Planned and coordinated staged demolition activities to maintain safety and minimise disruption",
-        "Managed subcontractors, site access, inductions, and exclusion zones",
-        "Coordinated waste streams, separation, tracking and disposal documentation",
-        "Maintained QA records and supported inspections and close-out"
+        "Sequenced demolition stages to manage risk and interfaces",
+        "Coordinated subcontractor trades and site access",
+        "Maintained SWMS, permits, prestarts and daily reporting",
+        "Managed waste separation and disposal documentation"
       ]
     }
   ],
-  "experience": [
+
+  "timeline": [
     {
       "roleCompany": "Project Engineer | Company Name",
-      "dates": "202X – Present | Melbourne, VIC",
+      "dates": "202X – Present",
+      "location": "Melbourne, VIC",
       "bullets": [
-        "Delivered site works with strong focus on safety, quality and schedule",
-        "Prepared daily reports and coordinated subcontractor sequencing",
-        "Supported stakeholder coordination and permit requirements"
+        "Site delivery across demolition, remediation and civil works",
+        "Subcontractor coordination, QA/QC and reporting",
+        "Stakeholder support and compliance documentation"
       ]
     }
   ],
-  "education": [
-    {
-      "title": "Bachelor of Engineering (Civil) – University Name",
-      "meta": "Year | Location",
-      "bullets": [
-        "Key subjects: Structures, Geotechnical, Construction Management",
-        "Professional goal: progress toward CPEng / RPEV (as applicable)"
-      ]
-    }
-  ],
+
   "contact": {
     "location": "Melbourne, VIC",
-    "phone": "Your phone here",
+    "phone": "Your phone",
     "email": "your.email@example.com",
     "linkedin": "https://linkedin.com/in/your-link"
   },
+
   "downloadCvUrl": ""
 }
