@@ -18,6 +18,13 @@ function setLink(id, href){
   el.href = href;
 }
 
+function setImage(id, src){
+  const el = $(id);
+  if (!el) return;
+  if (!src) { el.style.display = "none"; return; }
+  el.src = src;
+}
+
 function createPill(text){
   const s = document.createElement("span");
   s.className = "pill";
@@ -199,6 +206,10 @@ function renderSimpleList(id, items){
     setText("aboutStory", data.aboutStory);
     setText("signatureLine", data.signatureLine);
 
+    // Photo (defaults to profile.png if you keep it)
+    setImage("profilePhoto", data.profilePhotoUrl || "./profile.png");
+
+    // Links
     setLink("linkedinLink", data.contact?.linkedin || null);
     setLink("contactLinkedinBtn", data.contact?.linkedin || null);
 
