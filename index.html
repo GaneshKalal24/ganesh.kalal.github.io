@@ -41,15 +41,27 @@
     <main>
         <section id="hero" class="hero">
             <div class="wrap">
-                <div class="hero-content">
-                    <div class="hero-kicker gsap-fade-up" id="heroPositioning"></div>
-                    <h1 class="hero-title gsap-fade-up">
-                        <span class="text-outline">ENGINEERING</span><br>
-                        PRECISION.
-                    </h1>
-                    <p class="hero-subtitle gsap-fade-up" id="heroTagline"></p>
-                    <div class="hero-actions gsap-fade-up">
-                        <a href="#projects" class="btn btn-primary magnetic" data-strength="40">Explore Projects</a>
+                <div class="hero-grid">
+                    <div class="hero-text">
+                        <div class="hero-kicker gsap-fade-up" id="heroPositioning"></div>
+                        <h1 class="hero-title gsap-fade-up">
+                            Hi, I'm <span class="accent-text" id="heroName"></span>.
+                        </h1>
+                        <h2 class="hero-role text-outline gsap-fade-up" id="heroRole"></h2>
+                        <p class="hero-subtitle gsap-fade-up" id="heroTagline"></p>
+                        <div class="hero-actions gsap-fade-up">
+                            <a href="#projects" class="btn btn-primary magnetic" data-strength="40">Explore Projects</a>
+                            <a href="#about" class="btn btn-ghost magnetic" data-strength="40">View Profile</a>
+                        </div>
+                    </div>
+                    <div class="hero-visual gsap-fade-up">
+                        <div class="profile-frame glass-panel tilt-card">
+                            <img id="heroPhoto" src="profile.png" alt="Profile Photo" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                            <div class="fallback-avatar" style="display:none;">
+                                <i data-lucide="user" style="width: 64px; height: 64px;"></i>
+                            </div>
+                            <div class="photo-glow"></div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -69,9 +81,9 @@
 
         <section id="about" class="section">
             <div class="wrap">
-                <div class="about-grid">
+                <div class="about-content">
                     <div class="about-text gsap-fade-up">
-                        <h2 class="section-title">Profile</h2>
+                        <h2 class="section-title">Professional Profile</h2>
                         <p class="lead-text" id="aboutLead"></p>
                         <ul class="bullet-list" id="aboutBullets"></ul>
                     </div>
