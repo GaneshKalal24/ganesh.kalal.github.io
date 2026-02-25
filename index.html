@@ -4,183 +4,179 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Ganesh Kalal | Engineering Portfolio</title>
-    <link rel="stylesheet" href="styles.css">
     
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    
     <script src="https://unpkg.com/lucide@latest"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body data-theme="dark">
+
     <div class="noise-overlay"></div>
-    <div class="mesh-bg"></div>
-    <div class="blueprint-overlay"></div>
+    <div class="orb orb-1"></div>
+    <div class="orb orb-2"></div>
+    <div class="orb orb-3"></div>
 
     <div class="cursor-dot" id="cursorDot"></div>
     <div class="cursor-ring" id="cursorRing"></div>
 
-    <nav id="navbar" class="glass-nav">
-        <div class="nav-content wrap">
-            <div class="logo magnetic" data-strength="20">G.<strong>KALAL</strong></div>
-            <ul class="nav-links">
-                <li><a href="#about" class="nav-link magnetic" data-strength="20">About</a></li>
-                <li><a href="#experience" class="nav-link magnetic" data-strength="20">Career</a></li>
-                <li><a href="#projects" class="nav-link magnetic" data-strength="20">Projects</a></li>
-                <li><a href="#metrics" class="nav-link magnetic" data-strength="20">Metrics</a></li>
-            </ul>
-            <div class="nav-actions">
-                <button id="themeToggle" class="icon-btn magnetic" data-strength="30" aria-label="Toggle theme">
-                    <i data-lucide="moon" id="themeIcon"></i>
-                </button>
-                <a href="#contact" class="btn btn-primary btn-sm glow-effect magnetic" data-strength="40">Contact</a>
+    <nav class="floating-nav">
+        <div class="nav-inner glass-panel">
+            <div class="logo magnetic" data-strength="20">G<strong>K</strong></div>
+            <div class="nav-links">
+                <a href="#about" class="magnetic" data-strength="15">About</a>
+                <a href="#projects" class="magnetic" data-strength="15">Projects</a>
+                <a href="#career" class="magnetic" data-strength="15">Career</a>
             </div>
+            <a href="#contact" class="btn btn-primary btn-sm magnetic" data-strength="30">Connect <i data-lucide="arrow-right" class="btn-icon-right"></i></a>
         </div>
     </nav>
 
-    <main class="main-content">
-        <section id="home" class="hero section">
-            <div class="wrap hero-wrap">
-                <div class="hero-content gsap-reveal">
-                    <div class="positioning-line" id="heroPositioning"></div>
-                    <h1 class="hero-name glitch" id="heroName"></h1>
-                    <h2 class="gradient-text hero-title" id="heroTitle"></h2>
-                    <p class="hero-tagline" id="heroTagline"></p>
-                    <div class="hero-cta">
-                        <a href="#projects" class="btn btn-primary glow-effect magnetic" data-strength="50">View Projects</a>
-                        <a href="#contact" class="btn btn-ghost magnetic" data-strength="50">Get in Touch</a>
+    <main>
+        <section id="hero" class="hero">
+            <div class="wrap">
+                <div class="hero-content">
+                    <div class="hero-kicker gsap-fade-up" id="heroPositioning"></div>
+                    <h1 class="hero-title gsap-fade-up">
+                        <span class="text-outline">ENGINEERING</span><br>
+                        PRECISION.
+                    </h1>
+                    <p class="hero-subtitle gsap-fade-up" id="heroTagline"></p>
+                    <div class="hero-actions gsap-fade-up">
+                        <a href="#projects" class="btn btn-primary magnetic" data-strength="40">Explore Projects</a>
                     </div>
+                </div>
+            </div>
+            <div class="scroll-indicator">
+                <div class="mouse">
+                    <div class="wheel"></div>
                 </div>
             </div>
         </section>
 
-        <section id="about" class="about section">
+        <div class="marquee-section">
+            <div class="marquee-content">
+                <span>TELECOM UPGRADES • CIVIL INFRASTRUCTURE • STRUCTURAL DESIGN • QA/QC COMPLIANCE • TIER-1 DELIVERY • </span>
+                <span>TELECOM UPGRADES • CIVIL INFRASTRUCTURE • STRUCTURAL DESIGN • QA/QC COMPLIANCE • TIER-1 DELIVERY • </span>
+            </div>
+        </div>
+
+        <section id="about" class="section">
             <div class="wrap">
                 <div class="about-grid">
-                    <div class="about-visual gsap-fade-up">
-                        <div class="glass-panel profile-wrapper tilt-card">
-                            <img id="profilePhoto" src="profile.png" alt="Profile" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
-                            <div class="fallback-avatar" style="display:none;">
-                                <i data-lucide="user" style="width: 64px; height: 64px;"></i>
-                            </div>
-                        </div>
+                    <div class="about-text gsap-fade-up">
+                        <h2 class="section-title">Profile</h2>
+                        <p class="lead-text" id="aboutLead"></p>
+                        <ul class="bullet-list" id="aboutBullets"></ul>
                     </div>
-                    <div class="about-details gsap-fade-up">
-                        <h3 class="section-label">01 // Profile</h3>
-                        <p id="aboutLead" class="about-lead"></p>
-                        <ul class="bullet-summary" id="aboutBullets"></ul>
-                        <div class="stats-grid" id="statsGrid">
-                            </div>
-                    </div>
+                    <div class="about-stats grid-2 gsap-fade-up" id="statsGrid"></div>
                 </div>
             </div>
         </section>
 
-        <section id="experience" class="career section">
+        <section id="projects" class="section">
             <div class="wrap">
-                <h3 class="section-label gsap-fade-up">02 // Career Journey</h3>
-                <div id="timeline" class="timeline">
-                    </div>
-            </div>
-        </section>
-
-        <section id="projects" class="projects section">
-            <div class="wrap">
-                <div class="projects-header gsap-fade-up">
-                    <h3 class="section-label">03 // Key Projects</h3>
-                    <div class="filter-group" id="projectFilters">
-                        </div>
+                <div class="section-header gsap-fade-up">
+                    <h2 class="section-title">Key Projects</h2>
+                    <div class="filter-chips" id="projectFilters"></div>
                 </div>
-                <div id="projectsBento" class="bento-grid perspective-grid">
-                    </div>
+                <div class="bento-grid" id="projectsBento"></div>
             </div>
         </section>
 
-        <section id="metrics" class="metrics section">
+        <section id="metrics" class="section">
             <div class="wrap">
-                <h3 class="section-label gsap-fade-up">04 // Analytics & Impact</h3>
-                <div class="dashboard-grid gsap-stagger">
-                    <div class="chart-card glass-panel tilt-card">
-                        <h4>Capital Expenditure ($M)</h4>
+                <h2 class="section-title gsap-fade-up">Analytics & Milestones</h2>
+                <div class="dashboard-grid gsap-fade-up">
+                    <div class="glass-panel chart-card spotlight-card">
+                        <h4>Capital Expenditure Handled ($M)</h4>
                         <div class="chart-wrapper"><canvas id="budgetChart"></canvas></div>
                     </div>
-                    <div class="chart-card glass-panel tilt-card">
+                    <div class="glass-panel stat-card spotlight-card accent-card">
+                        <i data-lucide="shield-check" class="huge-icon"></i>
+                        <div class="stat-number">0</div>
+                        <div class="stat-label">Lost Time Injuries (LTIs)</div>
+                        <p class="stat-desc">Maintained strictly across all high-risk operations.</p>
+                    </div>
+                    <div class="glass-panel chart-card spotlight-card">
                         <h4>Project Distribution</h4>
                         <div class="chart-wrapper"><canvas id="typeChart"></canvas></div>
                     </div>
-                    <div class="chart-card glass-panel stat-highlight tilt-card">
-                        <i data-lucide="shield-check" class="accent-icon"></i>
-                        <div class="big-number">0</div>
-                        <div class="stat-label">Lost Time Injuries (LTIs)</div>
-                        <p class="stat-sub">Across all Tier-1 environments</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="career" class="section">
+            <div class="wrap">
+                <h2 class="section-title gsap-fade-up">Career Journey</h2>
+                <div class="timeline" id="careerTimeline"></div>
+            </div>
+        </section>
+
+        <section id="contact" class="section pb-large">
+            <div class="wrap">
+                <div class="contact-container glass-panel spotlight-card gsap-fade-up">
+                    <div class="contact-left">
+                        <h2 class="section-title">Initiate Contact</h2>
+                        <p class="contact-desc">Open for discussions regarding Project Engineering roles in Telecom, Civil, and Major Infrastructure delivery.</p>
+                        <div class="social-links" id="socialLinks"></div>
                     </div>
-                </div>
-            </div>
-        </section>
-
-        <section id="achievements" class="achievements section">
-            <div class="wrap">
-                <h3 class="section-label gsap-fade-up">05 // Milestones</h3>
-                <div class="scroll-container gsap-fade-up">
-                    <div id="achievementsList" class="scroll-track">
-                        </div>
-                </div>
-            </div>
-        </section>
-
-        <section id="contact" class="contact section">
-            <div class="wrap">
-                <div class="contact-card glass-panel gsap-fade-up tilt-card">
-                    <div class="contact-info">
-                        <h3 class="section-label">06 // Connect</h3>
-                        <p>Open for opportunities in civil, structural, and major infrastructure delivery.</p>
-                        <div class="contact-links" id="socialLinks">
+                    <div class="contact-right">
+                        <form class="premium-form" onsubmit="event.preventDefault(); window.location.href='mailto:ganesh.r.kalal24@gmail.com';">
+                            <div class="input-group">
+                                <input type="text" id="name" required placeholder=" ">
+                                <label for="name">Name</label>
                             </div>
+                            <div class="input-group">
+                                <input type="email" id="email" required placeholder=" ">
+                                <label for="email">Email</label>
+                            </div>
+                            <div class="input-group">
+                                <textarea id="message" required rows="3" placeholder=" "></textarea>
+                                <label for="message">Message</label>
+                            </div>
+                            <button type="submit" class="btn btn-primary magnetic" data-strength="30">Send Transmission <i data-lucide="send" class="btn-icon-right"></i></button>
+                        </form>
                     </div>
-                    <form class="contact-form" id="contactForm" onsubmit="event.preventDefault(); window.location.href='mailto:ganesh.r.kalal24@gmail.com';">
-                        <div class="input-group">
-                            <input type="text" id="name" required placeholder=" ">
-                            <label for="name">Name</label>
-                        </div>
-                        <div class="input-group">
-                            <input type="email" id="email" required placeholder=" ">
-                            <label for="email">Email</label>
-                        </div>
-                        <div class="input-group">
-                            <textarea id="message" required rows="4" placeholder=" "></textarea>
-                            <label for="message">Project Inquiry</label>
-                        </div>
-                        <button type="submit" class="btn btn-primary glow-effect w-full magnetic" data-strength="30">Initiate Contact</button>
-                    </form>
                 </div>
             </div>
         </section>
     </main>
 
-    <footer class="footer">
-        <div class="wrap"><p id="footerText"></p></div>
+    <footer class="premium-footer">
+        <div class="wrap footer-content">
+            <div class="footer-logo">G.KALAL</div>
+            <p id="footerText"></p>
+            <div class="footer-meta">MIEAust • Melbourne, VIC</div>
+        </div>
     </footer>
 
     <div id="projectModal" class="modal" aria-hidden="true">
         <div class="modal-backdrop" onclick="closeModal()"></div>
         <div class="modal-content glass-panel">
-            <button class="modal-close glass" onclick="closeModal()"><i data-lucide="x"></i></button>
-            <div class="modal-scroll-area">
-                <div class="modal-header">
-                    <div class="modal-tags" id="modalTags"></div>
-                    <h2 id="modalTitle" class="gradient-text modal-title"></h2>
-                    <div class="modal-metrics" id="modalMetrics"></div>
-                </div>
-                <div class="modal-grid">
+            <button class="modal-close magnetic" data-strength="20" onclick="closeModal()"><i data-lucide="x"></i></button>
+            <div class="modal-body">
+                <div class="modal-tags" id="modalTags"></div>
+                <h2 id="modalTitle" class="modal-title"></h2>
+                <div class="modal-metrics-bar" id="modalMetrics"></div>
+                
+                <div class="modal-split">
                     <div class="modal-col">
                         <h4>Scope & Architecture</h4>
                         <ul id="modalScope" class="modal-list"></ul>
-                        <h4 class="mt-4">Role & Execution</h4>
+                        <h4 class="mt-2">Role & Execution</h4>
                         <ul id="modalRole" class="modal-list"></ul>
                     </div>
                     <div class="modal-col">
-                        <h4>Constraints & Environment</h4>
+                        <h4>Constraints</h4>
                         <ul id="modalConstraints" class="modal-list"></ul>
-                        <h4 class="mt-4">Engineering Outcomes</h4>
+                        <h4 class="mt-2">Outcomes</h4>
                         <ul id="modalOutcomes" class="modal-list"></ul>
                     </div>
                 </div>
