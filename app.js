@@ -2,21 +2,32 @@
 const fallbackData = {
     "name": "Ganesh Kalal (MIEAust)",
     "role": "Project Engineer",
-    "kicker": "Melbourne VIC • Telecom • Civil Infrastructure",
-    "heroSubtitle": "Civil and Telecom Project Engineer delivering Tier-1 projects. Specializing in 5G rollouts, statutory approvals, and precision structural execution.",
+    "kicker": "Melbourne VIC • Civil Infrastructure",
+    "heroSubtitle": "Delivering Tier-1 projects with structural precision. Specializing in 5G rollouts, statutory approvals, and complex brownfield execution.",
+    "visaStatus": "Australian Permanent Resident",
     "aboutLead": "Strategy-driven engineer balancing technical oversight with commercial discipline.",
     "aboutStory": "I bridge the gap between structural engineering theory and site execution. With over 5 years of experience across 5G telecom infrastructure, metro rail, live-traffic freeways, and the largest industrial closures in the Southern Hemisphere.",
     "knownFor": [
       "5G Infrastructure Rollouts & Upgrades",
-      "Site Acquisition, Permitting & Council Approvals",
-      "Fibre Backhaul, Trenching & Civil Works Coordination",
-      "Structural Tower Design & Audits (AS/NZS 1170.2)",
-      "Subcontractor Management & Commercial Execution"
+      "Site Acquisition & Statutory Approvals",
+      "Structural Design & Audits (AS/NZS 1170.2, AS 3600)",
+      "Subcontractor Management & Procurement"
     ],
-    "certifications": [
-      { "name": "Oracle Primavera P6 Professional", "issuer": "Compass Consult", "icon": "calendar-days" },
-      { "name": "Generative AI for Project Managers", "issuer": "Project Management Institute (PMI)", "icon": "bot" },
-      { "name": "Leadership Development", "issuer": "Osprey International", "icon": "award" }
+    "logistics": [
+        { "name": "White Card", "icon": "hard-hat" },
+        { "name": "Victorian Driver's License", "icon": "car" },
+        { "name": "Working at Heights", "icon": "triangle-right" }
+    ],
+    "education": [
+        { "degree": "Master of Engineering Science (Structural)", "school": "Swinburne University of Technology", "date": "2019 - 2021" },
+        { "degree": "Bachelor of Civil Engineering", "school": "University of Pune", "date": "2014 - 2018" }
+    ],
+    "affiliations": [
+        { "org": "Engineers Australia (MIEAust)", "status": "NER Registration in progress" },
+        { "org": "Project Management Institute", "status": "Working towards PMP" }
+    ],
+    "techStack": [
+        "MS Project", "Primavera P6", "Procore", "AutoCAD 3D", "Civil 3D", "SpaceGass", "Microstran", "RAPT"
     ],
     "stats": [
       { "label": "Portfolio Value", "value": "$400M+" },
@@ -104,7 +115,7 @@ const fallbackData = {
         "bullets": ["Designed stormwater drainage, OSD systems, and site grading.", "Coordinated geotechnical investigations and council approvals."]
       },
       {
-        "roleCompany": "Engineering Cadet / Site Eng, Tata Projects",
+        "roleCompany": "Engineering Cadet, Tata Projects",
         "dates": "01/2019 - 07/2019",
         "location": "Mumbai, India",
         "bullets": ["Supported QA/QC for concrete pours (slump testing).", "Assisted in pile integrity and dynamic load testing for foundations."]
@@ -136,15 +147,18 @@ document.addEventListener('DOMContentLoaded', async () => {
         const savedTheme = localStorage.getItem('theme') || 'dark';
         document.body.setAttribute('data-theme', savedTheme);
 
-        const toggleBtn = document.getElementById('themeToggle');
-        if(toggleBtn) {
-            toggleBtn.addEventListener('click', () => {
-                const currentTheme = document.body.getAttribute('data-theme');
-                const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
-                document.body.setAttribute('data-theme', newTheme);
-                localStorage.setItem('theme', newTheme);
-            });
-        }
+        const toggleTheme = () => {
+            const currentTheme = document.body.getAttribute('data-theme');
+            const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+            document.body.setAttribute('data-theme', newTheme);
+            localStorage.setItem('theme', newTheme);
+        };
+
+        const tBtn = document.getElementById('themeToggle');
+        const mBtn = document.getElementById('themeToggleMobile');
+        
+        if(tBtn) tBtn.addEventListener('click', toggleTheme);
+        if(mBtn) mBtn.addEventListener('click', toggleTheme);
     }
 
     // --- 3. POPULATE DOM ---
@@ -165,6 +179,9 @@ document.addEventListener('DOMContentLoaded', async () => {
         const photoNode = document.getElementById('heroPhoto');
         if(photoNode && siteData.profilePhotoUrl) photoNode.src = siteData.profilePhotoUrl;
 
+        const visaText = document.getElementById('visaText');
+        if(visaText && siteData.visaStatus) visaText.textContent = siteData.visaStatus;
+
         // About
         const leadNode = document.getElementById('aboutLead');
         if(leadNode) leadNode.innerHTML = `<strong>${siteData.aboutLead || ''}</strong><br><br>${siteData.aboutStory || ''}`;
@@ -178,22 +195,50 @@ document.addEventListener('DOMContentLoaded', async () => {
             });
         }
 
-        const certGrid = document.getElementById('certGrid');
-        if(certGrid && siteData.certifications) {
-            siteData.certifications.forEach(cert => {
+        // Logistics
+        const logGrid = document.getElementById('logisticsGrid');
+        if(logGrid && siteData.logistics) {
+            siteData.logistics.forEach(log => {
                 const div = document.createElement('div');
-                div.className = 'cert-item';
-                div.innerHTML = `
-                    <i data-lucide="${cert.icon}" class="cert-icon"></i>
-                    <div class="cert-text">
-                        <h5>${cert.name}</h5>
-                        <p>${cert.issuer}</p>
-                    </div>
-                `;
-                certGrid.appendChild(div);
+                div.className = 'log-badge';
+                div.innerHTML = `<i data-lucide="${log.icon}"></i> ${log.name}`;
+                logGrid.appendChild(div);
             });
         }
 
+        // Education & Affiliations
+        const eduList = document.getElementById('educationList');
+        if(eduList && siteData.education) {
+            siteData.education.forEach(edu => {
+                const div = document.createElement('div');
+                div.className = 'edu-item';
+                div.innerHTML = `<div class="edu-title">${edu.degree}</div><div class="edu-meta">${edu.school} • ${edu.date}</div>`;
+                eduList.appendChild(div);
+            });
+        }
+
+        const affilList = document.getElementById('affiliationsList');
+        if(affilList && siteData.affiliations) {
+            siteData.affiliations.forEach(affil => {
+                const div = document.createElement('div');
+                div.className = 'edu-item';
+                div.innerHTML = `<div class="edu-title">${affil.org}</div><div class="edu-meta">${affil.status}</div>`;
+                affilList.appendChild(div);
+            });
+        }
+
+        // Tech Stack
+        const stackGrid = document.getElementById('techStackGrid');
+        if(stackGrid && siteData.techStack) {
+            siteData.techStack.forEach(tech => {
+                const span = document.createElement('span');
+                span.className = 'tech-tag';
+                span.textContent = tech;
+                stackGrid.appendChild(span);
+            });
+        }
+
+        // Stats
         const statsGrid = document.getElementById('statsGrid');
         if(statsGrid) {
             (siteData.stats || []).forEach(stat => {
@@ -323,7 +368,7 @@ document.addEventListener('DOMContentLoaded', async () => {
                 </a>
             `).join('');
         } else {
-            linksContainer.innerHTML = "<p style='color:var(--text-muted); font-size:0.9rem;'>No external media available.</p>";
+            linksContainer.innerHTML = "<p style='color:var(--text-muted); font-size:0.9rem;'>Internal/Confidential works. No external media.</p>";
         }
 
         const modal = document.getElementById('projectModal');
@@ -405,8 +450,8 @@ document.addEventListener('DOMContentLoaded', async () => {
                 const y = e.clientY - rect.top;
                 const centerX = rect.width / 2;
                 const centerY = rect.height / 2;
-                const rotateX = ((y - centerY) / centerY) * -8;
-                const rotateY = ((x - centerX) / centerX) * 8;
+                const rotateX = ((y - centerY) / centerY) * -5;
+                const rotateY = ((x - centerX) / centerX) * 5;
                 gsap.to(card, { rotationX: rotateX, rotationY: rotateY, transformPerspective: 1000, ease: "power1.out", duration: 0.4 });
             });
             card.addEventListener('mouseleave', () => {
