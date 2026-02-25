@@ -1,239 +1,131 @@
-const fallbackData = {
-    "name": "Ganesh Kalal (MIEAust)",
-    "role": "Project Engineer",
-    "tagline": "Civil & Structural Engineer | Major Infrastructure Delivery",
-    "kicker": "Melbourne VIC • Structural Design • QA Compliance",
-    "profilePhotoUrl": "./profile.png",
-    "heroTitle": "Delivering major civil, structural, and transport infrastructure with rigorous QA and engineering precision.",
-    "heroSubtitle": "Civil and Structural Engineer with 5+ years of experience delivering major transport infrastructure, telecom upgrades, and heavy industrial projects across Tier-1 and Tier-2 environments.",
-    "signatureLine": "Clear sequence. Strong controls. Clean QA. Deliver it right.",
-    "stats": [
-      { "label": "Experience", "value": "5+ Years" },
-      { "label": "Telecom Upgrades", "value": "150+" },
-      { "label": "Council Approvals", "value": "20+" }
-    ],
-    "aboutLead": "A strategy-driven engineer balancing technical oversight with commercial discipline.",
-    "aboutStory": "I am a Melbourne-based Civil and Structural Engineer with a proven track record across diverse sectors—from metro rail and freeway upgrades to 5G telecom infrastructure and major industrial works.",
-    "knownFor": [
-      "Structural design and analysis for civil, telecom, and infrastructure assets",
-      "Technical review and compliance checks to Australian Standards (AS 3600, AS 4100, AS 1170)",
-      "Planning and sequencing of heavy civil and structural works",
-      "SOW and RFQ preparation, procurement, and tender evaluation",
-      "Site inspections, hold points, and rigorous QA conformance reporting"
-    ],
-    "projects": [
-      {
-        "title": "Mumbai Metro Line 4 & 5",
-        "meta": "Mumbai, India | 2018 to 2019 | Confidential",
-        "preview": "Civil Site Engineer overseeing QA/QC, elevated viaducts, and underground tunnel (TBM) interfaces.",
-        "tags": ["Civil", "Rail Infrastructure", "QA/QC"],
-        "fullText": "Supported independent verification and QA/QC functions during the construction of elevated viaducts, metro stations, and deep foundation works in dense urban environments.",
-        "bullets": [
-          "Supervised concrete QA/QC including slump testing, cube sampling, and dimensional checks for piers and foundations",
-          "Conducted pile integrity and dynamic load testing for deep foundation works",
-          "Monitored tunnel alignment (TBM), excavation safety, and installation of precast bridge elements",
-          "Collaborated with engineers and surveyors to review ITPs and close out non-conformance reports (NCRs)"
-        ]
-      },
-      {
-        "title": "West Gate Freeway Upgrade",
-        "meta": "Melbourne | 2022 to 2023 | Confidential",
-        "preview": "Structural design support and construction oversight for RCC crash barriers and precast noise walls.",
-        "tags": ["Roads", "Concrete QA", "VicRoads"],
-        "fullText": "Delivered structural design support and site supervision, ensuring works met stringent VicRoads standards and AS 5100 under live-traffic conditions.",
-        "bullets": [
-          "Reviewed shop drawings and supervised concrete pours and panel installations",
-          "Conducted QA including concrete testing and reinforcement verification",
-          "Delivered civil works to VicRoads standards and AS 5100 requirements",
-          "Achieved zero non-conformances across 100+ structural installations"
-        ]
-      },
-      {
-        "title": "National 5G Telecom Upgrade",
-        "meta": "Victoria | 2023 to 2024 | $50 Million",
-        "preview": "Led structural design coordination for 150+ tower upgrades and completed 100+ site inspections.",
-        "tags": ["Structural Design", "Telecom", "AS 1170.2"],
-        "fullText": "Delivered design coordination, structural analysis, field inspections, and approvals support for critical telecom infrastructure across multiple council jurisdictions.",
-        "bullets": [
-          "Structural design coordination for 150+ steel and lattice tower upgrades",
-          "Completed 100+ site inspections to confirm structural compliance and safety",
-          "Technical evaluation of subcontractor engineering proposals",
-          "Secured statutory planning approvals from 20+ councils"
-        ]
-      },
-      {
-        "title": "Rio Tinto & ExxonMobil Industrial Projects",
-        "meta": "VIC & NT | 2024 to Present | $365M+",
-        "preview": "Project Engineer overseeing heavy structural dismantling, remediation, and design compliance on major Tier-1 industrial closures.",
-        "tags": ["Heavy Civil", "Remediation", "Contracts"],
-        "fullText": "Supporting the engineering delivery of Australia's largest industrial closure projects. Managed procurement documentation, structural design package reviews, and complex contractor coordination.",
-        "bullets": [
-          "Reviewed structural design packages for AS 3600 and AS 4100 compliance",
-          "Prepared SOW/RFQ packages and evaluated 15+ tender submissions technically",
-          "Negotiated and justified contract variations totaling $8M+",
-          "Managed contractor coordination and strict quality/safety verification for heavy civil works"
-        ]
-      }
-    ],
-    "timeline": [
-      {
-        "roleCompany": "Project Engineer, Liberty Industrial",
-        "dates": "02/2024 - Present",
-        "location": "Altona VIC / Gove NT",
-        "bullets": [
-          "Planned sequencing and delivery of heavy civil and structural works on $100M+ industrial projects",
-          "Prepared SOW, RFQ, ITPs and managed technical queries, RFIs, and engineering coordination",
-          "Conducted site inspections, verified hold points, led safety audits, and supported budget variations"
-        ]
-      },
-      {
-        "roleCompany": "Structural Engineer, Indara Digital Infrastructures",
-        "dates": "04/2023 - 03/2024",
-        "location": "Melbourne VIC",
-        "bullets": [
-          "Delivered 150+ lattice tower and steel/timber pole upgrades including structural design, analysis, and fabrication coordination",
-          "Reviewed drawings and ITPs for AS/NZS 1170.2 and AS 4100 compliance; conducted extensive field inspections",
-          "Supported statutory approvals across 20+ councils"
-        ]
-      },
-      {
-        "roleCompany": "Graduate Structural Engineer, Clive Steele Partners",
-        "dates": "11/2021 - 03/2023",
-        "location": "Clayton VIC",
-        "bullets": [
-          "Designed reinforced concrete elements to AS 3600 and prepared technical construction drawings",
-          "Reviewed subcontractor shop drawings and supervised on-site concrete works including quality testing",
-          "Conducted structural asset inspections and prepared rectification recommendations"
-        ]
-      },
-      {
-        "roleCompany": "Graduate Civil Engineer, Structcom Consulting Engineers",
-        "dates": "06/2020 - 10/2021",
-        "location": "Caulfield VIC",
-        "bullets": [
-          "Supported structural design and drafting for community centres, public transport assets, and residential structures",
-          "Designed civil stormwater and On-Site Detention (OSD) systems to meet local council requirements"
-        ]
-      },
-      {
-        "roleCompany": "Civil Site Engineer, Tata Projects (Mumbai Metro Line 4 & 5)",
-        "dates": "02/2018 - 07/2019",
-        "location": "Mumbai, India",
-        "bullets": [
-          "Supported independent verification and QA/QC teams on massive elevated viaduct and station construction",
-          "Performed concrete QA/QC (slump testing, cube sampling) and dimensional checks for piers and foundations",
-          "Monitored tunnel alignment (TBM), excavation safety, and installation of precast bridge elements"
-        ]
-      }
-    ],
-    "achievements": [
-      { "icon": "shield-check", "text": "Maintained an absolute zero LTI record across all high-risk Tier-1 environments." },
-      { "icon": "trending-up", "text": "Negotiated and successfully justified $8M+ in complex contract variations." },
-      { "icon": "check-circle", "text": "Achieved zero non-conformances on 100+ West Gate Freeway structural installations." },
-      { "icon": "radio-tower", "text": "Successfully delivered design coordination for 150+ 5G telecom tower upgrades." },
-      { "icon": "map", "text": "Introduced GPS and Drone topographic surveying to improve site remediation accuracy." }
-    ],
-    "contact": {
-      "location": "Melbourne, VIC",
-      "phone": "0424 121 941",
-      "email": "ganesh.r.kalal24@gmail.com",
-      "linkedin": "[https://www.linkedin.com/in/ganesh-kalal/](https://www.linkedin.com/in/ganesh-kalal/)"
-    }
-};
-
-let siteData = fallbackData;
-
 document.addEventListener('DOMContentLoaded', async () => {
+    let siteData = {};
+
+    // --- CURSOR LOGIC ---
+    const cursorDot = document.getElementById('cursorDot');
+    const cursorRing = document.getElementById('cursorRing');
+    
+    // Only init custom cursor on non-touch devices
+    if(window.matchMedia("(pointer: fine)").matches && cursorDot && cursorRing) {
+        let mouseX = 0, mouseY = 0;
+        let ringX = 0, ringY = 0;
+
+        window.addEventListener('mousemove', (e) => {
+            mouseX = e.clientX;
+            mouseY = e.clientY;
+            
+            // Instantly move the dot
+            gsap.set(cursorDot, { x: mouseX, y: mouseY });
+        });
+
+        // Smoothly trail the ring using GSAP ticker
+        gsap.ticker.add(() => {
+            ringX += (mouseX - ringX) * 0.15;
+            ringY += (mouseY - ringY) * 0.15;
+            gsap.set(cursorRing, { x: ringX, y: ringY });
+        });
+
+        // Add hover states
+        const interactiveElements = document.querySelectorAll('a, button, .bento-tile, .timeline-item, .magnetic');
+        interactiveElements.forEach(el => {
+            el.addEventListener('mouseenter', () => cursorRing.classList.add('hover'));
+            el.addEventListener('mouseleave', () => cursorRing.classList.remove('hover'));
+        });
+    }
+
+    // --- MAGNETIC BUTTONS LOGIC ---
+    function initMagnetic() {
+        const magnetics = document.querySelectorAll('.magnetic');
+        magnetics.forEach(btn => {
+            btn.addEventListener('mousemove', (e) => {
+                const rect = btn.getBoundingClientRect();
+                const strength = btn.dataset.strength || 20;
+                // Calculate distance from center
+                const x = ((e.clientX - rect.left) / rect.width - 0.5) * strength;
+                const y = ((e.clientY - rect.top) / rect.height - 0.5) * strength;
+                gsap.to(btn, { x: x, y: y, duration: 0.5, ease: "power2.out" });
+            });
+            btn.addEventListener('mouseleave', () => {
+                gsap.to(btn, { x: 0, y: 0, duration: 0.5, ease: "elastic.out(1, 0.3)" });
+            });
+        });
+    }
+
+    // --- DATA LOADING & RENDER ---
     async function init() {
         initTheme();
         await loadData();
-        
-        populateHero();
-        populateAbout();
-        populateCareer();
-        initProjectFilters();
-        populateProjects('all');
-        initCharts();
-        populateAchievements();
-        populateContact();
-        
-        initScrollReveal();
-        if(typeof lucide !== 'undefined') lucide.createIcons();
+        if (siteData.name) {
+            populateHero();
+            populateAbout();
+            populateCareer();
+            initProjectFilters();
+            populateProjects('all');
+            initCharts();
+            populateAchievements();
+            populateContact();
+            
+            // Init GSAP interactions after DOM is built
+            setTimeout(() => {
+                initGSAPScroll();
+                initMagnetic();
+                init3DTilt();
+                lucide.createIcons();
+            }, 100);
+        }
     }
 
     async function loadData() {
         try {
-            const response = await fetch('./content.json', { cache: 'no-store' });
-            if(response.ok) {
-                siteData = await response.json();
-            }
-        } catch (e) {
-            console.warn("Fetch failed, using fail-safe data.");
-        }
+            const res = await fetch('./content.json');
+            if(res.ok) siteData = await res.json();
+        } catch (e) { console.error("Data load failed", e); }
     }
 
     function initTheme() {
-        const savedTheme = localStorage.getItem('theme') || 'dark';
-        document.body.setAttribute('data-theme', savedTheme);
-        const iconEl = document.getElementById('themeIcon');
-        if(iconEl) iconEl.setAttribute('data-lucide', savedTheme === 'dark' ? 'sun' : 'moon');
+        const saved = localStorage.getItem('theme') || 'dark';
+        document.body.setAttribute('data-theme', saved);
+        if(document.getElementById('themeIcon')) document.getElementById('themeIcon').setAttribute('data-lucide', saved === 'dark' ? 'sun' : 'moon');
 
-        const toggleBtn = document.getElementById('themeToggle');
-        if(toggleBtn) {
-            toggleBtn.addEventListener('click', () => {
-                const currentTheme = document.body.getAttribute('data-theme');
-                const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
-                document.body.setAttribute('data-theme', newTheme);
-                localStorage.setItem('theme', newTheme);
-                
-                const newIconEl = document.getElementById('themeIcon');
-                if(newIconEl) newIconEl.setAttribute('data-lucide', newTheme === 'dark' ? 'sun' : 'moon');
-                if(typeof lucide !== 'undefined') lucide.createIcons();
-                initCharts();
-            });
-        }
+        document.getElementById('themeToggle').addEventListener('click', () => {
+            const current = document.body.getAttribute('data-theme');
+            const next = current === 'dark' ? 'light' : 'dark';
+            document.body.setAttribute('data-theme', next);
+            localStorage.setItem('theme', next);
+            document.getElementById('themeIcon').setAttribute('data-lucide', next === 'dark' ? 'sun' : 'moon');
+            lucide.createIcons();
+            initCharts(); 
+        });
     }
 
+    // --- POPULATORS ---
     function populateHero() {
-        if(document.getElementById('heroPositioning')) document.getElementById('heroPositioning').textContent = siteData.kicker || "";
-        if(document.getElementById('heroName')) document.getElementById('heroName').textContent = (siteData.name || "").split(' (')[0]; 
-        if(document.getElementById('heroTitle')) document.getElementById('heroTitle').textContent = siteData.role || "";
-        if(document.getElementById('heroTagline')) document.getElementById('heroTagline').textContent = siteData.heroSubtitle || "";
+        document.getElementById('heroPositioning').textContent = siteData.kicker;
+        document.getElementById('heroName').textContent = siteData.name.split(' (')[0]; 
+        document.getElementById('heroTitle').textContent = siteData.role;
+        document.getElementById('heroTagline').textContent = siteData.heroSubtitle;
     }
 
     function populateAbout() {
-        const leadEl = document.getElementById('aboutLead');
-        if(leadEl && siteData.aboutLead && siteData.aboutStory) {
-            leadEl.innerHTML = `<strong>${siteData.aboutLead}</strong><br><br>${siteData.aboutStory}`;
-        }
-        
+        document.getElementById('aboutLead').innerHTML = `<strong>${siteData.aboutLead}</strong><br><br>${siteData.aboutStory}`;
         const ul = document.getElementById('aboutBullets');
-        if(ul && siteData.knownFor) {
-            ul.innerHTML = '';
-            siteData.knownFor.forEach(item => {
-                const li = document.createElement('li');
-                li.innerHTML = `<i data-lucide="check-circle-2"></i> <span>${item}</span>`;
-                ul.appendChild(li);
-            });
-        }
+        siteData.knownFor.forEach(item => {
+            const li = document.createElement('li');
+            li.innerHTML = `<span>${item}</span>`;
+            ul.appendChild(li);
+        });
 
         const statsGrid = document.getElementById('statsGrid');
-        if(statsGrid && siteData.stats) {
-            statsGrid.innerHTML = '';
-            siteData.stats.forEach(stat => {
-                const div = document.createElement('div');
-                div.className = 'stat-box glass-panel';
-                div.innerHTML = `<div class="stat-val">${stat.value}</div><div class="stat-lbl">${stat.label}</div>`;
-                statsGrid.appendChild(div);
-            });
-        }
+        siteData.stats.forEach(stat => {
+            const div = document.createElement('div');
+            div.className = 'stat-box glass-panel tilt-card';
+            div.innerHTML = `<div class="stat-val">${stat.value}</div><div class="stat-lbl">${stat.label}</div>`;
+            statsGrid.appendChild(div);
+        });
     }
 
     function populateCareer() {
         const timeline = document.getElementById('careerTimeline');
-        if(!timeline || !siteData.timeline) return;
-        
-        timeline.innerHTML = '';
         siteData.timeline.forEach((job, index) => {
             const parts = job.roleCompany.split(',');
             const role = parts[0].trim();
@@ -243,7 +135,7 @@ document.addEventListener('DOMContentLoaded', async () => {
             const kw2 = job.bullets[1] ? job.bullets[1].split(' ')[0] : "Management";
 
             const card = document.createElement('div');
-            card.className = 'timeline-item glass-panel reveal';
+            card.className = 'timeline-item glass-panel gsap-stagger-item';
             if(index === 0) card.classList.add('expanded');
             
             card.innerHTML = `
@@ -266,9 +158,9 @@ document.addEventListener('DOMContentLoaded', async () => {
             `;
 
             card.addEventListener('click', () => {
-                const isExpanded = card.classList.contains('expanded');
+                const isExp = card.classList.contains('expanded');
                 document.querySelectorAll('.timeline-item').forEach(c => c.classList.remove('expanded'));
-                if (!isExpanded) card.classList.add('expanded');
+                if (!isExp) card.classList.add('expanded');
             });
             timeline.appendChild(card);
         });
@@ -276,13 +168,11 @@ document.addEventListener('DOMContentLoaded', async () => {
 
     function initProjectFilters() {
         const container = document.getElementById('projectFilters');
-        if(!container) return;
         const filters = ['All', 'Civil', 'Industrial', 'Telecom'];
-        
-        container.innerHTML = '';
         filters.forEach(cat => {
             const btn = document.createElement('button');
-            btn.className = `filter-chip ${cat === 'All' ? 'active' : ''}`;
+            btn.className = `filter-chip magnetic ${cat === 'All' ? 'active' : ''}`;
+            btn.dataset.strength = "10";
             btn.textContent = cat;
             btn.addEventListener('click', () => {
                 document.querySelectorAll('.filter-chip').forEach(c => c.classList.remove('active'));
@@ -295,7 +185,6 @@ document.addEventListener('DOMContentLoaded', async () => {
 
     function populateProjects(filter) {
         const grid = document.getElementById('projectsBento');
-        if(!grid || !siteData.projects) return;
         grid.innerHTML = '';
         
         let filtered = siteData.projects;
@@ -306,7 +195,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         filtered.forEach((p, index) => {
             const tile = document.createElement('div');
             let sizeClass = index === 0 ? 'large' : (index === 3 ? 'medium' : '');
-            tile.className = `bento-tile glass-panel reveal active ${sizeClass}`;
+            tile.className = `bento-tile glass-panel tilt-card gsap-stagger-item ${sizeClass}`;
             
             const hues = [195, 260, 220, 160];
             const h = hues[index % hues.length];
@@ -327,10 +216,14 @@ document.addEventListener('DOMContentLoaded', async () => {
             tile.addEventListener('click', () => openModal(p));
             grid.appendChild(tile);
         });
-        if(typeof lucide !== 'undefined') lucide.createIcons();
+        
+        // Re-init GSAP tilts for new elements
+        if(typeof gsap !== 'undefined') init3DTilt();
+        lucide.createIcons();
     }
 
-    window.openModal = function(project) {
+    // --- MODAL ---
+    function openModal(project) {
         document.getElementById('modalTitle').textContent = project.title;
         document.getElementById('modalTags').innerHTML = project.tags ? project.tags.map(t => `<span>${t}</span>`).join('') : '';
 
@@ -358,23 +251,30 @@ document.addEventListener('DOMContentLoaded', async () => {
 
         const modal = document.getElementById('projectModal');
         modal.setAttribute('aria-hidden', 'false');
-        modal.classList.add('open');
+        
+        // GSAP Modal Open Animation
+        gsap.to(modal, {autoAlpha: 1, duration: 0.3});
+        gsap.fromTo(modal.querySelector('.modal-content'), 
+            {y: 50, scale: 0.95}, 
+            {y: 0, scale: 1, duration: 0.5, ease: "back.out(1.2, 0.8)"}
+        );
         document.body.style.overflow = 'hidden';
-        if(typeof lucide !== 'undefined') lucide.createIcons();
+        lucide.createIcons();
     }
 
-    window.closeModal = function() {
+    window.closeModal = () => {
         const modal = document.getElementById('projectModal');
-        if(modal) {
+        // GSAP Modal Close Animation
+        gsap.to(modal.querySelector('.modal-content'), {y: 30, scale: 0.95, duration: 0.3, ease: "power2.in"});
+        gsap.to(modal, {autoAlpha: 0, duration: 0.3, onComplete: () => {
             modal.setAttribute('aria-hidden', 'true');
-            modal.classList.remove('open');
             document.body.style.overflow = '';
-        }
-    }
+        }});
+    };
 
+    // --- CHARTS ---
     function initCharts() {
         if(typeof Chart === 'undefined') return;
-        
         const isLight = document.body.getAttribute('data-theme') === 'light';
         const tColor = isLight ? '#475569' : '#94a3b8';
         const gColor = isLight ? 'rgba(15,23,42,0.05)' : 'rgba(255,255,255,0.05)';
@@ -402,17 +302,14 @@ document.addEventListener('DOMContentLoaded', async () => {
                 options: {
                     responsive: true, maintainAspectRatio: false,
                     plugins: { legend: { display: false } },
-                    scales: { 
-                        y: { beginAtZero: true, grid: { color: gColor } }, 
-                        x: { grid: { display: false } } 
-                    }
+                    scales: { y: { beginAtZero: true, grid: { color: gColor } }, x: { grid: { display: false } } }
                 }
             });
         }
 
-        const ctxOutput = document.getElementById('typeChart');
-        if(ctxOutput) {
-            window.chart2 = new Chart(ctxOutput.getContext('2d'), {
+        const ctxType = document.getElementById('typeChart');
+        if(ctxType) {
+            window.chart2 = new Chart(ctxType.getContext('2d'), {
                 type: 'doughnut',
                 data: {
                     labels: ['Industrial Demolition', 'Telecom 5G', 'Civil/Transport'],
@@ -422,27 +319,18 @@ document.addEventListener('DOMContentLoaded', async () => {
                         borderWidth: 0
                     }]
                 },
-                options: { 
-                    responsive: true, 
-                    maintainAspectRatio: false, 
-                    plugins: { legend: { position: 'bottom', labels: { color: tColor } } } 
-                }
+                options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { position: 'bottom', labels: { color: tColor } } } }
             });
         }
     }
 
     function populateAchievements() {
         const scroll = document.getElementById('achievementsScroll');
-        if(!scroll || !siteData.achievements) return;
-        
-        scroll.innerHTML = '';
+        if(!siteData.achievements) return;
         siteData.achievements.forEach(ach => {
             const card = document.createElement('div');
-            card.className = 'ach-card glass-panel';
-            card.innerHTML = `
-                <div class="ach-icon"><i data-lucide="${ach.icon}"></i></div>
-                <div class="ach-text">${ach.text}</div>
-            `;
+            card.className = 'ach-card glass-panel tilt-card';
+            card.innerHTML = `<div class="ach-icon"><i data-lucide="${ach.icon}"></i></div><div class="ach-text">${ach.text}</div>`;
             scroll.appendChild(card);
         });
     }
@@ -452,25 +340,87 @@ document.addEventListener('DOMContentLoaded', async () => {
             const links = document.getElementById('socialLinks');
             if(links) {
                 links.innerHTML = `
-                    <a href="${siteData.contact.linkedin}" target="_blank" class="glass-panel"><i data-lucide="linkedin"></i> LinkedIn</a>
-                    <a href="mailto:${siteData.contact.email}" class="glass-panel"><i data-lucide="mail"></i> Email</a>
+                    <a href="${siteData.contact.linkedin}" target="_blank" class="glass-panel magnetic"><i data-lucide="linkedin"></i> LinkedIn</a>
+                    <a href="mailto:${siteData.contact.email}" class="glass-panel magnetic"><i data-lucide="mail"></i> Email</a>
                 `;
             }
-            const fText = document.getElementById('footerText');
-            if(fText) fText.innerHTML = `&copy; ${new Date().getFullYear()} ${siteData.name.split(' ')[0]}. Engineered for Precision.`;
+            document.getElementById('footerText').innerHTML = `&copy; ${new Date().getFullYear()} ${siteData.name.split(' ')[0]}. Engineered for Precision.`;
         }
     }
 
-    function initScrollReveal() {
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('active');
-                }
-            });
-        }, { threshold: 0.1, rootMargin: "0px 0px -50px 0px" });
+    // --- GSAP ANIMATIONS ---
+    function initGSAPScroll() {
+        if(typeof gsap === 'undefined') return;
+        gsap.registerPlugin(ScrollTrigger);
 
-        document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+        // Fade Up Elements
+        gsap.utils.toArray('.gsap-fade-up').forEach(elem => {
+            gsap.fromTo(elem, 
+                { y: 50, autoAlpha: 0 },
+                {
+                    y: 0, autoAlpha: 1, duration: 0.8, ease: "power2.out",
+                    scrollTrigger: { trigger: elem, start: "top 85%", toggleActions: "play none none none" }
+                }
+            );
+        });
+
+        // Staggered Grids (Bento, Timeline)
+        gsap.utils.toArray('.bento-grid, .timeline, .dashboard-grid').forEach(container => {
+            const items = container.querySelectorAll('.gsap-stagger-item, .bento-tile, .chart-card');
+            if(items.length > 0) {
+                gsap.fromTo(items, 
+                    { y: 50, autoAlpha: 0 },
+                    {
+                        y: 0, autoAlpha: 1, duration: 0.6, stagger: 0.1, ease: "power2.out",
+                        scrollTrigger: { trigger: container, start: "top 85%" }
+                    }
+                );
+            }
+        });
+
+        // Hero Intro Animation
+        gsap.fromTo(".hero-name", { y: 20, opacity: 0 }, { y: 0, opacity: 1, duration: 1, ease: "power3.out" });
+        gsap.fromTo(".hero-title", { y: 20, opacity: 0 }, { y: 0, opacity: 1, duration: 1, delay: 0.1, ease: "power3.out" });
+        gsap.fromTo(".hero-tagline", { y: 20, opacity: 0 }, { y: 0, opacity: 1, duration: 1, delay: 0.2, ease: "power3.out" });
+        gsap.fromTo(".hero-cta", { y: 20, opacity: 0 }, { y: 0, opacity: 1, duration: 1, delay: 0.3, ease: "power3.out" });
+    }
+
+    // --- 3D TILT EFFECT ---
+    function init3DTilt() {
+        if(!window.matchMedia("(pointer: fine)").matches) return; // Skip on mobile
+        
+        const tiltCards = document.querySelectorAll('.tilt-card, .bento-tile');
+        tiltCards.forEach(card => {
+            card.addEventListener('mousemove', e => {
+                const rect = card.getBoundingClientRect();
+                const x = e.clientX - rect.left; // x position within the element
+                const y = e.clientY - rect.top;  // y position within the element
+                
+                const centerX = rect.width / 2;
+                const centerY = rect.height / 2;
+                
+                // Calculate rotation (max 10 degrees)
+                const rotateX = ((y - centerY) / centerY) * -10;
+                const rotateY = ((x - centerX) / centerX) * 10;
+                
+                gsap.to(card, {
+                    rotationX: rotateX,
+                    rotationY: rotateY,
+                    transformPerspective: 1000,
+                    ease: "power1.out",
+                    duration: 0.4
+                });
+            });
+            
+            card.addEventListener('mouseleave', () => {
+                gsap.to(card, {
+                    rotationX: 0,
+                    rotationY: 0,
+                    ease: "elastic.out(1, 0.3)",
+                    duration: 1
+                });
+            });
+        });
     }
 
     init();
