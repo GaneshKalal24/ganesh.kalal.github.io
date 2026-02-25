@@ -25,7 +25,10 @@
   "logistics": [
     { "name": "White Card", "icon": "hard-hat" },
     { "name": "Victorian Driver's License", "icon": "car" },
-    { "name": "Working at Heights", "icon": "triangle-right" }
+    { "name": "Working at Heights", "icon": "triangle-right" },
+    { "name": "Confined Spaces", "icon": "box" },
+    { "name": "Asbestos Safety", "icon": "shield-alert" },
+    { "name": "Mental Health First Aider", "icon": "heart-pulse" }
   ],
   "education": [
     { "degree": "Master of Engineering Science (Structural)", "school": "Swinburne University of Technology", "date": "2019 - 2021" },
@@ -36,7 +39,7 @@
     { "org": "Project Management Institute", "status": "Working towards PMP" }
   ],
   "techStack": [
-    "MS Project", "Primavera P6", "Procore", "AutoCAD 3D", "Civil 3D", "SpaceGass", "Microstran", "RAPT"
+    "MS Project", "Primavera P6", "Procore", "AutoCAD 3D", "Civil 3D", "SpaceGass", "Microstran", "MS Tower", "RAPT", "Inducta", "12d"
   ],
   "projects": [
     {
@@ -61,11 +64,12 @@
       "bullets": [
         "Managed subcontractor packages, procurement processes, and regulatory interfaces.",
         "Negotiated and justified contract variations totaling $8M+.",
-        "Updated Primavera P6 schedules to reflect sequencing, progress and delay impacts."
+        "Updated Primavera P6 schedules to reflect sequencing, progress and delay impacts.",
+        "Introduced GPS and Drone topographic surveying for remediation earthworks, improving accuracy by 25%."
       ],
       "links": [
-        { "title": "World's Most Powerful Shear Unveiled", "url": "https://libertyindustrial.com/worlds-most-powerful-shear-unveiled-in-australia/" },
-        { "title": "Rio Tinto Recycling Record Steel", "url": "https://libertyindustrial.com/rio-tinto-starts-recycling-steel-from-australias-largest-ever-demolition-project-on-the-northern-territorys-gove-peninsula/" },
+        { "title": "World's Most Powerful Shear Unveiled (Liberty Industrial)", "url": "https://libertyindustrial.com/worlds-most-powerful-shear-unveiled-in-australia/" },
+        { "title": "Rio Tinto Recycling Record Steel (Gove NT)", "url": "https://libertyindustrial.com/rio-tinto-starts-recycling-steel-from-australias-largest-ever-demolition-project-on-the-northern-territorys-gove-peninsula/" },
         { "title": "ExxonMobil Altona Demolition Works", "url": "https://corporate.exxonmobil.com/locations/australia/australia-newsroom/mobil-community-outreach/2025/altona-refinery-facilities-to-begin-demolition-works" }
       ]
     },
@@ -78,7 +82,8 @@
       "bullets": [
         "Supervised shop drawings, on-site concrete pours, and panel installation.",
         "Conducted QA including concrete testing and reinforcement verification.",
-        "Achieved zero non-conformances across 100+ structural installations."
+        "Achieved zero non-conformances across 100+ structural installations.",
+        "Coordinated fabrication and builder interfaces."
       ]
     },
     {
@@ -90,7 +95,8 @@
       "bullets": [
         "Performed concrete QA/QC (slump testing, dimensional checks) for foundations.",
         "Conducted Pile Integrity Testing (PIT) and Dynamic Load Testing (DLT).",
-        "Monitored tunnel alignment (TBM) and excavation safety."
+        "Monitored tunnel alignment (TBM) and excavation safety.",
+        "Supervised installation of bearings and precast bridge elements."
       ]
     }
   ],
@@ -111,8 +117,9 @@
       "location": "Melbourne VIC",
       "bullets": [
         "Delivered 150+ telecom infrastructure upgrades (5G network expansion) across metro and remote sites.",
-        "Coordinated land access, council approvals and statutory submissions.",
-        "Managed civil interfaces for tower foundations and fibre backhaul readiness."
+        "Coordinated land access, council approvals and statutory submissions for new and upgraded sites.",
+        "Managed civil interfaces for tower foundations and fibre backhaul readiness.",
+        "Reviewed fabrication drawings and conducted site inspections to AS/NZS 1170."
       ]
     },
     {
