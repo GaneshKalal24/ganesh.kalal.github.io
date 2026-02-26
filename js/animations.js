@@ -5,7 +5,6 @@ document.addEventListener('DOMContentLoaded', () => {
     const cursorRing = document.getElementById('cursorRing');
     
     if(window.matchMedia("(pointer: fine)").matches && typeof gsap !== 'undefined') {
-        // Only hide native cursor if JS is successfully running
         document.body.classList.add('custom-cursor-active'); 
         
         let mouseX = window.innerWidth/2, mouseY = window.innerHeight/2;
@@ -22,7 +21,6 @@ document.addEventListener('DOMContentLoaded', () => {
             gsap.set(cursorRing, { x: ringX, y: ringY });
         });
 
-        // Hover states using event delegation for dynamic elements
         document.body.addEventListener('mouseover', (e) => {
             if(e.target.closest('a, button, .bento-tile, .timeline-item, .magnetic')) {
                 cursorRing.classList.add('hover');
@@ -86,8 +84,8 @@ document.addEventListener('DOMContentLoaded', () => {
                 const rect = card.getBoundingClientRect();
                 const x = e.clientX - rect.left;
                 const y = e.clientY - rect.top;
-                const rotateX = ((y - rect.height/2) / rect.height/2) * -8;
-                const rotateY = ((x - rect.width/2) / rect.width/2) * 8;
+                const rotateX = ((y - rect.height/2) / rect.height/2) * -5;
+                const rotateY = ((x - rect.width/2) / rect.width/2) * 5;
                 gsap.to(card, { rotationX: rotateX, rotationY: rotateY, transformPerspective: 1000, ease: "power1.out", duration: 0.4 });
             }
         });
@@ -99,7 +97,6 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // Let the DOM populate first, then initialize
     setTimeout(() => {
         initScramble();
         initReveals();
