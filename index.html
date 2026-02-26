@@ -19,187 +19,194 @@
 </head>
 <body data-theme="dark">
 
-    <canvas id="webgl-canvas"></canvas>
-    <div class="noise-overlay"></div>
-    
-    <div class="fibre-cables">
-        <div class="cable cable-horizontal cable-1"><div class="pulse"></div></div>
-        <div class="cable cable-horizontal cable-2"><div class="pulse"></div></div>
-        <div class="cable cable-vertical cable-3"><div class="pulse"></div></div>
-        <div class="cable cable-horizontal cable-4"><div class="pulse"></div></div>
-    </div>
+    <svg style="width:0;height:0;position:absolute;z-index:-1;">
+        <filter id="liquid-ripple">
+            <feTurbulence type="fractalNoise" baseFrequency="0.015" numOctaves="3" result="noise" id="rippleNoise"/>
+            <feDisplacementMap in="SourceGraphic" in2="noise" scale="0" xChannelSelector="R" yChannelSelector="G" id="displacementMap" />
+        </filter>
+    </svg>
 
-    <div class="orb orb-1"></div>
-    <div class="orb orb-2"></div>
-
-    <div class="cursor-dot" id="cursorDot"></div>
-    <div class="cursor-ring" id="cursorRing"></div>
-
-    <nav class="floating-nav desktop-nav">
-        <div class="nav-inner glass-panel">
-            <div class="logo magnetic" data-strength="20">G<strong>K</strong></div>
-            <div class="nav-links">
-                <a href="#about" class="magnetic" data-strength="15">Profile</a>
-                <a href="#projects" class="magnetic" data-strength="15">Projects</a>
-                <a href="#career" class="magnetic" data-strength="15">Career</a>
-            </div>
-            <div class="nav-actions">
-                <button id="themeToggle" class="theme-btn magnetic" data-strength="20">
-                    <i data-lucide="sun" class="sun-icon"></i>
-                    <i data-lucide="moon" class="moon-icon"></i>
-                </button>
-                <a href="#contact" class="btn btn-primary btn-sm magnetic" data-strength="30">Connect</a>
-            </div>
-        </div>
-    </nav>
-
-    <nav class="mobile-nav glass-panel">
-        <a href="#hero" class="nav-item"><i data-lucide="home"></i></a>
-        <a href="#about" class="nav-item"><i data-lucide="user"></i></a>
-        <a href="#projects" class="nav-item"><i data-lucide="briefcase"></i></a>
-        <a href="#contact" class="nav-item"><i data-lucide="mail"></i></a>
-        <button id="themeToggleMobile" class="nav-item theme-btn-mobile">
-            <i data-lucide="sun" class="sun-icon"></i>
-            <i data-lucide="moon" class="moon-icon"></i>
-        </button>
-    </nav>
-
-    <main>
-        <section id="hero" class="hero">
-            <div class="wrap">
-                <div class="hero-grid">
-                    <div class="hero-text">
-                        <div class="hero-kicker gsap-fade-up" id="heroPositioning">Melbourne VIC • Telecom • Civil Infrastructure</div>
-                        <h1 class="hero-title gsap-fade-up">
-                            Hi, I'm <span class="accent-text" id="heroName">Ganesh Kalal</span>.
-                        </h1>
-                        <h2 class="hero-role text-outline gsap-fade-up" id="heroRole">Project Engineer</h2>
-                        <p class="hero-subtitle gsap-fade-up" id="heroTagline">Delivering Tier-1 projects with structural precision. Specializing in 5G rollouts, statutory approvals, and complex brownfield execution.</p>
-                        <div class="hero-actions gsap-fade-up">
-                            <a href="#projects" class="btn btn-primary magnetic" data-strength="40">Explore Projects</a>
-                            <a href="https://www.linkedin.com/in/ganesh-kalal/" target="_blank" class="btn btn-ghost magnetic" data-strength="40">LinkedIn</a>
-                        </div>
-                    </div>
-                    <div class="hero-visual gsap-fade-up">
-                        <div class="profile-frame glass-panel tilt-card">
-                            <img id="heroPhoto" src="profile.png" alt="Ganesh Kalal" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
-                            <div class="fallback-avatar" style="display:none;"><i data-lucide="user" style="width: 64px; height: 64px;"></i></div>
-                            <div class="photo-glow"></div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="scroll-indicator">
-                <div class="mouse"><div class="wheel"></div></div>
-            </div>
-        </section>
-
-        <div class="marquee-section">
-            <div class="marquee-content">
-                <span>TELECOM UPGRADES • CIVIL INFRASTRUCTURE • STRUCTURAL DESIGN • QA/QC COMPLIANCE • TIER-1 DELIVERY • </span>
-                <span>TELECOM UPGRADES • CIVIL INFRASTRUCTURE • STRUCTURAL DESIGN • QA/QC COMPLIANCE • TIER-1 DELIVERY • </span>
-            </div>
+    <div id="liquid-container">
+        <canvas id="webgl-canvas"></canvas>
+        <div class="noise-overlay"></div>
+        
+        <div class="fibre-cables">
+            <div class="cable cable-horizontal cable-1"><div class="pulse"></div></div>
+            <div class="cable cable-horizontal cable-2"><div class="pulse"></div></div>
+            <div class="cable cable-vertical cable-3"><div class="pulse"></div></div>
+            <div class="cable cable-horizontal cable-4"><div class="pulse"></div></div>
         </div>
 
-        <section id="about" class="section">
-            <div class="wrap">
-                <div class="about-content">
-                    <div class="about-text gsap-fade-up">
-                        <h2 class="section-title">Professional Profile</h2>
-                        <p class="lead-text" id="aboutLead">Loading profile data...</p>
-                        <ul class="bullet-list" id="aboutBullets"></ul>
-                        
-                        <h4 class="sub-heading mt-2">Site Clearances & Logistics</h4>
-                        <div class="logistics-grid" id="logisticsGrid"></div>
-                    </div>
-                    <div class="about-stats grid-2 gsap-fade-up">
-                        <div id="statsGrid" style="display: contents;"></div>
-                    </div>
+        <div class="orb orb-1"></div>
+        <div class="orb orb-2"></div>
+
+        <div class="cursor-dot" id="cursorDot"></div>
+        <div class="cursor-ring" id="cursorRing"></div>
+
+        <nav class="floating-nav desktop-nav">
+            <div class="nav-inner glass-panel">
+                <div class="logo magnetic" data-strength="20">G<strong>K</strong></div>
+                <div class="nav-links">
+                    <a href="#about" class="magnetic" data-strength="15">Profile</a>
+                    <a href="#projects" class="magnetic" data-strength="15">Projects</a>
+                    <a href="#career" class="magnetic" data-strength="15">Career</a>
+                </div>
+                <div class="nav-actions">
+                    <button id="themeToggle" class="theme-btn magnetic" data-strength="20">
+                        <i data-lucide="sun" class="sun-icon"></i>
+                        <i data-lucide="moon" class="moon-icon"></i>
+                    </button>
+                    <a href="#contact" class="btn btn-primary btn-sm magnetic" data-strength="30">Connect</a>
                 </div>
             </div>
-        </section>
+        </nav>
 
-        <section id="credentials" class="section bg-alt">
-            <div class="wrap">
-                <h2 class="section-title gsap-fade-up">Credentials & Arsenal</h2>
-                <div class="credentials-grid gsap-fade-up">
-                    <div class="glass-panel p-3 spotlight-card">
-                        <h4 class="sub-heading"><i data-lucide="graduation-cap"></i> Academic Background</h4>
-                        <div id="educationList" class="edu-list"></div>
-                        <h4 class="sub-heading mt-2"><i data-lucide="award"></i> Professional Affiliations</h4>
-                        <div id="affiliationsList" class="affil-list"></div>
-                    </div>
-                    <div class="glass-panel p-3 spotlight-card">
-                        <h4 class="sub-heading"><i data-lucide="cpu"></i> Technical Stack</h4>
-                        <div id="techStackGrid" class="tech-stack"></div>
-                    </div>
-                </div>
-            </div>
-        </section>
+        <nav class="mobile-nav glass-panel">
+            <a href="#hero" class="nav-item"><i data-lucide="home"></i></a>
+            <a href="#about" class="nav-item"><i data-lucide="user"></i></a>
+            <a href="#projects" class="nav-item"><i data-lucide="briefcase"></i></a>
+            <a href="#contact" class="nav-item"><i data-lucide="mail"></i></a>
+            <button id="themeToggleMobile" class="nav-item theme-btn-mobile">
+                <i data-lucide="sun" class="sun-icon"></i>
+                <i data-lucide="moon" class="moon-icon"></i>
+            </button>
+        </nav>
 
-        <section id="projects" class="section">
-            <div class="wrap">
-                <div class="section-header gsap-fade-up">
-                    <h2 class="section-title">Key Projects</h2>
-                    <div class="filter-chips" id="projectFilters"></div>
-                </div>
-                <div class="bento-grid" id="projectsBento">
-                    <p style="color: var(--text-muted);">Initializing Project Data...</p>
-                </div>
-            </div>
-        </section>
-
-        <section id="career" class="section">
-            <div class="wrap">
-                <h2 class="section-title gsap-fade-up">Career Journey</h2>
-                <div class="timeline" id="careerTimeline"></div>
-            </div>
-        </section>
-
-        <section id="contact" class="section pb-large">
-            <div class="wrap">
-                <div class="contact-container glass-panel spotlight-card gsap-fade-up">
-                    <div class="contact-left">
-                        <h2 class="section-title" style="margin-bottom: 1rem;">Initiate Contact</h2>
-                        <p class="contact-desc">Ready to deliver major infrastructure. Open to Project Engineering roles.</p>
-                        
-                        <div class="visa-badge" id="visaBadgeContact">
-                            <span class="pulse-dot"></span> <span id="visaText">Australian Permanent Resident</span>
+        <main>
+            <section id="hero" class="hero">
+                <div class="wrap">
+                    <div class="hero-grid">
+                        <div class="hero-text">
+                            <div class="hero-kicker gsap-fade-up" id="heroPositioning">Melbourne VIC • Telecom • Civil Infrastructure</div>
+                            <h1 class="hero-title gsap-fade-up">
+                                Hi, I'm <span class="accent-text" id="heroName">Ganesh Kalal</span>.
+                            </h1>
+                            <h2 class="hero-role text-outline gsap-fade-up" id="heroRole">Project Engineer</h2>
+                            <p class="hero-subtitle gsap-fade-up" id="heroTagline">Delivering Tier-1 projects with structural precision. Specializing in 5G rollouts, statutory approvals, and complex brownfield execution.</p>
+                            <div class="hero-actions gsap-fade-up">
+                                <a href="#projects" class="btn btn-primary magnetic" data-strength="40">Explore Projects</a>
+                                <a href="https://www.linkedin.com/in/ganesh-kalal/" target="_blank" class="btn btn-ghost magnetic" data-strength="40">LinkedIn</a>
+                            </div>
                         </div>
-
-                        <div class="social-links" id="socialLinks" style="margin-top: 2rem;"></div>
-                    </div>
-                    <div class="contact-right">
-                        <form class="premium-form" onsubmit="event.preventDefault(); window.location.href='mailto:ganesh.r.kalal24@gmail.com';">
-                            <div class="input-group">
-                                <input type="text" id="name" required placeholder=" ">
-                                <label for="name">Name</label>
+                        <div class="hero-visual gsap-fade-up">
+                            <div class="profile-frame glass-panel tilt-card">
+                                <img id="heroPhoto" src="profile.png" alt="Ganesh Kalal" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                                <div class="fallback-avatar" style="display:none;"><i data-lucide="user" style="width: 64px; height: 64px;"></i></div>
+                                <div class="photo-glow"></div>
                             </div>
-                            <div class="input-group">
-                                <input type="email" id="email" required placeholder=" ">
-                                <label for="email">Email</label>
-                            </div>
-                            <div class="input-group">
-                                <textarea id="message" required rows="3" placeholder=" "></textarea>
-                                <label for="message">Message</label>
-                            </div>
-                            <button type="submit" class="btn btn-primary magnetic" data-strength="30">Send Transmission <i data-lucide="send" class="btn-icon-right"></i></button>
-                        </form>
+                        </div>
                     </div>
                 </div>
+                <div class="scroll-indicator">
+                    <div class="mouse"><div class="wheel"></div></div>
+                </div>
+            </section>
+
+            <div class="marquee-section">
+                <div class="marquee-content">
+                    <span>TELECOM UPGRADES • CIVIL INFRASTRUCTURE • STRUCTURAL DESIGN • QA/QC COMPLIANCE • TIER-1 DELIVERY • </span>
+                    <span>TELECOM UPGRADES • CIVIL INFRASTRUCTURE • STRUCTURAL DESIGN • QA/QC COMPLIANCE • TIER-1 DELIVERY • </span>
+                </div>
             </div>
-        </section>
-    </main>
 
-    <footer class="premium-footer">
-        <div class="wrap footer-content">
-            <div class="footer-logo">G.KALAL</div>
-            <p id="footerText"></p>
-            <div class="footer-meta">MIEAust • Melbourne, VIC</div>
-        </div>
-    </footer>
+            <section id="about" class="section">
+                <div class="wrap">
+                    <div class="about-content">
+                        <div class="about-text gsap-fade-up">
+                            <h2 class="section-title">Professional Profile</h2>
+                            <p class="lead-text" id="aboutLead">Loading profile data...</p>
+                            <ul class="bullet-list" id="aboutBullets"></ul>
+                            
+                            <h4 class="sub-heading mt-2">Site Clearances & Logistics</h4>
+                            <div class="logistics-grid" id="logisticsGrid"></div>
+                        </div>
+                        <div class="about-stats grid-2 gsap-fade-up">
+                            <div id="statsGrid" style="display: contents;"></div>
+                        </div>
+                    </div>
+                </div>
+            </section>
 
-    <div id="projectModal" class="modal" aria-hidden="true">
+            <section id="credentials" class="section bg-alt">
+                <div class="wrap">
+                    <h2 class="section-title gsap-fade-up">Credentials & Arsenal</h2>
+                    <div class="credentials-grid gsap-fade-up">
+                        <div class="glass-panel p-3 spotlight-card">
+                            <h4 class="sub-heading"><i data-lucide="graduation-cap"></i> Academic Background</h4>
+                            <div id="educationList" class="edu-list"></div>
+                            <h4 class="sub-heading mt-2"><i data-lucide="award"></i> Professional Affiliations</h4>
+                            <div id="affiliationsList" class="affil-list"></div>
+                        </div>
+                        <div class="glass-panel p-3 spotlight-card">
+                            <h4 class="sub-heading"><i data-lucide="cpu"></i> Technical Stack</h4>
+                            <div id="techStackGrid" class="tech-stack"></div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="projects" class="section">
+                <div class="wrap">
+                    <div class="section-header gsap-fade-up">
+                        <h2 class="section-title">Key Projects</h2>
+                        <div class="filter-chips" id="projectFilters"></div>
+                    </div>
+                    <div class="bento-grid" id="projectsBento">
+                        <p style="color: var(--text-muted);">Initializing Project Data...</p>
+                    </div>
+                </div>
+            </section>
+
+            <section id="career" class="section">
+                <div class="wrap">
+                    <h2 class="section-title gsap-fade-up">Career Journey</h2>
+                    <div class="timeline" id="careerTimeline"></div>
+                </div>
+            </section>
+
+            <section id="contact" class="section pb-large">
+                <div class="wrap">
+                    <div class="contact-container glass-panel spotlight-card gsap-fade-up">
+                        <div class="contact-left">
+                            <h2 class="section-title" style="margin-bottom: 1rem;">Initiate Contact</h2>
+                            <p class="contact-desc">Ready to deliver major infrastructure. Open to Project Engineering roles.</p>
+                            
+                            <div class="visa-badge" id="visaBadgeContact">
+                                <span class="pulse-dot"></span> <span id="visaText">Australian Permanent Resident</span>
+                            </div>
+
+                            <div class="social-links" id="socialLinks" style="margin-top: 2rem;"></div>
+                        </div>
+                        <div class="contact-right">
+                            <form class="premium-form" onsubmit="event.preventDefault(); window.location.href='mailto:ganesh.r.kalal24@gmail.com';">
+                                <div class="input-group">
+                                    <input type="text" id="name" required placeholder=" ">
+                                    <label for="name">Name</label>
+                                </div>
+                                <div class="input-group">
+                                    <input type="email" id="email" required placeholder=" ">
+                                    <label for="email">Email</label>
+                                </div>
+                                <div class="input-group">
+                                    <textarea id="message" required rows="3" placeholder=" "></textarea>
+                                    <label for="message">Message</label>
+                                </div>
+                                <button type="submit" class="btn btn-primary magnetic" data-strength="30">Send Transmission <i data-lucide="send" class="btn-icon-right"></i></button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <footer class="premium-footer">
+            <div class="wrap footer-content">
+                <div class="footer-logo">G.KALAL</div>
+                <p id="footerText"></p>
+                <div class="footer-meta">MIEAust • Melbourne, VIC</div>
+            </div>
+        </footer>
+    </div> <div id="projectModal" class="modal" aria-hidden="true">
         <div class="modal-backdrop" onclick="closeModal()"></div>
         <div class="modal-content glass-panel">
             <button class="modal-close magnetic" data-strength="20" onclick="closeModal()"><i data-lucide="x"></i></button>
@@ -216,7 +223,7 @@
                         <ul id="modalRole" class="modal-list"></ul>
                     </div>
                     <div class="modal-col">
-                        <h4>Constraints</h4>
+                        <h4>Constraints & Outcomes</h4>
                         <ul id="modalConstraints" class="modal-list"></ul>
                         <h4 class="mt-2">External Links / Media</h4>
                         <div id="modalLinks" class="modal-links-container"></div>
