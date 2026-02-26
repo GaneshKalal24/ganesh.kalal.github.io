@@ -1,29 +1,22 @@
 :root {
-    /* DARK MODE */
     --bg-main: #020308;
     --bg-alt: #050812;
     --bg-glass: rgba(10, 15, 25, 0.6);
     --border-glass: rgba(255, 255, 255, 0.12);
-    
-    /* BRIGHT TEXT FOR READABILITY */
     --text-primary: #ffffff;
     --text-muted: #e2e8f0; 
-    
     --accent: #00f0ff; 
     --accent-dark: #0088ff; 
     --accent-glow: rgba(0, 240, 255, 0.4);
     --success: #10b981;
-    
     --glass-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.5);
     --input-bg: rgba(255, 255, 255, 0.05);
-    
     --font-heading: 'Space Grotesk', sans-serif;
     --font-body: 'Inter', sans-serif;
     --ease-fluid: cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 [data-theme="light"] {
-    /* LIGHT MODE */
     --bg-main: #f8fafc;
     --bg-alt: #f1f5f9;
     --bg-glass: rgba(255, 255, 255, 0.85);
@@ -34,7 +27,8 @@
     --accent-dark: #0369a1; 
     --accent-glow: rgba(2, 132, 199, 0.2);
     --success: #059669;
-    --input-bg: rgba(255,255,255,0.7);
+    --glass-shadow: 0 8px 32px 0 rgba(15, 23, 42, 0.06);
+    --input-bg: rgba(255,255,255,0.5);
 }
 
 * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -54,48 +48,26 @@ body.custom-cursor-active * { cursor: none !important; }
 .p-3 { padding: 2rem; }
 .pb-large { padding-bottom: 8rem; }
 
-/* --- FULLSCREEN VIDEO BACKGROUND --- */
+/* --- VIDEO BACKGROUND --- */
 .video-background {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100vw;
-    height: 100vh;
-    z-index: -999;
-    overflow: hidden;
-    background: var(--bg-main); /* Fallback color */
+    position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
+    z-index: -999; overflow: hidden; background: var(--bg-main);
 }
-
 .video-background video {
-    width: 100vw;
-    height: 100vh;
-    object-fit: cover; /* Stretches video to fill screen perfectly */
-    opacity: 0.7; /* Dims video slightly so text is readable */
-    transition: opacity 0.5s ease;
+    width: 100vw; height: 100vh; object-fit: cover; 
+    opacity: 0.7; transition: opacity 0.5s ease;
 }
-
 .video-overlay {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    /* Cinematic dark gradient over the video */
+    position: absolute; top: 0; left: 0; width: 100%; height: 100%;
     background: linear-gradient(to bottom, rgba(2,3,8,0.2) 0%, rgba(2,3,8,0.8) 100%);
     pointer-events: none;
 }
-
-/* Light mode adjustments for video */
 [data-theme="light"] .video-background video {
-    opacity: 0.15; 
-    filter: invert(1) hue-rotate(180deg); /* Reverses colors for light mode */
+    opacity: 0.15; filter: invert(1) hue-rotate(180deg);
 }
 [data-theme="light"] .video-overlay {
     background: linear-gradient(to bottom, rgba(248,250,252,0.4) 0%, rgba(248,250,252,0.95) 100%);
 }
-
-#webgl-canvas, #bg-canvas { display: none !important; } /* Hide old canvas elements */
-
 .noise-overlay { position: fixed; inset: 0; z-index: 9999; pointer-events: none; opacity: 0.04; background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E"); }
 
 /* --- CURSOR --- */
@@ -215,7 +187,6 @@ h1, h2, h3, h4, h5, .logo { font-family: var(--font-heading); }
     content: '';
     position: absolute;
     inset: 0;
-    /* This makes sure the project images are dark enough at the bottom for text */
     background: linear-gradient(to top, rgba(2, 3, 8, 0.95) 0%, rgba(2, 3, 8, 0.1) 100%);
     z-index: 1;
     transition: opacity 0.4s ease;
@@ -301,7 +272,7 @@ h1, h2, h3, h4, h5, .logo { font-family: var(--font-heading); }
     .about-content, .contact-container, .modal-split, .credentials-grid { grid-template-columns: 1fr; gap: 2.5rem; }
     .contact-container { padding: 2rem; }
     .bento-grid { grid-template-columns: 1fr; grid-auto-rows: auto; }
-    .bento-tile { padding: 8rem 2rem 2rem 2rem; } /* Extra padding on mobile to show image */
+    .bento-tile { padding: 8rem 2rem 2rem 2rem; } 
     .bento-tile.large, .bento-tile.medium { grid-column: span 1; grid-row: span 1; }
     .hero-title { font-size: 3rem; }
     .hero-role { font-size: 2rem; }
