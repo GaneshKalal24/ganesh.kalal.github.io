@@ -18,7 +18,7 @@
         :root {
             --bg-main: #020308;
             --surface: rgba(255, 255, 255, 0.03);
-            --border: rgba(255, 255, 255, 0.15); /* Slightly brighter borders */
+            --border: rgba(255, 255, 255, 0.15); 
             --accent: #00f0ff; 
             --accent-glow: rgba(0, 240, 255, 0.4);
             --text-primary: #ffffff;
@@ -159,11 +159,8 @@
         .section-num { font-family: var(--font-heading); font-size: 1.2rem; color: var(--accent); font-weight: 700; }
         .section-title { font-size: clamp(2rem, 5vw, 4rem); font-weight: 700; }
 
-        /* =========================================
-           BENTO PROJECTS (FIXED VISIBILITY)
-        ========================================= */
+        /* BENTO PROJECTS */
         .bento-grid { display: grid; grid-template-columns: repeat(12, 1fr); grid-auto-rows: 320px; gap: 1.5rem; }
-        
         .bento-card {
             background: var(--surface); border: 1px solid var(--border); border-radius: 24px; padding: 2.5rem; 
             color: var(--text-primary); transition: transform 0.4s, border-color 0.4s; position: relative; 
@@ -171,17 +168,13 @@
             backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
         }
         @media (hover: hover) { .bento-card:hover { transform: translateY(-8px); border-color: var(--accent); } }
+        .bento-card.span-7 { grid-column: span 7; } .bento-card.span-5 { grid-column: span 5; }
+        .bento-card.span-4 { grid-column: span 4; } .bento-card.span-8 { grid-column: span 8; }
 
-        /* New 5-Box Grid Layout */
-        .bento-card.span-8 { grid-column: span 8; }
-        .bento-card.span-4 { grid-column: span 4; }
-
-        /* THE FIX: Standard Opacity instead of Blend Modes */
         .bento-bg {
             position: absolute; inset: 0; background-size: cover; background-position: center;
             opacity: 0.35; transition: opacity 0.4s, transform 0.6s; z-index: 1;
         }
-        /* Heavy dark gradient so text is always readable over the photo */
         .bento-card::before { 
             content: ''; position: absolute; inset: 0; 
             background: linear-gradient(to top, var(--bg-main) 20%, rgba(2,3,8,0.4) 100%); 
@@ -192,6 +185,7 @@
         .bento-content { position: relative; z-index: 3; }
         .card-tags { display: flex; gap: 0.5rem; flex-wrap: wrap; margin-bottom: 1rem; }
         .card-tag { font-family: var(--font-heading); font-size: 0.75rem; background: var(--accent); color: #000; padding: 0.3rem 0.8rem; border-radius: 99px; font-weight: 700; text-transform: uppercase; }
+        .card-tag.hot { background: var(--text-primary); color: var(--bg-main);}
         .card-title { font-size: 2rem; font-weight: 700; margin-bottom: 0.5rem; line-height: 1.1; }
         .card-desc { font-size: 1.05rem; color: var(--text-muted); line-height: 1.5; }
 
@@ -259,33 +253,55 @@
         .modal-list { list-style: none; padding-left: 0; }
         .modal-list li { position: relative; padding-left: 1.5rem; margin-bottom: 1rem; color: var(--text-muted); line-height: 1.6; font-size: 1.05rem;}
         .modal-list li::before { content: '▹'; position: absolute; left: 0; color: var(--accent); font-weight: bold;}
+        
+        .external-link-btn {
+            display: inline-flex; align-items: center; gap: 0.6rem; padding: 0.8rem 1.5rem;
+            background: var(--surface); border: 1px solid var(--border); border-radius: 8px;
+            color: var(--accent); text-decoration: none; font-weight: 600; font-size: 0.95rem;
+            transition: 0.3s; margin-top: 1rem;
+        }
+        .external-link-btn:hover { background: rgba(0, 240, 255, 0.1); border-color: var(--accent); }
 
         /* MOBILE OPTIMIZATION */
         @media (max-width: 768px) {
             nav { padding: 1rem 1.5rem; }
             .nav-links { display: none; }
+            
             .hero { grid-template-columns: 1fr; padding-top: 7rem; gap: 2rem; text-align: center; }
             .hero-label { justify-content: center; }
             .hero-title { font-size: 3rem; }
             .hero-desc { margin: 0 auto 2rem auto; font-size: 1.05rem; }
             .profile-img { max-width: 280px; } 
+            
             section { padding: 5rem 0; }
+            .wrap { padding: 0 1.5rem; }
             .section-header { margin-bottom: 2rem; }
             .section-title { font-size: 2.2rem; }
+            
             .bento-card { padding: 1.5rem; min-height: 300px; }
-            .bento-card.span-8, .bento-card.span-4 { grid-column: span 12; } /* Stack on mobile */
+            .bento-card.span-7, .bento-card.span-5, .bento-card.span-4, .bento-card.span-8 { grid-column: span 12; }
+            
             .timeline-wrap { grid-template-columns: 1fr; gap: 2rem; }
             .timeline-intro { position: static; font-size: 1.05rem; margin-bottom: 1rem; }
             .timeline { padding-left: 2rem; border-left: 2px solid var(--border); }
             .tl-item { padding: 1.5rem; margin-bottom: 1.5rem; }
             .tl-item::after { left: -2.6rem; top: 2rem; width: 14px; height: 14px; border-width: 2px; }
+            .tl-role { font-size: 1.5rem; }
+            .tl-list li { font-size: 1rem; }
+            
             .skills-grid { grid-template-columns: 1fr; gap: 1rem; }
+            .skill-cell { padding: 1.5rem; }
+            
             .towers-background { height: 20vh; }
+            
             .modal-content { padding: 1.5rem; margin: 1rem; width: calc(100% - 2rem); }
+            .modal-title { font-size: 1.8rem; }
+            .modal-metrics-bar { font-size: 0.85rem; }
             .modal-split { grid-template-columns: 1fr; gap: 1.5rem; }
+            
             footer { padding: 3rem 0; margin-top: 2rem;}
             .footer-wrap { flex-direction: column; gap: 1.5rem; text-align: center; }
-            .footer-links { flex-direction: column; align-items: center; gap: 1rem; }
+            .footer-links { display: flex; flex-direction: column; align-items: center; gap: 1rem; }
             .footer-links a { margin: 0; }
         }
     </style>
@@ -319,7 +335,6 @@
     </div>
 
     <div class="noise-overlay"></div>
-
     <div class="cursor-dot" id="cursorDot"></div>
     <div class="cursor-ring" id="cursorRing"></div>
 
@@ -391,10 +406,9 @@
             </div>
 
             <div class="bento-grid fade-up" style="margin-bottom: 1.5rem;">
-                
                 <div class="bento-card span-8" data-id="p1">
                     <div class="card-img bento-bg" style="background-image: url('https://images.unsplash.com/photo-1578319439584-104c94d37305?auto=format&fit=crop&w=1200&q=80');"></div>
-                    <div class="card-content">
+                    <div class="bento-content">
                         <div class="card-top">
                             <div class="card-tags"><span class="card-tag hot">Mining</span><span class="card-tag">Demolition</span><span class="card-tag">Remediation</span></div>
                             <div class="card-arrow"><i data-lucide="arrow-up-right"></i></div>
@@ -409,7 +423,7 @@
 
                 <div class="bento-card span-4" data-id="p2">
                     <div class="card-img bento-bg" style="background-image: url('https://images.unsplash.com/photo-1534398079543-7ae6d016b86c?auto=format&fit=crop&w=800&q=80');"></div>
-                    <div class="card-content">
+                    <div class="bento-content">
                         <div class="card-top">
                             <div class="card-tags"><span class="card-tag">Oil & Gas</span><span class="card-tag">Demolition</span></div>
                             <div class="card-arrow"><i data-lucide="arrow-up-right"></i></div>
@@ -417,17 +431,16 @@
                         <div class="card-bottom">
                             <div class="card-num">Altona, VIC | 2024–Present | $65M</div>
                             <h3 class="card-title">ExxonMobil Refinery Decommissioning</h3>
-                            <p class="card-desc">Safe decommissioning and demolition of major refinery assets and pipe racks.</p>
+                            <p class="card-desc">Safe decommissioning and demolition of major refinery assets, stacks, and pipe racks.</p>
                         </div>
                     </div>
                 </div>
             </div>
 
             <div class="bento-grid fade-up" style="transition-delay: 0.1s;">
-                
                 <div class="bento-card span-4" data-id="p3">
                     <div class="card-img bento-bg" style="background-image: url('https://images.unsplash.com/photo-1544006659-f0b21884ce1d?auto=format&fit=crop&w=800&q=80');"></div>
-                    <div class="card-content">
+                    <div class="bento-content">
                         <div class="card-top">
                             <div class="card-tags"><span class="card-tag">Telecom</span><span class="card-tag">Structural</span></div>
                             <div class="card-arrow"><i data-lucide="arrow-up-right"></i></div>
@@ -442,7 +455,7 @@
 
                 <div class="bento-card span-4" data-id="p4">
                     <div class="card-img bento-bg" style="background-image: url('https://images.unsplash.com/photo-1545558014-8692077e9b5c?auto=format&fit=crop&w=800&q=80');"></div>
-                    <div class="card-content">
+                    <div class="bento-content">
                         <div class="card-top">
                             <div class="card-tags"><span class="card-tag">Infrastructure</span><span class="card-tag">QA/QC</span></div>
                             <div class="card-arrow"><i data-lucide="arrow-up-right"></i></div>
@@ -450,14 +463,14 @@
                         <div class="card-bottom">
                             <div class="card-num">VIC & India | 2018–2023</div>
                             <h3 class="card-title">Major Civil Infrastructure</h3>
-                            <p class="card-desc">West Gate Freeway Upgrade & Mumbai Metro Line 4 & 5. High-stakes urban transport delivery.</p>
+                            <p class="card-desc">West Gate Freeway Upgrade & Mumbai Metro. High-stakes urban transport delivery.</p>
                         </div>
                     </div>
                 </div>
 
                 <div class="bento-card span-4" data-id="p5">
                     <div class="card-img bento-bg" style="background-image: url('https://images.unsplash.com/photo-1503387762-592deb58ef4e?auto=format&fit=crop&w=800&q=80');"></div>
-                    <div class="card-content">
+                    <div class="bento-content">
                         <div class="card-top">
                             <div class="card-tags"><span class="card-tag">Commercial</span><span class="card-tag">Residential</span></div>
                             <div class="card-arrow"><i data-lucide="arrow-up-right"></i></div>
@@ -485,7 +498,6 @@
                 </div>
 
                 <div class="timeline">
-                    
                     <div class="tl-item fade-up" data-id="c1">
                         <div class="tl-top">
                             <div>
@@ -560,7 +572,6 @@
                             <li>Assisted in pile integrity and dynamic load testing for deep metro foundations.</li>
                         </ul>
                     </div>
-
                 </div>
             </div>
         </section>
@@ -640,6 +651,12 @@
                     <ul id="modalRightList" class="modal-list"></ul>
                 </div>
             </div>
+
+            <div id="modalLinksContainer" style="display: none; margin-top: 3rem; border-top: 1px solid var(--border); padding-top: 1.5rem;">
+                <h4 style="color: var(--text-primary); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 1rem; font-size: 0.9rem;">External References</h4>
+                <div id="modalLinks" style="display: flex; gap: 1rem; flex-wrap: wrap;"></div>
+            </div>
+
         </div>
     </div>
 
@@ -648,7 +665,7 @@
             // 1. ICONS
             lucide.createIcons();
 
-            // 2. NATIVE SCROLL ANIMATIONS (Foolproof)
+            // 2. NATIVE SCROLL ANIMATIONS
             const observerOptions = { threshold: 0.1, rootMargin: "0px 0px -50px 0px" };
             const observer = new IntersectionObserver((entries) => {
                 entries.forEach(entry => {
@@ -735,38 +752,41 @@
             }
             animateBg();
 
-            // 4. MODAL LOGIC (Detailed CV Bullet Points)
+            // 4. MODAL LOGIC WITH LINKS & DETAILED CV DATA
             const siteData = {
                 // PROJECTS
                 "p1": {
                     title: "Rio Tinto Bauxite Refinery Closure", tags: ["Mining", "Demolition", "Remediation"], meta: "Gove, NT | 2024 - Present | $300M+",
                     leftTitle: "Scope & Architecture", rightTitle: "Execution & Outcomes",
-                    left: ["Project Engineer on Australia's largest industrial demolition project.", "Prepared procurement documentation and reviewed structural design packages for AS 3600 & AS 4100 compliances."],
-                    right: ["Supported environmental controls, risk management, and stakeholder engagement.", "Delivered works to Rio Tinto's high standards for safety, compliance, and responsible site closure."]
+                    left: ["Project Engineer on Australia's largest industrial closure project.", "Prepared procurement documentation and reviewed structural design packages for AS 3600 & AS 4100 compliances.", "Supported environmental controls, risk management, and stakeholder engagement."],
+                    right: ["Delivered works to Rio Tinto's strict standards for safety and responsible site closure.", "Contributed heavily to massive mechanical and explosive demolition planning.", "Organised and executed massive scrap steel load-out logistics."],
+                    links: [
+                        { title: "Rio Tinto Recycling Record Steel", url: "https://libertyindustrial.com/" }
+                    ]
                 },
                 "p2": {
                     title: "ExxonMobil Refinery Decommissioning", tags: ["Oil & Gas", "Demolition"], meta: "Altona, VIC | 2024 - Present | $65M",
                     leftTitle: "Scope & Architecture", rightTitle: "Execution & Outcomes",
-                    left: ["Project Engineer supporting the safe decommissioning of major refinery assets including stacks, LPG tanks, boilers and pipe racks.", "Contributed to planning and supervision of heavy mechanical demolition."],
-                    right: ["Negotiated and technically justified contract variations totaling $8M+.", "Organised scrap steel load-outs exceeding 135,000 tonnes (approx $65M+ in scrap value)."]
+                    left: ["Project Engineer managing subcontractor packages and on-site civil/structural works.", "Prepared SOWs/RFQs and conducted technical & commercial evaluation of 15+ tender submissions.", "Supported the safe decommissioning of major refinery assets including stacks, LPG tanks, boilers and pipe racks."],
+                    right: ["Reviewed and approved contractor designs.", "Negotiated and technically justified contract variations totaling $8M+.", "Supervised on-site concrete demolition works and coordinated statutory approvals with Hobsons Bay City Council."]
                 },
                 "p3": {
                     title: "National 5G Telecom Rollout", tags: ["Telecom", "Structural"], meta: "National | 2023 - 2024 | $50M",
                     leftTitle: "Scope & Architecture", rightTitle: "Execution & Outcomes",
-                    left: ["Led structural design coordination for 150+ tower upgrades.", "Conducted technical evaluation of subcontractor proposals and ITPs."],
-                    right: ["Delivered lattice tower and pole upgrades ensuring AS1170.2 compliance.", "Secured statutory planning approvals from 20+ councils, reducing approval cycles by 20%."]
+                    left: ["Led structural design coordination for 150+ tower upgrades.", "Conducted technical evaluation of subcontractor proposals and ITPs.", "Designed steel headframes for telecom structures."],
+                    right: ["Delivered lattice tower and pole upgrades ensuring AS1170.2 compliance.", "Managed trenching interfaces and civil coordination for fibre backhaul.", "Secured statutory planning approvals from 20+ councils, reducing approval cycles by 20%."]
                 },
                 "p4": {
                     title: "Major Civil Infrastructure", tags: ["Infrastructure", "QA/QC"], meta: "VIC & India | 2018 - 2023",
                     leftTitle: "Scope & Architecture", rightTitle: "Execution & Outcomes",
-                    left: ["West Gate Freeway: Structural design support and QA verification of reinforced concrete crash barriers.", "Mumbai Metro Lines 4 & 5: Supported independent verification on elevated viaducts."],
-                    right: ["Achieved zero non-conformances across 100+ structural installations on West Gate Freeway.", "Performed concrete QA/QC for deep foundations (slump testing) and Monitored tunnel alignment (TBM)."]
+                    left: ["West Gate Freeway: Structural design support and QA verification of reinforced concrete crash barriers.", "Provided input on temporary works including formwork detailing, access scaffolding, and construction sequence planning.", "Mumbai Metro Lines 4 & 5: Supported independent verification on elevated viaducts and monitored tunnel alignment (TBM)."],
+                    right: ["Achieved zero non-conformances across 100+ structural installations on West Gate Freeway.", "Performed concrete QA/QC for deep foundations (slump testing).", "Conducted Dynamic Load Testing (DLT) and Pile Integrity Testing (PIT) to evaluate load bearing capacity and structural soundness."]
                 },
                 "p5": {
                     title: "Commercial Fitouts & Residential", tags: ["Commercial", "Residential", "Fitout"], meta: "Victoria | 2020 - 2021",
                     leftTitle: "Scope & Architecture", rightTitle: "Execution & Outcomes",
-                    left: ["Structural design and drafting for retail fitouts including KFC and Hungry Jack's.", "Drafted floor plans, connection details, and elevations for residential projects."],
-                    right: ["Designed stormwater drainage, OSD systems, and overall site grading.", "Resolved compliance issues with contractors and architects, minimising delays."]
+                    left: ["Supported structural design and drafting for community centres, pavilions, courts and public transport assets.", "Designed stormwater drainage, OSD systems, and overall site grading.", "Drafted floor plans, connection details, and elevations for residential projects."],
+                    right: ["Delivered drainage, utilities and municipal infrastructure renewal projects in compliance with MRPV/VicRoads specifications.", "Coordinated approvals with council officers & developers; organised land surveys, Geotech, DBYD."]
                 },
                 
                 // CAREER PATHWAY
@@ -820,6 +840,22 @@
                     
                     document.getElementById('modalLeftList').innerHTML = data.left.map(b => `<li>${b}</li>`).join('');
                     document.getElementById('modalRightList').innerHTML = data.right.map(b => `<li>${b}</li>`).join('');
+
+                    // Handle External Links
+                    const linksContainer = document.getElementById('modalLinksContainer');
+                    const linksDiv = document.getElementById('modalLinks');
+                    if (data.links && data.links.length > 0) {
+                        linksContainer.style.display = 'block';
+                        linksDiv.innerHTML = data.links.map(l => 
+                            `<a href="${l.url}" target="_blank" class="external-link-btn">
+                                <i data-lucide="external-link" style="width: 16px; height: 16px;"></i> ${l.title}
+                            </a>`
+                        ).join('');
+                        lucide.createIcons(); // Re-render icon inside the new link
+                    } else {
+                        linksContainer.style.display = 'none';
+                        linksDiv.innerHTML = '';
+                    }
 
                     modal.classList.add('open');
                     document.body.style.overflow = 'hidden'; 
