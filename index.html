@@ -19,10 +19,9 @@
         :root {
             --bg-main: #020308;
             --surface: rgba(255, 255, 255, 0.03);
-            --surface-hover: rgba(255, 255, 255, 0.08);
             --border: rgba(255, 255, 255, 0.1);
             --accent: #00f0ff; 
-            --accent-dark: #0088ff;
+            --accent-glow: rgba(0, 240, 255, 0.4);
             --text-primary: #ffffff;
             --text-muted: #cbd5e1;
             --font-heading: 'Space Grotesk', sans-serif;
@@ -33,10 +32,8 @@
         [data-theme="light"] {
             --bg-main: #f8fafc;
             --surface: rgba(0, 0, 0, 0.03);
-            --surface-hover: rgba(0, 0, 0, 0.08);
             --border: rgba(0, 0, 0, 0.1);
             --accent: #0284c7; 
-            --accent-dark: #0369a1;
             --text-primary: #0f172a;
             --text-muted: #475569;
             --glass-shadow: 0 8px 32px 0 rgba(15, 23, 42, 0.06);
@@ -55,7 +52,7 @@
             -webkit-font-smoothing: antialiased;
         }
 
-        /* HARDCODED CANVAS BACKGROUND (Replaces Video) */
+        /* HARDCODED CANVAS BACKGROUND (Glitter & Data Streams) */
         #bg-canvas {
             position: fixed;
             top: 0; left: 0;
@@ -70,9 +67,9 @@
         }
 
         /* LAYOUT */
-        .wrap { max-width: 1280px; margin: 0 auto; padding: 0 2rem; position: relative; z-index: 10; }
+        .wrap { max-width: 1200px; margin: 0 auto; padding: 0 2rem; position: relative; z-index: 10; }
         section { padding: 8rem 0; border-bottom: 1px solid var(--border); }
-        h1, h2, h3, h4, .font-display { font-family: var(--font-heading); }
+        h1, h2, h3, h4 { font-family: var(--font-heading); }
 
         /* NAV & THEME TOGGLE */
         nav {
@@ -100,7 +97,7 @@
         [data-theme="light"] .icon-sun { display: none; }
         [data-theme="light"] .icon-moon { display: block; }
 
-        /* HERO SECTION (Split Layout with Profile Image) */
+        /* HERO SECTION */
         .hero {
             min-height: 100vh; display: grid; grid-template-columns: 1.2fr 0.8fr;
             gap: 4rem; align-items: center; padding-top: 6rem;
@@ -113,19 +110,14 @@
             display: inline-flex; align-items: center; gap: 0.8rem;
             padding: 1rem 2.5rem; background: var(--text-primary); color: var(--bg-main);
             border-radius: 999px; font-weight: 700; text-decoration: none; transition: 0.3s;
-            font-family: var(--font-body);
         }
         .btn-primary:hover { transform: translateY(-3px); box-shadow: 0 10px 20px rgba(0, 240, 255, 0.2); }
 
         .hero-image-container { position: relative; display: flex; justify-content: center; align-items: center; }
         .profile-img {
-            width: 100%; max-width: 400px; aspect-ratio: 4/5; object-fit: cover;
+            width: 100%; max-width: 380px; aspect-ratio: 4/5; object-fit: cover;
             border-radius: 24px; border: 1px solid var(--border);
             box-shadow: var(--glass-shadow); position: relative; z-index: 2;
-        }
-        .img-glow {
-            position: absolute; inset: -20px; background: radial-gradient(circle, var(--accent-glow) 0%, transparent 70%);
-            z-index: 1; filter: blur(30px); opacity: 0.6;
         }
 
         /* SECTION HEADERS */
@@ -140,6 +132,7 @@
             border-radius: 24px; padding: 2.5rem; text-decoration: none; color: var(--text-primary);
             transition: transform 0.4s, border-color 0.4s; position: relative; overflow: hidden;
             display: flex; flex-direction: column; justify-content: flex-end;
+            backdrop-filter: blur(12px); box-shadow: var(--glass-shadow);
         }
         .bento-card:hover { transform: translateY(-8px); border-color: var(--accent); }
         .bento-card.span-7 { grid-column: span 7; }
@@ -147,16 +140,15 @@
         .bento-card.span-4 { grid-column: span 4; }
         .bento-card.span-8 { grid-column: span 8; }
 
-        /* Safe Image Layering for Projects */
         .bento-bg {
             position: absolute; inset: 0; background-size: cover; background-position: center;
             opacity: 0.3; transition: transform 0.6s, opacity 0.4s; z-index: 1;
-            filter: grayscale(80%); /* Gives it a sleek, engineering watermark look */
+            filter: grayscale(80%); 
         }
         .bento-card::before {
             content: ''; position: absolute; inset: 0;
             background: linear-gradient(to top, var(--bg-main) 10%, transparent 100%);
-            z-index: 2; /* Dark gradient at the bottom so text is perfectly readable */
+            z-index: 2; 
         }
         .bento-card:hover .bento-bg { transform: scale(1.05); opacity: 0.5; filter: grayscale(0%); }
 
@@ -166,33 +158,112 @@
         .card-title { font-size: 2.2rem; font-weight: 700; margin-bottom: 0.5rem; line-height: 1.1; }
         .card-desc { font-size: 1.1rem; color: var(--text-muted); line-height: 1.6; }
 
-        /* TIMELINE */
+        /* =========================================
+           CAREER TIMELINE (FULL PATHWAY)
+        ========================================= */
         .timeline-wrap { display: grid; grid-template-columns: 1fr 2fr; gap: 4rem; }
         .timeline-intro { font-size: 1.2rem; color: var(--text-muted); line-height: 1.8; }
+        
+        .timeline { 
+            display: flex; flex-direction: column; position: relative;
+            /* Glowing vertical wire */
+            border-left: 3px solid var(--border);
+            padding-left: 3rem;
+        }
+        
+        /* The glow effect running down the line */
+        .timeline::before {
+            content: ''; position: absolute; left: -3px; top: 0; width: 3px; height: 100%;
+            background: linear-gradient(to bottom, transparent, var(--accent), transparent);
+            background-size: 100% 200%;
+            animation: dataFlow 4s linear infinite;
+        }
+
+        @keyframes dataFlow {
+            0% { background-position: 0% -100%; }
+            100% { background-position: 0% 200%; }
+        }
+
         .timeline-item {
-            padding: 3rem; background: var(--surface); border: 1px solid var(--border);
-            border-radius: 24px; margin-bottom: 1.5rem; transition: border-color 0.3s;
+            padding: 2.5rem; background: var(--surface); border: 1px solid var(--border);
+            border-radius: 24px; margin-bottom: 2rem; position: relative;
+            backdrop-filter: blur(12px); transition: border-color 0.3s;
         }
         .timeline-item:hover { border-color: var(--accent); }
+        
+        /* The glowing nodes connecting the wire to the card */
+        .timeline-item::after {
+            content: ''; position: absolute; left: -3.6rem; top: 3.5rem;
+            width: 16px; height: 16px; border-radius: 50%;
+            background: var(--bg-main); border: 3px solid var(--accent);
+            box-shadow: 0 0 15px var(--accent-glow);
+        }
+
         .tl-year { font-family: var(--font-heading); font-size: 1.1rem; color: var(--accent); font-weight: 700; margin-bottom: 0.5rem; }
         .tl-role { font-size: 2rem; font-weight: 700; margin-bottom: 0.5rem; }
-        .tl-company { font-size: 1.1rem; color: var(--text-muted); margin-bottom: 1.5rem; font-weight: 500;}
+        .tl-company { font-size: 1.1rem; color: var(--text-muted); margin-bottom: 1.5rem; font-weight: 500; text-transform: uppercase; letter-spacing: 1px;}
         .tl-list { list-style: none; display: flex; flex-direction: column; gap: 0.8rem; padding-left: 0;}
         .tl-list li { font-size: 1.1rem; color: var(--text-muted); display: flex; gap: 0.8rem; line-height: 1.6;}
         .tl-list li::before { content: '▹'; color: var(--accent); font-weight: bold;}
 
-        /* SKILLS */
-        .skills-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.5rem; }
-        .skill-cell { background: var(--surface); border: 1px solid var(--border); padding: 2.5rem; border-radius: 24px; }
-        .skill-title { font-family: var(--font-heading); font-size: 1.2rem; color: var(--accent); margin-bottom: 1.5rem; font-weight: 700;}
-        .skill-list { display: flex; flex-direction: column; gap: 1rem; }
-        .skill-list div { font-size: 1.1rem; color: var(--text-primary); display: flex; align-items: center; gap: 0.6rem; }
-        .skill-list div::before { content: ''; width: 6px; height: 6px; background: var(--text-muted); border-radius: 50%; }
+        /* =========================================
+           TRANSMISSION TOWERS SVG FOOTER
+        ========================================= */
+        .towers-container {
+            width: 100%;
+            overflow: hidden;
+            background: var(--bg-main);
+            position: relative;
+            border-top: 1px solid var(--border);
+            padding-top: 2rem;
+            margin-top: 4rem;
+        }
 
-        /* FOOTER */
-        footer { padding: 4rem 0; border-top: 1px solid var(--border); display: flex; justify-content: space-between; align-items: center; }
-        .footer-logo { font-family: var(--font-heading); font-size: 2rem; font-weight: 700; }
-        .footer-links a { color: var(--text-muted); text-decoration: none; font-size: 1.1rem; margin-left: 2rem; font-weight: 500; transition: color 0.3s;}
+        .towers-svg {
+            width: 100%;
+            height: 250px;
+            display: block;
+        }
+
+        /* The glowing wires */
+        .fiber-wire {
+            fill: none;
+            stroke: var(--accent);
+            stroke-width: 2;
+            opacity: 0.4;
+        }
+        
+        /* The data pulses moving across the wires */
+        .fiber-pulse {
+            fill: none;
+            stroke: #ffffff;
+            stroke-width: 3;
+            stroke-dasharray: 20 200;
+            filter: drop-shadow(0 0 8px var(--accent));
+            animation: pulseWire 3s linear infinite;
+        }
+        
+        /* Slower pulse for variety */
+        .fiber-pulse.slow { animation: pulseWire 4.5s linear infinite reverse; }
+
+        @keyframes pulseWire {
+            from { stroke-dashoffset: 220; }
+            to { stroke-dashoffset: 0; }
+        }
+
+        /* The steel towers */
+        .tower-structure {
+            fill: none;
+            stroke: var(--text-muted);
+            stroke-width: 2;
+            opacity: 0.6;
+        }
+
+        footer {
+            padding: 2rem 0 4rem 0; text-align: center; background: var(--bg-main);
+        }
+        .footer-logo { font-family: var(--font-heading); font-size: 2rem; font-weight: 700; margin-bottom: 1rem;}
+        .footer-links a { color: var(--text-muted); text-decoration: none; font-size: 1.1rem; margin: 0 1rem; font-weight: 500; transition: color 0.3s;}
         .footer-links a:hover { color: var(--accent); }
 
         @media (max-width: 1024px) {
@@ -201,14 +272,8 @@
             .hero-desc { margin: 0 auto 2.5rem auto; }
             .bento-card.span-7, .bento-card.span-5, .bento-card.span-4, .bento-card.span-8 { grid-column: span 12; }
             .timeline-wrap { grid-template-columns: 1fr; }
-            .skills-grid { grid-template-columns: repeat(2, 1fr); }
             nav { padding: 1rem 1.5rem; }
-            .nav-links { display: none; } /* Hide links on mobile, keep toggle */
-        }
-        @media (max-width: 600px) {
-            .skills-grid { grid-template-columns: 1fr; }
-            footer { flex-direction: column; gap: 2rem; text-align: center; }
-            .footer-links a { margin: 0 1rem; }
+            .nav-links { display: none; }
         }
     </style>
 </head>
@@ -221,8 +286,7 @@
         <div class="nav-logo">GK<span>.</span>ENG</div>
         <div class="nav-links">
             <a href="#projects">Projects</a>
-            <a href="#career">Career</a>
-            <a href="#skills">Competencies</a>
+            <a href="#career">Career Pathway</a>
         </div>
         <button class="theme-toggle" id="themeBtn" aria-label="Toggle Theme">
             <i data-lucide="sun" class="icon-sun"></i>
@@ -233,7 +297,7 @@
     <div class="wrap">
         <section class="hero">
             <div class="hero-text">
-                <div class="hero-label">Melbourne VIC • Civil Infrastructure</div>
+                <div class="hero-label">Melbourne VIC • Telecom • Civil</div>
                 <h1 class="hero-title">
                     <span class="outline">GANESH</span><br>
                     KALAL
@@ -264,7 +328,7 @@
                             <span class="card-tag">Structural</span>
                         </div>
                         <h3 class="card-title">National 5G Rollout</h3>
-                        <p class="card-desc">Delivered 150+ lattice tower and pole upgrades for Indara's national 5G expansion, ensuring full AS1170.2 structural compliance.</p>
+                        <p class="card-desc">Delivered 150+ lattice tower and pole upgrades for Indara's national 5G expansion, ensuring full AS1170.2 structural compliance across diverse site conditions.</p>
                     </div>
                 </a>
 
@@ -276,7 +340,7 @@
                             <span class="card-tag">Demolition</span>
                         </div>
                         <h3 class="card-title">Tier-1 Industrial Closures</h3>
-                        <p class="card-desc">End-to-end delivery involving massive brownfield deconstruction scopes and 142,000 tonnes of steel.</p>
+                        <p class="card-desc">End-to-end commercial and delivery oversight involving massive brownfield deconstruction scopes and 142,000 tonnes of steel.</p>
                     </div>
                 </a>
 
@@ -288,7 +352,7 @@
                             <span class="card-tag">QA</span>
                         </div>
                         <h3 class="card-title">West Gate Freeway</h3>
-                        <p class="card-desc">Quality-critical infrastructure delivery ensuring VicRoads and AS 5100 compliance across major works.</p>
+                        <p class="card-desc">Quality-critical infrastructure delivery ensuring VicRoads and AS 5100 compliance across major freeway works.</p>
                     </div>
                 </a>
 
@@ -300,21 +364,21 @@
                             <span class="card-tag">Infrastructure</span>
                         </div>
                         <h3 class="card-title">Mumbai Metro Lines 4 & 5</h3>
-                        <p class="card-desc">Civil Site Engineer supporting independent verification and quality assurance on elevated viaduct construction.</p>
+                        <p class="card-desc">Civil Site Engineer supporting independent verification and QA on elevated viaduct construction — complex, high-stakes urban rail infrastructure.</p>
                     </div>
                 </a>
             </div>
         </section>
 
-        <section id="career">
+        <section id="career" style="border-bottom: none;">
             <div class="section-header">
                 <span class="section-num">02 //</span>
-                <h2 class="section-title">Career Trajectory</h2>
+                <h2 class="section-title">Career Pathway</h2>
             </div>
 
             <div class="timeline-wrap">
                 <div class="timeline-intro">
-                    <p>Four years of progressive responsibility across structural, civil, and industrial engineering disciplines. Each role building on the last — from graduate designer to full project accountability.</p>
+                    <p>Five years of progressive responsibility across structural, civil, and industrial engineering disciplines. Each role building on the last — from graduate designer to full project accountability.</p>
                 </div>
 
                 <div class="timeline">
@@ -349,70 +413,80 @@
                             <li>Conducted site inspections and signed off QA hold points on infrastructure projects.</li>
                         </ul>
                     </div>
-                </div>
-            </div>
-        </section>
 
-        <section id="skills">
-            <div class="section-header">
-                <span class="section-num">03 //</span>
-                <h2 class="section-title">Core Competencies</h2>
-            </div>
+                    <div class="timeline-item">
+                        <div class="tl-year">06/2020 — 10/2021</div>
+                        <div class="tl-role">Graduate Civil Engineer</div>
+                        <div class="tl-company">Structcom | Caulfield VIC</div>
+                        <ul class="tl-list">
+                            <li>Designed stormwater drainage, OSD systems, and site grading.</li>
+                            <li>Coordinated geotechnical investigations and council approvals.</li>
+                        </ul>
+                    </div>
 
-            <div class="skills-grid">
-                <div class="skill-cell">
-                    <h3 class="skill-title">Structural</h3>
-                    <div class="skill-list">
-                        <div>AS1170.2 Wind Design</div>
-                        <div>AS 4100 Steel</div>
-                        <div>AS 3600 Concrete</div>
-                        <div>Lattice Tower Assessment</div>
-                    </div>
-                </div>
-                <div class="skill-cell">
-                    <h3 class="skill-title">Civil & Infrastructure</h3>
-                    <div class="skill-list">
-                        <div>AS 5100 Bridges</div>
-                        <div>VicRoads Standards</div>
-                        <div>Elevated Viaducts</div>
-                        <div>QA Hold Points</div>
-                    </div>
-                </div>
-                <div class="skill-cell">
-                    <h3 class="skill-title">Project Management</h3>
-                    <div class="skill-list">
-                        <div>Variation Administration</div>
-                        <div>EOT Management</div>
-                        <div>Programme Control</div>
-                        <div>Subcontractor Mgt.</div>
-                    </div>
-                </div>
-                <div class="skill-cell">
-                    <h3 class="skill-title">Regulatory</h3>
-                    <div class="skill-list">
-                        <div>EPA Approvals</div>
-                        <div>WorkSafe Victoria</div>
-                        <div>Council DA Process</div>
-                        <div>Risk Assessment</div>
+                    <div class="timeline-item">
+                        <div class="tl-year">01/2019 — 07/2019</div>
+                        <div class="tl-role">Engineering Cadet</div>
+                        <div class="tl-company">Tata Projects | Mumbai, India</div>
+                        <ul class="tl-list">
+                            <li>Supported QA/QC for mass concrete pours including slump and dimensional checks.</li>
+                            <li>Assisted in pile integrity and dynamic load testing for deep foundations.</li>
+                        </ul>
                     </div>
                 </div>
             </div>
         </section>
+    </div>
 
-        <footer>
+    <div class="towers-container">
+        <svg class="towers-svg" viewBox="0 0 1200 250" preserveAspectRatio="xMidYMax slice" xmlns="http://www.w3.org/2000/svg">
+            
+            <path class="fiber-wire" id="wire1" d="M -50,50 Q 300,180 600,60 T 1250,50"></path>
+            <path class="fiber-pulse" d="M -50,50 Q 300,180 600,60 T 1250,50"></path>
+            
+            <path class="fiber-wire" id="wire2" d="M -50,80 Q 300,210 600,90 T 1250,80"></path>
+            <path class="fiber-pulse slow" d="M -50,80 Q 300,210 600,90 T 1250,80"></path>
+
+            <path class="fiber-wire" id="wire3" d="M -50,110 Q 300,240 600,120 T 1250,110"></path>
+            <path class="fiber-pulse" d="M -50,110 Q 300,240 600,120 T 1250,110" style="animation-delay: -1s;"></path>
+
+            <g class="tower-structure" transform="translate(150, 40)">
+                <path d="M 20,0 L 0,210 M 20,0 L 40,210"></path>
+                <path d="M 15,50 L 25,50 M 10,100 L 30,100 M 5,150 L 35,150"></path>
+                <path d="M 15,50 L 30,100 M 25,50 L 10,100 M 10,100 L 35,150 M 30,100 L 5,150 M 5,150 L 40,210 M 35,150 L 0,210"></path>
+                <path d="M -10,30 L 50,30 M -15,60 L 55,60"></path>
+            </g>
+
+            <g class="tower-structure" transform="translate(580, 50)">
+                <path d="M 20,0 L 0,200 M 20,0 L 40,200"></path>
+                <path d="M 15,50 L 25,50 M 10,100 L 30,100 M 5,150 L 35,150"></path>
+                <path d="M 15,50 L 30,100 M 25,50 L 10,100 M 10,100 L 35,150 M 30,100 L 5,150 M 5,150 L 40,200 M 35,150 L 0,200"></path>
+                <path d="M -10,30 L 50,30 M -15,60 L 55,60"></path>
+            </g>
+
+            <g class="tower-structure" transform="translate(1000, 40)">
+                <path d="M 20,0 L 0,210 M 20,0 L 40,210"></path>
+                <path d="M 15,50 L 25,50 M 10,100 L 30,100 M 5,150 L 35,150"></path>
+                <path d="M 15,50 L 30,100 M 25,50 L 10,100 M 10,100 L 35,150 M 30,100 L 5,150 M 5,150 L 40,210 M 35,150 L 0,210"></path>
+                <path d="M -10,30 L 50,30 M -15,60 L 55,60"></path>
+            </g>
+        </svg>
+    </div>
+
+    <footer>
+        <div class="wrap">
             <div class="footer-logo">G.KALAL</div>
             <div class="footer-links">
                 <a href="mailto:ganesh.r.kalal24@gmail.com">Email Me</a>
                 <a href="https://www.linkedin.com/in/ganesh-kalal/" target="_blank">LinkedIn</a>
             </div>
-        </footer>
-    </div>
+        </div>
+    </footer>
 
     <script>
-        // 1. Initialize Icons
         lucide.createIcons();
 
-        // 2. Light / Dark Mode Toggle
+        // 1. LIGHT / DARK MODE
         const themeBtn = document.getElementById('themeBtn');
         const currentTheme = localStorage.getItem('theme') || 'dark';
         document.body.setAttribute('data-theme', currentTheme);
@@ -424,7 +498,7 @@
             localStorage.setItem('theme', newTheme);
         });
 
-        // 3. FIBER OPTIC DATA STREAM CANVAS BACKGROUND (Recreates the video look)
+        // 2. FIBER OPTIC DATA STREAM BACKGROUND (Recreates the video securely)
         const canvas = document.getElementById('bg-canvas');
         const ctx = canvas.getContext('2d');
         let width, height;
@@ -436,7 +510,6 @@
         window.addEventListener('resize', resizeCanvas);
         resizeCanvas();
 
-        // Particles for the glowing dust effect
         const particles = [];
         for(let i=0; i<80; i++) {
             particles.push({
@@ -448,62 +521,45 @@
             });
         }
 
-        // Lines for the High-Speed Data Transfer effect (from your video attachment)
         const lines = [];
         for(let i=0; i<30; i++) {
             lines.push({
                 x: Math.random() * width,
                 y: Math.random() * height,
                 length: Math.random() * 100 + 50,
-                speedY: -(Math.random() * 5 + 3), // Move up fast
+                speedY: -(Math.random() * 5 + 3), 
                 alpha: Math.random() * 0.3 + 0.1
             });
         }
 
         function drawBackground() {
-            // Check theme to adjust background color
             const isLight = document.body.getAttribute('data-theme') === 'light';
-            
-            // Clear screen with a slight trail effect
             ctx.fillStyle = isLight ? 'rgba(248, 250, 252, 0.3)' : 'rgba(2, 3, 8, 0.3)';
             ctx.fillRect(0, 0, width, height);
 
-            const glowColor = isLight ? '0, 150, 255' : '0, 240, 255'; // Cyan glow
+            const glowColor = isLight ? '0, 150, 255' : '0, 240, 255'; 
 
-            // Draw Data Lines (Like Video 3)
             lines.forEach(line => {
                 line.y += line.speedY;
                 if (line.y + line.length < 0) {
                     line.y = height + line.length;
                     line.x = Math.random() * width;
                 }
-                
                 const grad = ctx.createLinearGradient(line.x, line.y, line.x, line.y + line.length);
                 grad.addColorStop(0, `rgba(${glowColor}, ${line.alpha})`);
                 grad.addColorStop(1, `rgba(${glowColor}, 0)`);
                 
-                ctx.beginPath();
-                ctx.strokeStyle = grad;
-                ctx.lineWidth = 2;
-                ctx.moveTo(line.x, line.y);
-                ctx.lineTo(line.x, line.y + line.length);
+                ctx.beginPath(); ctx.strokeStyle = grad; ctx.lineWidth = 2;
+                ctx.moveTo(line.x, line.y); ctx.lineTo(line.x, line.y + line.length);
                 ctx.stroke();
             });
 
-            // Draw Drifting Particles (Like Video 1)
             particles.forEach(p => {
                 p.y += p.speedY;
-                p.x += Math.sin(p.y * 0.01) * 0.5; // Slight wave motion
-                
-                if (p.y < 0) {
-                    p.y = height;
-                    p.x = Math.random() * width;
-                }
-
-                ctx.beginPath();
-                ctx.fillStyle = `rgba(${glowColor}, ${p.alpha})`;
-                ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
-                ctx.fill();
+                p.x += Math.sin(p.y * 0.01) * 0.5; 
+                if (p.y < 0) { p.y = height; p.x = Math.random() * width; }
+                ctx.beginPath(); ctx.fillStyle = `rgba(${glowColor}, ${p.alpha})`;
+                ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2); ctx.fill();
             });
 
             requestAnimationFrame(drawBackground);
