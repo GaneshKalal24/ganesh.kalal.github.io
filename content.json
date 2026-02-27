@@ -17,9 +17,10 @@
   "aboutStory": "I bridge the gap between structural engineering theory and site execution. With over 5 years of experience across 5G telecom infrastructure, metro rail, live-traffic freeways, and the largest industrial closures in the Southern Hemisphere.",
   "knownFor": [
     "5G Infrastructure Rollouts & Upgrades",
-    "Site Acquisition & Statutory Approvals",
-    "Structural Design & Audits (AS/NZS 1170.2, AS 3600)",
-    "Subcontractor Management & Procurement"
+    "Site Acquisition, Permitting & Council Approvals",
+    "Fibre Backhaul, Trenching & Civil Works Coordination",
+    "Structural Tower Design & Audits (AS/NZS 1170.2)",
+    "Subcontractor Management & Commercial Execution"
   ],
   "logistics": [
     { "name": "White Card", "icon": "hard-hat" },
@@ -45,42 +46,40 @@
       "title": "National 5G Telecom Upgrade",
       "tags": ["Telecom", "Structural", "Design"],
       "meta": "Victoria | 2023 - 2024 | $50M",
+      "imageUrl": "https://images.unsplash.com/photo-1517424168051-78922894db09?auto=format&fit=crop&w=800&q=80",
       "preview": "Structural design coordination for 150+ tower upgrades and 100+ site inspections.",
       "fullText": "Delivered design coordination, structural analysis, field inspections, and approvals support for critical telecom infrastructure.",
       "bullets": [
         "Delivered 150+ lattice tower and steel/timber pole upgrades ensuring compliance with AS1170.2.",
         "Managed trenching interfaces and civil coordination for fibre backhaul.",
-        "Prepared detailed BoQ/BOM, supported procurement and fabrication reviews.",
-        "Secured statutory planning approvals from 20+ councils, reducing approval cycles by 20% through improved documentation."
+        "Secured statutory planning approvals from 20+ councils, reducing approval cycles by 20%."
       ]
     },
     {
-      "title": "Tier-1 Industrial Closures (Exxon & Rio Tinto)",
+      "title": "Tier-1 Industrial Closures",
       "tags": ["Industrial", "Demolition", "Civil"],
       "meta": "VIC & NT | 2024 - Present | $365M+",
+      "imageUrl": "https://images.unsplash.com/photo-1504307651254-35680f356f12?auto=format&fit=crop&w=800&q=80",
       "preview": "Project Engineer contributing to Australia's largest industrial demolition projects.",
       "fullText": "End-to-end commercial and delivery oversight. Involving explosive demolition events, 142,000 tonnes of steel, and 300,000 tonnes of concrete.",
       "bullets": [
-        "Managed subcontractor packages, RFQs, and regulatory interfaces with Hobsons Bay City Council.",
+        "Managed subcontractor packages, RFQs, and regulatory interfaces with local councils.",
         "Negotiated and technically justified contract variations totaling $8M+.",
-        "Organised scrap steel load-outs exceeding 135,000 tonnes (approx $65M+ in scrap value).",
-        "Introduced GPS and aerial Drone topographic surveying for remediation earthworks, improving accuracy by 25%."
+        "Organised scrap steel load-outs exceeding 135,000 tonnes (approx $65M+ in scrap value)."
       ],
       "links": [
-        { "title": "World's Most Powerful Shear Unveiled", "url": "https://libertyindustrial.com/worlds-most-powerful-shear-unveiled-in-australia/" },
-        { "title": "Rio Tinto Recycling Record Steel", "url": "https://libertyindustrial.com/rio-tinto-starts-recycling-steel-from-australias-largest-ever-demolition-project-on-the-northern-territorys-gove-peninsula/" },
-        { "title": "ExxonMobil Altona Demolition Works", "url": "https://corporate.exxonmobil.com/locations/australia/australia-newsroom/mobil-community-outreach/2025/altona-refinery-facilities-to-begin-demolition-works" }
+        { "title": "Rio Tinto Recycling Record Steel", "url": "https://libertyindustrial.com/" }
       ]
     },
     {
       "title": "West Gate Freeway Upgrade",
       "tags": ["Civil", "Infrastructure", "QA"],
       "meta": "Melbourne, VIC | 2022 - 2023 | Confidential",
+      "imageUrl": "https://images.unsplash.com/photo-1460555353139-4d6423ebfc9f?auto=format&fit=crop&w=800&q=80",
       "preview": "Structural design support and QA verification of reinforced concrete crash barriers.",
       "fullText": "Quality-critical infrastructure delivery ensuring compliance with VicRoads and AS 5100.",
       "bullets": [
         "Supervised shop drawings and on-site concrete pours for precast noise walls.",
-        "Conducted rigorous QA testing and reinforcement verification.",
         "Provided input on temporary works including formwork detailing and access scaffolding.",
         "Achieved zero non-conformances across 100+ structural installations."
       ]
@@ -89,12 +88,12 @@
       "title": "Mumbai Metro Line 4 & 5",
       "tags": ["Civil", "QA/QC", "Infrastructure"],
       "meta": "Mumbai, India | 2018 - 2019 | Confidential",
+      "imageUrl": "https://images.unsplash.com/photo-1533256080277-22f37cbb5a4e?auto=format&fit=crop&w=800&q=80",
       "preview": "Civil Site Engineer supporting independent verification on elevated viaducts.",
       "fullText": "Oversight of massive concrete construction and underground tunnel operations.",
       "bullets": [
         "Performed concrete QA/QC for deep foundations (slump testing, dimensional checks).",
-        "Conducted Dynamic Load Testing (DLT) to evaluate load-bearing capacity.",
-        "Performed Pile Integrity Testing (PIT) to assess cast-in-situ piles.",
+        "Conducted Dynamic Load Testing (DLT) and Pile Integrity Testing (PIT).",
         "Monitored tunnel alignment (TBM) and excavation safety."
       ]
     }
@@ -104,31 +103,28 @@
       "roleCompany": "Project Engineer, Liberty Industrial",
       "dates": "03/2024 - Present",
       "location": "Altona VIC / Gove NT",
-      "bullets": ["Supported end-to-end delivery of $100M+ industrial projects.", "Managed subcontractor procurement (RFQs, tender evaluations).", "Administered variations ($8M+), progress claims and EOTs."]
+      "bullets": [
+        "Supported end-to-end delivery of $100M+ industrial projects.",
+        "Administered variations ($8M+), progress claims and EOTs."
+      ]
     },
     {
       "roleCompany": "Structural Project Engineer, Indara",
       "dates": "04/2023 - 03/2024",
       "location": "Melbourne VIC",
-      "bullets": ["Delivered 150+ telecom infrastructure upgrades (5G expansion).", "Coordinated land access and statutory submissions.", "Managed civil interfaces for foundations and fibre backhaul."]
+      "bullets": [
+        "Delivered 150+ telecom infrastructure upgrades (5G expansion).",
+        "Managed civil interfaces for foundations and fibre backhaul."
+      ]
     },
     {
       "roleCompany": "Graduate Structural Engineer, Clive Steele Partners",
       "dates": "11/2021 - 03/2023",
       "location": "Clayton VIC",
-      "bullets": ["Designed steel framing and reinforced concrete to AS 4100/3600.", "Provided input on temporary works including formwork detailing and scaffolding.", "Conducted site inspections and QA hold-point sign-offs."]
-    },
-    {
-      "roleCompany": "Graduate Civil Engineer, Structcom",
-      "dates": "06/2020 - 10/2021",
-      "location": "Caulfield VIC",
-      "bullets": ["Designed stormwater drainage, OSD systems, and site grading.", "Coordinated geotechnical investigations and council approvals."]
-    },
-    {
-      "roleCompany": "Engineering Cadet, Tata Projects",
-      "dates": "01/2019 - 07/2019",
-      "location": "Mumbai, India",
-      "bullets": ["Supported QA/QC for concrete pours (slump testing).", "Assisted in pile integrity and dynamic load testing for foundations."]
+      "bullets": [
+        "Designed steel framing and reinforced concrete to AS 4100/3600.",
+        "Conducted site inspections and QA hold-point sign-offs."
+      ]
     }
   ],
   "contact": {
