@@ -41,7 +41,7 @@ const fallbackData = {
         "title": "National 5G Telecom Upgrade",
         "tags": ["Telecom", "Structural", "Design"],
         "meta": "Victoria | 2023 - 2024 | $50M",
-        "imageUrl": "https://images.unsplash.com/photo-1544006659-f0b21884ce1d?auto=format&fit=crop&w=800&q=80",
+        "imageUrl": "https://images.unsplash.com/photo-1517424168051-78922894db09?auto=format&fit=crop&w=800&q=80",
         "preview": "Structural design coordination for 150+ tower upgrades and 100+ site inspections.",
         "fullText": "Delivered design coordination, structural analysis, field inspections, and approvals support for critical telecom infrastructure.",
         "bullets": [
@@ -51,10 +51,10 @@ const fallbackData = {
         ]
       },
       {
-        "title": "Tier-1 Industrial Closures (Exxon & Rio Tinto)",
+        "title": "Tier-1 Industrial Closures",
         "tags": ["Industrial", "Demolition", "Civil"],
         "meta": "VIC & NT | 2024 - Present | $365M+",
-        "imageUrl": "https://images.unsplash.com/photo-1534398079543-7ae6d016b86c?auto=format&fit=crop&w=800&q=80",
+        "imageUrl": "https://images.unsplash.com/photo-1504307651254-35680f356f12?auto=format&fit=crop&w=800&q=80",
         "preview": "Project Engineer contributing to Australia's largest industrial demolition projects.",
         "fullText": "End-to-end commercial and delivery oversight. Involving explosive demolition events, 142,000 tonnes of steel, and 300,000 tonnes of concrete.",
         "bullets": [
@@ -70,7 +70,7 @@ const fallbackData = {
         "title": "West Gate Freeway Upgrade",
         "tags": ["Civil", "Infrastructure", "QA"],
         "meta": "Melbourne, VIC | 2022 - 2023 | Confidential",
-        "imageUrl": "https://images.unsplash.com/photo-1545558014-8692077e9b5c?auto=format&fit=crop&w=800&q=80",
+        "imageUrl": "https://images.unsplash.com/photo-1460555353139-4d6423ebfc9f?auto=format&fit=crop&w=800&q=80",
         "preview": "Structural design support and QA verification of reinforced concrete crash barriers.",
         "fullText": "Quality-critical infrastructure delivery ensuring compliance with VicRoads and AS 5100.",
         "bullets": [
@@ -83,7 +83,7 @@ const fallbackData = {
         "title": "Mumbai Metro Line 4 & 5",
         "tags": ["Civil", "QA/QC", "Infrastructure"],
         "meta": "Mumbai, India | 2018 - 2019 | Confidential",
-        "imageUrl": "https://images.unsplash.com/photo-1582298538104-e3facf70a256?auto=format&fit=crop&w=800&q=80",
+        "imageUrl": "https://images.unsplash.com/photo-1533256080277-22f37cbb5a4e?auto=format&fit=crop&w=800&q=80",
         "preview": "Civil Site Engineer supporting independent verification on elevated viaducts.",
         "fullText": "Oversight of massive concrete construction and underground tunnel operations.",
         "bullets": [
@@ -197,8 +197,6 @@ document.addEventListener('DOMContentLoaded', async () => {
                         // PERFECT IMAGE RENDERING
                         const img = p.imageUrl || 'https://images.unsplash.com/photo-1544006659-f0b21884ce1d?auto=format&fit=crop&w=800&q=80';
                         tile.style.backgroundImage = `url('${img}')`;
-                        tile.style.backgroundSize = 'cover';
-                        tile.style.backgroundPosition = 'center';
 
                         tile.innerHTML = `
                             <div>
