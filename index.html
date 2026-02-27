@@ -48,77 +48,76 @@
             color: var(--text-primary);
             overflow-x: hidden;
             line-height: 1.7;
-            transition: background-color 0.4s ease, color 0.4s ease;
             -webkit-font-smoothing: antialiased;
         }
 
-        /* HARDCODED CANVAS BACKGROUND (Glitter & Data Streams) */
+        /* 1. DEEP BACKGROUND (Replaces Video) */
         #bg-canvas {
-            position: fixed;
-            top: 0; left: 0;
+            position: fixed; top: 0; left: 0;
             width: 100vw; height: 100vh;
-            z-index: -100;
-            pointer-events: none;
+            z-index: -100; pointer-events: none;
         }
+
+        /* 2. FIXED TRANSMISSION TOWERS BACKGROUND */
+        .towers-background {
+            position: fixed;
+            bottom: 0; left: 0;
+            width: 100vw;
+            height: 35vh; /* Scales with screen height */
+            z-index: -1; /* Sits behind content, but above the canvas */
+            pointer-events: none;
+            opacity: 0.6; /* Dims it slightly so it doesn't distract from text */
+        }
+        .towers-svg {
+            width: 100%; height: 100%;
+            display: block;
+        }
+        .tower-steel { fill: none; stroke: var(--text-muted); stroke-width: 1.5; opacity: 0.5; }
+        .fiber-wire { fill: none; stroke: var(--accent); stroke-width: 1.5; opacity: 0.3; }
+        .fiber-pulse {
+            fill: none; stroke: #ffffff; stroke-width: 2.5;
+            stroke-dasharray: 15 250;
+            filter: drop-shadow(0 0 8px var(--accent));
+            animation: pulseWire 3s linear infinite;
+        }
+        .fiber-pulse.slow { animation: pulseWire 4.5s linear infinite reverse; }
+        @keyframes pulseWire { from { stroke-dashoffset: 265; } to { stroke-dashoffset: 0; } }
 
         .noise-overlay {
-            position: fixed; inset: 0; z-index: -90; pointer-events: none;
-            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.04'/%3E%3C/svg%3E");
+            position: fixed; inset: 0; z-index: 9999; pointer-events: none; opacity: 0.03;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
         }
 
-        /* LAYOUT */
+        /* LAYOUT & NAV */
         .wrap { max-width: 1200px; margin: 0 auto; padding: 0 2rem; position: relative; z-index: 10; }
         section { padding: 8rem 0; border-bottom: 1px solid var(--border); }
         h1, h2, h3, h4 { font-family: var(--font-heading); }
 
-        /* NAV & THEME TOGGLE */
         nav {
             position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
             display: flex; align-items: center; justify-content: space-between;
             padding: 1.5rem 3rem; border-bottom: 1px solid var(--border);
             background: var(--surface); backdrop-filter: blur(20px);
-            transition: background 0.4s, border-color 0.4s;
         }
         .nav-logo { font-family: var(--font-heading); font-size: 1.2rem; font-weight: 700; letter-spacing: 2px; }
         .nav-logo span { color: var(--accent); }
         .nav-links { display: flex; gap: 2.5rem; list-style: none; align-items: center; }
-        .nav-links a { font-size: 0.9rem; font-weight: 600; color: var(--text-muted); text-decoration: none; text-transform: uppercase; letter-spacing: 1px; transition: color 0.3s; }
+        .nav-links a { font-size: 0.9rem; font-weight: 600; color: var(--text-muted); text-decoration: none; text-transform: uppercase; letter-spacing: 1px; transition: 0.3s; }
         .nav-links a:hover { color: var(--text-primary); }
-        
-        .theme-toggle {
-            background: transparent; border: 1px solid var(--border);
-            color: var(--text-primary); width: 40px; height: 40px;
-            border-radius: 50%; display: flex; align-items: center; justify-content: center;
-            cursor: pointer; transition: 0.3s;
-        }
+        .theme-toggle { background: transparent; border: 1px solid var(--border); color: var(--text-primary); width: 40px; height: 40px; border-radius: 50%; display: flex; align-items: center; justify-content: center; cursor: pointer; transition: 0.3s; }
         .theme-toggle:hover { background: var(--text-primary); color: var(--bg-main); }
-        [data-theme="dark"] .icon-sun { display: block; }
-        [data-theme="dark"] .icon-moon { display: none; }
-        [data-theme="light"] .icon-sun { display: none; }
-        [data-theme="light"] .icon-moon { display: block; }
+        [data-theme="dark"] .icon-sun { display: block; } [data-theme="dark"] .icon-moon { display: none; }
+        [data-theme="light"] .icon-sun { display: none; } [data-theme="light"] .icon-moon { display: block; }
 
         /* HERO SECTION */
-        .hero {
-            min-height: 100vh; display: grid; grid-template-columns: 1.2fr 0.8fr;
-            gap: 4rem; align-items: center; padding-top: 6rem;
-        }
+        .hero { min-height: 100vh; display: grid; grid-template-columns: 1.2fr 0.8fr; gap: 4rem; align-items: center; padding-top: 6rem; }
         .hero-label { font-family: var(--font-heading); font-size: 1rem; color: var(--accent); text-transform: uppercase; letter-spacing: 2px; margin-bottom: 1rem; font-weight: 700;}
         .hero-title { font-size: clamp(3.5rem, 6vw, 5.5rem); font-weight: 800; line-height: 1.1; margin-bottom: 1.5rem; }
         .hero-desc { font-size: 1.2rem; color: var(--text-muted); margin-bottom: 2.5rem; max-width: 600px; line-height: 1.8; }
-        
-        .btn-primary {
-            display: inline-flex; align-items: center; gap: 0.8rem;
-            padding: 1rem 2.5rem; background: var(--text-primary); color: var(--bg-main);
-            border-radius: 999px; font-weight: 700; text-decoration: none; transition: 0.3s;
-        }
+        .btn-primary { display: inline-flex; align-items: center; gap: 0.8rem; padding: 1rem 2.5rem; background: var(--text-primary); color: var(--bg-main); border-radius: 999px; font-weight: 700; text-decoration: none; transition: 0.3s; }
         .btn-primary:hover { transform: translateY(-3px); box-shadow: 0 10px 20px rgba(0, 240, 255, 0.2); }
-
         .hero-image-container { position: relative; display: flex; justify-content: center; align-items: center; }
-        .profile-img {
-            width: 100%; max-width: 380px; aspect-ratio: 4/5; object-fit: cover;
-            border-radius: 24px; border: 1px solid var(--border);
-            box-shadow: var(--glass-shadow); position: relative; z-index: 2;
-        }
+        .profile-img { width: 100%; max-width: 380px; aspect-ratio: 4/5; object-fit: cover; border-radius: 24px; border: 1px solid var(--border); box-shadow: var(--glass-shadow); position: relative; z-index: 2; filter: grayscale(20%);}
 
         /* SECTION HEADERS */
         .section-header { margin-bottom: 4rem; display: flex; align-items: baseline; gap: 1rem; }
@@ -127,30 +126,28 @@
 
         /* BENTO PROJECTS */
         .bento-grid { display: grid; grid-template-columns: repeat(12, 1fr); grid-auto-rows: 350px; gap: 1.5rem; }
+        
+        /* Changed from <a> to <div> to stop page jumping */
         .bento-card {
             background: var(--surface); border: 1px solid var(--border);
-            border-radius: 24px; padding: 2.5rem; text-decoration: none; color: var(--text-primary);
+            border-radius: 24px; padding: 2.5rem; color: var(--text-primary);
             transition: transform 0.4s, border-color 0.4s; position: relative; overflow: hidden;
             display: flex; flex-direction: column; justify-content: flex-end;
-            backdrop-filter: blur(12px); box-shadow: var(--glass-shadow);
+            backdrop-filter: blur(12px); box-shadow: var(--glass-shadow); cursor: pointer;
         }
         .bento-card:hover { transform: translateY(-8px); border-color: var(--accent); }
-        .bento-card.span-7 { grid-column: span 7; }
-        .bento-card.span-5 { grid-column: span 5; }
-        .bento-card.span-4 { grid-column: span 4; }
-        .bento-card.span-8 { grid-column: span 8; }
+        .bento-card.span-7 { grid-column: span 7; } .bento-card.span-5 { grid-column: span 5; }
+        .bento-card.span-4 { grid-column: span 4; } .bento-card.span-8 { grid-column: span 8; }
 
         .bento-bg {
             position: absolute; inset: 0; background-size: cover; background-position: center;
-            opacity: 0.3; transition: transform 0.6s, opacity 0.4s; z-index: 1;
-            filter: grayscale(80%); 
+            opacity: 0.3; transition: transform 0.6s, opacity 0.4s; z-index: 1; filter: grayscale(80%); 
         }
         .bento-card::before {
             content: ''; position: absolute; inset: 0;
-            background: linear-gradient(to top, var(--bg-main) 10%, transparent 100%);
-            z-index: 2; 
+            background: linear-gradient(to top, var(--bg-main) 10%, transparent 100%); z-index: 2; 
         }
-        .bento-card:hover .bento-bg { transform: scale(1.05); opacity: 0.5; filter: grayscale(0%); }
+        .bento-card:hover .bento-bg { transform: scale(1.05); opacity: 0.6; filter: grayscale(0%); }
 
         .bento-content { position: relative; z-index: 3; }
         .card-tags { display: flex; gap: 0.6rem; flex-wrap: wrap; margin-bottom: 1rem; }
@@ -158,31 +155,19 @@
         .card-title { font-size: 2.2rem; font-weight: 700; margin-bottom: 0.5rem; line-height: 1.1; }
         .card-desc { font-size: 1.1rem; color: var(--text-muted); line-height: 1.6; }
 
-        /* =========================================
-           CAREER TIMELINE (FULL PATHWAY)
-        ========================================= */
+        /* TIMELINE */
         .timeline-wrap { display: grid; grid-template-columns: 1fr 2fr; gap: 4rem; }
         .timeline-intro { font-size: 1.2rem; color: var(--text-muted); line-height: 1.8; }
-        
         .timeline { 
             display: flex; flex-direction: column; position: relative;
-            /* Glowing vertical wire */
-            border-left: 3px solid var(--border);
-            padding-left: 3rem;
+            border-left: 3px solid var(--border); padding-left: 3rem;
         }
-        
-        /* The glow effect running down the line */
         .timeline::before {
             content: ''; position: absolute; left: -3px; top: 0; width: 3px; height: 100%;
             background: linear-gradient(to bottom, transparent, var(--accent), transparent);
-            background-size: 100% 200%;
-            animation: dataFlow 4s linear infinite;
+            background-size: 100% 200%; animation: dataFlow 4s linear infinite;
         }
-
-        @keyframes dataFlow {
-            0% { background-position: 0% -100%; }
-            100% { background-position: 0% 200%; }
-        }
+        @keyframes dataFlow { 0% { background-position: 0% -100%; } 100% { background-position: 0% 200%; } }
 
         .timeline-item {
             padding: 2.5rem; background: var(--surface); border: 1px solid var(--border);
@@ -190,8 +175,6 @@
             backdrop-filter: blur(12px); transition: border-color 0.3s;
         }
         .timeline-item:hover { border-color: var(--accent); }
-        
-        /* The glowing nodes connecting the wire to the card */
         .timeline-item::after {
             content: ''; position: absolute; left: -3.6rem; top: 3.5rem;
             width: 16px; height: 16px; border-radius: 50%;
@@ -206,64 +189,22 @@
         .tl-list li { font-size: 1.1rem; color: var(--text-muted); display: flex; gap: 0.8rem; line-height: 1.6;}
         .tl-list li::before { content: '▹'; color: var(--accent); font-weight: bold;}
 
-        /* =========================================
-           TRANSMISSION TOWERS SVG FOOTER
-        ========================================= */
-        .towers-container {
-            width: 100%;
-            overflow: hidden;
-            background: var(--bg-main);
-            position: relative;
-            border-top: 1px solid var(--border);
-            padding-top: 2rem;
-            margin-top: 4rem;
-        }
+        /* MODAL */
+        .modal { position: fixed; inset: 0; display: none; align-items: center; justify-content: center; z-index: 9999; padding: 1rem; }
+        .modal.open { display: flex; }
+        .modal-backdrop { position: absolute; inset: 0; background: rgba(0,0,0,0.8); backdrop-filter: blur(10px); }
+        .modal-content { position: relative; width: 100%; max-width: 900px; max-height: 90vh; overflow-y: auto; background: var(--bg-main); border: 1px solid var(--border); border-radius: 24px; z-index: 10; padding: 3rem;}
+        .modal-close { position: absolute; top: 1.5rem; right: 1.5rem; width: 45px; height: 45px; border-radius: 50%; border: 1px solid var(--border); background: transparent; color: var(--text-primary); cursor: pointer; }
+        .modal-title { font-size: 2.5rem; margin-bottom: 1rem; line-height: 1.1; }
+        .modal-metrics-bar { display: flex; gap: 1.5rem; margin-bottom: 2rem; padding-bottom: 1.5rem; border-bottom: 1px solid var(--border); }
+        .modal-split { display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; }
+        .modal-list { list-style: none; }
+        .modal-list li { position: relative; padding-left: 1.5rem; margin-bottom: 1rem; color: var(--text-muted); line-height: 1.6; }
+        .modal-list li::before { content: '▹'; position: absolute; left: 0; color: var(--accent); }
 
-        .towers-svg {
-            width: 100%;
-            height: 250px;
-            display: block;
-        }
-
-        /* The glowing wires */
-        .fiber-wire {
-            fill: none;
-            stroke: var(--accent);
-            stroke-width: 2;
-            opacity: 0.4;
-        }
-        
-        /* The data pulses moving across the wires */
-        .fiber-pulse {
-            fill: none;
-            stroke: #ffffff;
-            stroke-width: 3;
-            stroke-dasharray: 20 200;
-            filter: drop-shadow(0 0 8px var(--accent));
-            animation: pulseWire 3s linear infinite;
-        }
-        
-        /* Slower pulse for variety */
-        .fiber-pulse.slow { animation: pulseWire 4.5s linear infinite reverse; }
-
-        @keyframes pulseWire {
-            from { stroke-dashoffset: 220; }
-            to { stroke-dashoffset: 0; }
-        }
-
-        /* The steel towers */
-        .tower-structure {
-            fill: none;
-            stroke: var(--text-muted);
-            stroke-width: 2;
-            opacity: 0.6;
-        }
-
-        footer {
-            padding: 2rem 0 4rem 0; text-align: center; background: var(--bg-main);
-        }
+        footer { padding: 4rem 0; text-align: center; position: relative; z-index: 10; border-top: 1px solid var(--border); margin-top: 4rem; background: var(--bg-main); }
         .footer-logo { font-family: var(--font-heading); font-size: 2rem; font-weight: 700; margin-bottom: 1rem;}
-        .footer-links a { color: var(--text-muted); text-decoration: none; font-size: 1.1rem; margin: 0 1rem; font-weight: 500; transition: color 0.3s;}
+        .footer-links a { color: var(--text-muted); text-decoration: none; font-size: 1.1rem; margin: 0 1rem; transition: color 0.3s;}
         .footer-links a:hover { color: var(--accent); }
 
         @media (max-width: 1024px) {
@@ -272,21 +213,54 @@
             .hero-desc { margin: 0 auto 2.5rem auto; }
             .bento-card.span-7, .bento-card.span-5, .bento-card.span-4, .bento-card.span-8 { grid-column: span 12; }
             .timeline-wrap { grid-template-columns: 1fr; }
-            nav { padding: 1rem 1.5rem; }
-            .nav-links { display: none; }
+            nav { padding: 1rem 1.5rem; } .nav-links { display: none; }
+            .modal-split { grid-template-columns: 1fr; }
         }
     </style>
 </head>
 <body data-theme="dark">
 
     <canvas id="bg-canvas"></canvas>
+
+    <div class="towers-background">
+        <svg class="towers-svg" viewBox="0 0 3100 250" preserveAspectRatio="xMidYMax slice" xmlns="http://www.w3.org/2000/svg">
+            
+            <defs>
+                <g id="tower">
+                    <path class="tower-steel" d="M 20,0 L 0,210 M 20,0 L 40,210"></path>
+                    <path class="tower-steel" d="M 15,50 L 25,50 M 10,100 L 30,100 M 5,150 L 35,150"></path>
+                    <path class="tower-steel" d="M 15,50 L 30,100 M 25,50 L 10,100 M 10,100 L 35,150 M 30,100 L 5,150 M 5,150 L 40,210 M 35,150 L 0,210"></path>
+                    <path class="tower-steel" d="M -15,30 L 55,30 M -20,60 L 60,60"></path>
+                </g>
+            </defs>
+
+            <path class="fiber-wire" d="M -230,50 Q -30,150 170,50 Q 370,150 570,50 Q 770,150 970,50 Q 1170,150 1370,50 Q 1570,150 1770,50 Q 1970,150 2170,50 Q 2370,150 2570,50 Q 2770,150 2970,50 Q 3170,150 3370,50"></path>
+            <path class="fiber-pulse" d="M -230,50 Q -30,150 170,50 Q 370,150 570,50 Q 770,150 970,50 Q 1170,150 1370,50 Q 1570,150 1770,50 Q 1970,150 2170,50 Q 2370,150 2570,50 Q 2770,150 2970,50 Q 3170,150 3370,50"></path>
+            
+            <path class="fiber-wire" d="M -230,80 Q -30,180 170,80 Q 370,180 570,80 Q 770,180 970,80 Q 1170,180 1370,80 Q 1570,180 1770,80 Q 1970,180 2170,80 Q 2370,180 2570,80 Q 2770,180 2970,80 Q 3170,180 3370,80"></path>
+            <path class="fiber-pulse slow" d="M -230,80 Q -30,180 170,80 Q 370,180 570,80 Q 770,180 970,80 Q 1170,180 1370,80 Q 1570,180 1770,80 Q 1970,180 2170,80 Q 2370,180 2570,80 Q 2770,180 2970,80 Q 3170,180 3370,80"></path>
+
+            <path class="fiber-wire" d="M -230,110 Q -30,210 170,110 Q 370,210 570,110 Q 770,210 970,110 Q 1170,210 1370,110 Q 1570,210 1770,110 Q 1970,210 2170,110 Q 2370,210 2570,110 Q 2770,210 2970,110 Q 3170,210 3370,110"></path>
+            <path class="fiber-pulse" d="M -230,110 Q -30,210 170,110 Q 370,210 570,110 Q 770,210 970,110 Q 1170,210 1370,110 Q 1570,210 1770,110 Q 1970,210 2170,110 Q 2370,210 2570,110 Q 2770,210 2970,110 Q 3170,210 3370,110" style="animation-delay: -1.5s;"></path>
+
+            <use href="#tower" x="150" y="40" />
+            <use href="#tower" x="550" y="40" />
+            <use href="#tower" x="950" y="40" />
+            <use href="#tower" x="1350" y="40" />
+            <use href="#tower" x="1750" y="40" />
+            <use href="#tower" x="2150" y="40" />
+            <use href="#tower" x="2550" y="40" />
+            <use href="#tower" x="2950" y="40" />
+        </svg>
+    </div>
+
     <div class="noise-overlay"></div>
 
     <nav>
         <div class="nav-logo">GK<span>.</span>ENG</div>
         <div class="nav-links">
             <a href="#projects">Projects</a>
-            <a href="#career">Career Pathway</a>
+            <a href="#career">Professional Trajectory</a>
         </div>
         <button class="theme-toggle" id="themeBtn" aria-label="Toggle Theme">
             <i data-lucide="sun" class="icon-sun"></i>
@@ -320,7 +294,7 @@
             </div>
 
             <div class="bento-grid">
-                <a href="#" class="bento-card span-7">
+                <div class="bento-card span-7" data-id="1">
                     <div class="bento-bg" style="background-image: url('https://images.unsplash.com/photo-1544006659-f0b21884ce1d?auto=format&fit=crop&w=1200&q=80');"></div>
                     <div class="bento-content">
                         <div class="card-tags">
@@ -328,11 +302,12 @@
                             <span class="card-tag">Structural</span>
                         </div>
                         <h3 class="card-title">National 5G Rollout</h3>
-                        <p class="card-desc">Delivered 150+ lattice tower and pole upgrades for Indara's national 5G expansion, ensuring full AS1170.2 structural compliance across diverse site conditions.</p>
+                        <p class="card-desc">Delivered 150+ lattice tower and pole upgrades for Indara's national 5G expansion.</p>
+                        <div style="color:var(--accent); font-weight:700; font-size:1rem; display:flex; align-items:center; gap:0.5rem; margin-top:1rem;">View Case Study <i data-lucide="arrow-right"></i></div>
                     </div>
-                </a>
+                </div>
 
-                <a href="#" class="bento-card span-5">
+                <div class="bento-card span-5" data-id="2">
                     <div class="bento-bg" style="background-image: url('https://images.unsplash.com/photo-1534398079543-7ae6d016b86c?auto=format&fit=crop&w=800&q=80');"></div>
                     <div class="bento-content">
                         <div class="card-tags">
@@ -340,11 +315,12 @@
                             <span class="card-tag">Demolition</span>
                         </div>
                         <h3 class="card-title">Tier-1 Industrial Closures</h3>
-                        <p class="card-desc">End-to-end commercial and delivery oversight involving massive brownfield deconstruction scopes and 142,000 tonnes of steel.</p>
+                        <p class="card-desc">End-to-end commercial and delivery oversight involving 142,000 tonnes of steel.</p>
+                        <div style="color:var(--accent); font-weight:700; font-size:1rem; display:flex; align-items:center; gap:0.5rem; margin-top:1rem;">View Case Study <i data-lucide="arrow-right"></i></div>
                     </div>
-                </a>
+                </div>
 
-                <a href="#" class="bento-card span-4">
+                <div class="bento-card span-4" data-id="3">
                     <div class="bento-bg" style="background-image: url('https://images.unsplash.com/photo-1545558014-8692077e9b5c?auto=format&fit=crop&w=800&q=80');"></div>
                     <div class="bento-content">
                         <div class="card-tags">
@@ -352,11 +328,12 @@
                             <span class="card-tag">QA</span>
                         </div>
                         <h3 class="card-title">West Gate Freeway</h3>
-                        <p class="card-desc">Quality-critical infrastructure delivery ensuring VicRoads and AS 5100 compliance across major freeway works.</p>
+                        <p class="card-desc">Quality-critical infrastructure delivery ensuring VicRoads and AS 5100 compliance.</p>
+                        <div style="color:var(--accent); font-weight:700; font-size:1rem; display:flex; align-items:center; gap:0.5rem; margin-top:1rem;">View Case Study <i data-lucide="arrow-right"></i></div>
                     </div>
-                </a>
+                </div>
 
-                <a href="#" class="bento-card span-8">
+                <div class="bento-card span-8" data-id="4">
                     <div class="bento-bg" style="background-image: url('https://images.unsplash.com/photo-1582298538104-e3facf70a256?auto=format&fit=crop&w=1200&q=80');"></div>
                     <div class="bento-content">
                         <div class="card-tags">
@@ -364,21 +341,22 @@
                             <span class="card-tag">Infrastructure</span>
                         </div>
                         <h3 class="card-title">Mumbai Metro Lines 4 & 5</h3>
-                        <p class="card-desc">Civil Site Engineer supporting independent verification and QA on elevated viaduct construction — complex, high-stakes urban rail infrastructure.</p>
+                        <p class="card-desc">Civil Site Engineer supporting independent verification and QA on elevated viaducts.</p>
+                        <div style="color:var(--accent); font-weight:700; font-size:1rem; display:flex; align-items:center; gap:0.5rem; margin-top:1rem;">View Case Study <i data-lucide="arrow-right"></i></div>
                     </div>
-                </a>
+                </div>
             </div>
         </section>
 
         <section id="career" style="border-bottom: none;">
             <div class="section-header">
                 <span class="section-num">02 //</span>
-                <h2 class="section-title">Career Pathway</h2>
+                <h2 class="section-title">Professional Trajectory</h2>
             </div>
 
             <div class="timeline-wrap">
                 <div class="timeline-intro">
-                    <p>Five years of progressive responsibility across structural, civil, and industrial engineering disciplines. Each role building on the last — from graduate designer to full project accountability.</p>
+                    <p>Over five years of progressive responsibility across structural, civil, and industrial engineering disciplines. Each role building on the last — from site engineer to full project delivery accountability.</p>
                 </div>
 
                 <div class="timeline">
@@ -388,7 +366,7 @@
                         <div class="tl-company">Liberty Industrial | Altona VIC / Gove NT</div>
                         <ul class="tl-list">
                             <li>End-to-end delivery of $100M+ industrial decommissioning and demolition projects.</li>
-                            <li>Administered variations totalling $8M+, progress claims, and EOT events.</li>
+                            <li>Administered variations totalling $8M+, progress claims, and Extension of Time events.</li>
                             <li>Coordinated EPA and WorkSafe statutory approvals across multiple jurisdictions.</li>
                         </ul>
                     </div>
@@ -410,7 +388,7 @@
                         <div class="tl-company">Clive Steele Partners | Clayton VIC</div>
                         <ul class="tl-list">
                             <li>Designed steel framing and reinforced concrete structures to AS 4100 and AS 3600.</li>
-                            <li>Conducted site inspections and signed off QA hold points on infrastructure projects.</li>
+                            <li>Conducted site inspections and signed off QA hold points on major infrastructure projects.</li>
                         </ul>
                     </div>
 
@@ -419,8 +397,8 @@
                         <div class="tl-role">Graduate Civil Engineer</div>
                         <div class="tl-company">Structcom | Caulfield VIC</div>
                         <ul class="tl-list">
-                            <li>Designed stormwater drainage, OSD systems, and site grading.</li>
-                            <li>Coordinated geotechnical investigations and council approvals.</li>
+                            <li>Designed stormwater drainage, OSD systems, and overall site grading.</li>
+                            <li>Coordinated geotechnical investigations and council development approvals.</li>
                         </ul>
                     </div>
 
@@ -430,58 +408,42 @@
                         <div class="tl-company">Tata Projects | Mumbai, India</div>
                         <ul class="tl-list">
                             <li>Supported QA/QC for mass concrete pours including slump and dimensional checks.</li>
-                            <li>Assisted in pile integrity and dynamic load testing for deep foundations.</li>
+                            <li>Assisted in pile integrity and dynamic load testing for deep metro foundations.</li>
                         </ul>
                     </div>
                 </div>
             </div>
         </section>
-    </div>
 
-    <div class="towers-container">
-        <svg class="towers-svg" viewBox="0 0 1200 250" preserveAspectRatio="xMidYMax slice" xmlns="http://www.w3.org/2000/svg">
-            
-            <path class="fiber-wire" id="wire1" d="M -50,50 Q 300,180 600,60 T 1250,50"></path>
-            <path class="fiber-pulse" d="M -50,50 Q 300,180 600,60 T 1250,50"></path>
-            
-            <path class="fiber-wire" id="wire2" d="M -50,80 Q 300,210 600,90 T 1250,80"></path>
-            <path class="fiber-pulse slow" d="M -50,80 Q 300,210 600,90 T 1250,80"></path>
-
-            <path class="fiber-wire" id="wire3" d="M -50,110 Q 300,240 600,120 T 1250,110"></path>
-            <path class="fiber-pulse" d="M -50,110 Q 300,240 600,120 T 1250,110" style="animation-delay: -1s;"></path>
-
-            <g class="tower-structure" transform="translate(150, 40)">
-                <path d="M 20,0 L 0,210 M 20,0 L 40,210"></path>
-                <path d="M 15,50 L 25,50 M 10,100 L 30,100 M 5,150 L 35,150"></path>
-                <path d="M 15,50 L 30,100 M 25,50 L 10,100 M 10,100 L 35,150 M 30,100 L 5,150 M 5,150 L 40,210 M 35,150 L 0,210"></path>
-                <path d="M -10,30 L 50,30 M -15,60 L 55,60"></path>
-            </g>
-
-            <g class="tower-structure" transform="translate(580, 50)">
-                <path d="M 20,0 L 0,200 M 20,0 L 40,200"></path>
-                <path d="M 15,50 L 25,50 M 10,100 L 30,100 M 5,150 L 35,150"></path>
-                <path d="M 15,50 L 30,100 M 25,50 L 10,100 M 10,100 L 35,150 M 30,100 L 5,150 M 5,150 L 40,200 M 35,150 L 0,200"></path>
-                <path d="M -10,30 L 50,30 M -15,60 L 55,60"></path>
-            </g>
-
-            <g class="tower-structure" transform="translate(1000, 40)">
-                <path d="M 20,0 L 0,210 M 20,0 L 40,210"></path>
-                <path d="M 15,50 L 25,50 M 10,100 L 30,100 M 5,150 L 35,150"></path>
-                <path d="M 15,50 L 30,100 M 25,50 L 10,100 M 10,100 L 35,150 M 30,100 L 5,150 M 5,150 L 40,210 M 35,150 L 0,210"></path>
-                <path d="M -10,30 L 50,30 M -15,60 L 55,60"></path>
-            </g>
-        </svg>
-    </div>
-
-    <footer>
-        <div class="wrap">
+        <footer>
             <div class="footer-logo">G.KALAL</div>
             <div class="footer-links">
                 <a href="mailto:ganesh.r.kalal24@gmail.com">Email Me</a>
                 <a href="https://www.linkedin.com/in/ganesh-kalal/" target="_blank">LinkedIn</a>
             </div>
+        </footer>
+    </div>
+
+    <div id="projectModal" class="modal" aria-hidden="true">
+        <div class="modal-backdrop" id="modalBackdrop"></div>
+        <div class="modal-content">
+            <button class="modal-close" id="modalCloseBtn"><i data-lucide="x"></i></button>
+            <div class="modal-tags" id="modalTags" style="display: flex; gap: 0.5rem; margin-bottom: 1rem;"></div>
+            <h2 id="modalTitle" class="modal-title"></h2>
+            <div class="modal-metrics-bar" id="modalMetrics" style="color: var(--accent); font-weight: 600; margin-bottom: 2rem; padding-bottom: 1rem; border-bottom: 1px solid var(--border);"></div>
+            
+            <div class="modal-split">
+                <div>
+                    <h4 style="color: var(--text-primary); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 1rem;">Scope & Architecture</h4>
+                    <ul id="modalScope" class="modal-list"></ul>
+                </div>
+                <div>
+                    <h4 style="color: var(--text-primary); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 1rem;">Execution & Outcomes</h4>
+                    <ul id="modalConstraints" class="modal-list"></ul>
+                </div>
+            </div>
         </div>
-    </footer>
+    </div>
 
     <script>
         lucide.createIcons();
@@ -498,7 +460,7 @@
             localStorage.setItem('theme', newTheme);
         });
 
-        // 2. FIBER OPTIC DATA STREAM BACKGROUND (Recreates the video securely)
+        // 2. FIBER OPTIC DATA STREAM BACKGROUND (Replicates the Vecteezy Blue Line/Particles Video)
         const canvas = document.getElementById('bg-canvas');
         const ctx = canvas.getContext('2d');
         let width, height;
@@ -522,23 +484,25 @@
         }
 
         const lines = [];
-        for(let i=0; i<30; i++) {
+        for(let i=0; i<35; i++) {
             lines.push({
                 x: Math.random() * width,
                 y: Math.random() * height,
-                length: Math.random() * 100 + 50,
-                speedY: -(Math.random() * 5 + 3), 
-                alpha: Math.random() * 0.3 + 0.1
+                length: Math.random() * 120 + 50,
+                speedY: -(Math.random() * 6 + 3), 
+                alpha: Math.random() * 0.4 + 0.1
             });
         }
 
         function drawBackground() {
             const isLight = document.body.getAttribute('data-theme') === 'light';
+            // Leaves a slight trail behind moving objects
             ctx.fillStyle = isLight ? 'rgba(248, 250, 252, 0.3)' : 'rgba(2, 3, 8, 0.3)';
             ctx.fillRect(0, 0, width, height);
 
-            const glowColor = isLight ? '0, 150, 255' : '0, 240, 255'; 
+            const glowColor = isLight ? '0, 136, 255' : '0, 240, 255'; 
 
+            // Draw Data Lines (Shooting upward)
             lines.forEach(line => {
                 line.y += line.speedY;
                 if (line.y + line.length < 0) {
@@ -554,6 +518,7 @@
                 ctx.stroke();
             });
 
+            // Draw Fiber Particles (Floating upward)
             particles.forEach(p => {
                 p.y += p.speedY;
                 p.x += Math.sin(p.y * 0.01) * 0.5; 
@@ -565,6 +530,82 @@
             requestAnimationFrame(drawBackground);
         }
         drawBackground();
+
+        // 3. PROJECT MODAL LOGIC (Fixed Click Issue)
+        const projectData = {
+            "1": {
+                title: "National 5G Telecom Upgrade",
+                tags: ["Telecom", "Structural", "Design"],
+                meta: "Victoria | 2023 - 2024 | $50M",
+                preview: "Structural design coordination for 150+ tower upgrades and 100+ site inspections.",
+                bullets: [
+                    "Delivered 150+ lattice tower and steel/timber pole upgrades ensuring compliance with AS1170.2.",
+                    "Managed trenching interfaces and civil coordination for fibre backhaul.",
+                    "Secured statutory planning approvals from 20+ councils, reducing approval cycles by 20%."
+                ]
+            },
+            "2": {
+                title: "Tier-1 Industrial Closures",
+                tags: ["Industrial", "Demolition", "Civil"],
+                meta: "VIC & NT | 2024 - Present | $365M+",
+                preview: "Project Engineer contributing to Australia's largest industrial demolition projects.",
+                bullets: [
+                    "Managed subcontractor packages, RFQs, and regulatory interfaces with local councils.",
+                    "Negotiated and technically justified contract variations totaling $8M+.",
+                    "Organised scrap steel load-outs exceeding 135,000 tonnes (approx $65M+ in scrap value)."
+                ]
+            },
+            "3": {
+                title: "West Gate Freeway Upgrade",
+                tags": ["Civil", "Infrastructure", "QA"],
+                meta: "Melbourne, VIC | 2022 - 2023",
+                preview: "Structural design support and QA verification of reinforced concrete crash barriers.",
+                bullets: [
+                    "Supervised shop drawings and on-site concrete pours for precast noise walls.",
+                    "Provided input on temporary works including formwork detailing and access scaffolding.",
+                    "Achieved zero non-conformances across 100+ structural installations."
+                ]
+            },
+            "4": {
+                title: "Mumbai Metro Line 4 & 5",
+                tags": ["Civil", "QA/QC", "Infrastructure"],
+                meta: "Mumbai, India | 2018 - 2019",
+                preview: "Civil Site Engineer supporting independent verification on elevated viaducts.",
+                bullets: [
+                    "Performed concrete QA/QC for deep foundations (slump testing, dimensional checks).",
+                    "Conducted Dynamic Load Testing (DLT) and Pile Integrity Testing (PIT).",
+                    "Monitored tunnel alignment (TBM) and excavation safety."
+                ]
+            }
+        };
+
+        const modal = document.getElementById('projectModal');
+        
+        document.querySelectorAll('.bento-card').forEach(card => {
+            card.addEventListener('click', (e) => {
+                const id = card.getAttribute('data-id');
+                const data = projectData[id];
+                
+                document.getElementById('modalTitle').textContent = data.title;
+                document.getElementById('modalMetrics').textContent = data.meta;
+                document.getElementById('modalTags').innerHTML = data.tags.map(t => `<span style="background:var(--accent); color:#000; padding:0.2rem 0.6rem; border-radius:99px; font-size:0.75rem; font-weight:bold; text-transform:uppercase;">${t}</span>`).join('');
+                
+                document.getElementById('modalScope').innerHTML = `<li>${data.preview}</li>`;
+                document.getElementById('modalConstraints').innerHTML = data.bullets.map(b => `<li>${b}</li>`).join('');
+
+                modal.classList.add('open');
+                document.body.style.overflow = 'hidden'; // Stop background scrolling
+            });
+        });
+
+        function closeModal() {
+            modal.classList.remove('open');
+            document.body.style.overflow = '';
+        }
+        
+        document.getElementById('modalBackdrop').addEventListener('click', closeModal);
+        document.getElementById('modalCloseBtn').addEventListener('click', closeModal);
+
     </script>
 </body>
 </html>
