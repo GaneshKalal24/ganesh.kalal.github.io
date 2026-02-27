@@ -9,38 +9,53 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
     
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    
     <style>
         /* =========================================
-           RESTORED ORIGINAL GEMINI THEME
+           CORE THEME & VARIABLES
         ========================================= */
         :root {
-            --bg: #020308;
+            --bg-main: #020308;
             --surface: rgba(255, 255, 255, 0.03);
-            --surface2: rgba(255, 255, 255, 0.08);
+            --surface-hover: rgba(255, 255, 255, 0.08);
             --border: rgba(255, 255, 255, 0.1);
-            --accent: #00f0ff; /* The original Neon Cyan */
-            --accent-glow: rgba(0, 240, 255, 0.4);
-            --text: #ffffff;
-            --muted: #8892b0;
-            --mono: 'Space Grotesk', monospace;
-            --display: 'Space Grotesk', sans-serif;
-            --body: 'Inter', sans-serif;
+            --accent: #00f0ff; 
+            --accent-dark: #0088ff;
+            --text-primary: #ffffff;
+            --text-muted: #cbd5e1;
+            --font-heading: 'Space Grotesk', sans-serif;
+            --font-body: 'Inter', sans-serif;
             --glass-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.5);
+        }
+
+        [data-theme="light"] {
+            --bg-main: #f8fafc;
+            --surface: rgba(0, 0, 0, 0.03);
+            --surface-hover: rgba(0, 0, 0, 0.08);
+            --border: rgba(0, 0, 0, 0.1);
+            --accent: #0284c7; 
+            --accent-dark: #0369a1;
+            --text-primary: #0f172a;
+            --text-muted: #475569;
+            --glass-shadow: 0 8px 32px 0 rgba(15, 23, 42, 0.06);
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
         html { scroll-behavior: smooth; }
 
         body {
-            font-family: var(--body);
-            background: var(--bg);
-            color: var(--text);
+            font-family: var(--font-body);
+            background: var(--bg-main);
+            color: var(--text-primary);
             overflow-x: hidden;
-            cursor: none;
-            line-height: 1.6;
+            line-height: 1.7;
+            transition: background-color 0.4s ease, color 0.4s ease;
+            -webkit-font-smoothing: antialiased;
         }
 
-        /* CODE-GENERATED BACKGROUND (No video required) */
+        /* HARDCODED CANVAS BACKGROUND (Replaces Video) */
         #bg-canvas {
             position: fixed;
             top: 0; left: 0;
@@ -49,580 +64,451 @@
             pointer-events: none;
         }
 
-        /* Custom cursor */
-        .cursor {
-            width: 8px; height: 8px;
-            background: var(--text);
-            border-radius: 50%;
-            position: fixed;
-            pointer-events: none;
-            z-index: 9999;
-            transform: translate(-50%, -50%);
-        }
-        .cursor-ring {
-            width: 36px; height: 36px;
-            border: 1px solid rgba(255, 255, 255, 0.4);
-            border-radius: 50%;
-            position: fixed;
-            pointer-events: none;
-            z-index: 9998;
-            transform: translate(-50%, -50%);
-            transition: width 0.3s, height 0.3s, border-color 0.3s;
-        }
-        .cursor-ring.hover {
-            width: 60px; height: 60px;
-            border-color: var(--accent);
-            background: rgba(0, 240, 255, 0.1);
-            backdrop-filter: blur(2px);
+        .noise-overlay {
+            position: fixed; inset: 0; z-index: -90; pointer-events: none;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.04'/%3E%3C/svg%3E");
         }
 
-        /* NAV */
+        /* LAYOUT */
+        .wrap { max-width: 1280px; margin: 0 auto; padding: 0 2rem; position: relative; z-index: 10; }
+        section { padding: 8rem 0; border-bottom: 1px solid var(--border); }
+        h1, h2, h3, h4, .font-display { font-family: var(--font-heading); }
+
+        /* NAV & THEME TOGGLE */
         nav {
-            position: fixed;
-            top: 0; left: 0; right: 0;
-            z-index: 1000;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            padding: 1.5rem 3rem;
-            border-bottom: 1px solid var(--border);
-            background: rgba(2, 3, 8, 0.7);
-            backdrop-filter: blur(20px);
+            position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+            display: flex; align-items: center; justify-content: space-between;
+            padding: 1.5rem 3rem; border-bottom: 1px solid var(--border);
+            background: var(--surface); backdrop-filter: blur(20px);
+            transition: background 0.4s, border-color 0.4s;
         }
-
-        .nav-logo {
-            font-family: var(--mono);
-            font-size: 0.9rem;
-            color: var(--text);
-            letter-spacing: 0.15em;
-            text-transform: uppercase;
-            font-weight: 700;
-        }
+        .nav-logo { font-family: var(--font-heading); font-size: 1.2rem; font-weight: 700; letter-spacing: 2px; }
         .nav-logo span { color: var(--accent); }
-
-        .nav-links { display: flex; gap: 2.5rem; list-style: none; }
-        .nav-links a {
-            font-family: var(--mono);
-            font-size: 0.8rem;
-            letter-spacing: 0.12em;
-            text-transform: uppercase;
-            color: var(--muted);
-            text-decoration: none;
-            transition: color 0.2s;
-            font-weight: 600;
-        }
-        .nav-links a:hover { color: var(--accent); }
-
-        /* HERO */
-        .hero {
-            min-height: 100vh;
-            padding: 12rem 3rem 6rem;
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 4rem;
-            align-items: end;
-            position: relative;
-            border-bottom: 1px solid var(--border);
-        }
-
-        .hero-label {
-            font-family: var(--mono);
-            font-size: 0.8rem;
-            letter-spacing: 0.2em;
-            text-transform: uppercase;
-            color: var(--accent);
-            margin-bottom: 1.5rem;
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-            font-weight: 700;
-        }
-        .hero-label::before {
-            content: '';
-            display: block;
-            width: 30px; height: 2px;
-            background: var(--accent);
-        }
-
-        .hero-title {
-            font-family: var(--display);
-            font-size: clamp(4rem, 8vw, 8rem);
-            line-height: 1;
-            letter-spacing: -0.02em;
-            margin-bottom: 2rem;
-            font-weight: 700;
-        }
-        .hero-title .outline {
-            color: transparent;
-            -webkit-text-stroke: 1px var(--muted);
-        }
-
-        .hero-desc {
-            font-size: 1.15rem;
-            color: var(--muted);
-            margin-bottom: 3rem;
-            max-width: 450px;
-        }
-
-        .hero-stats {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 1px;
-            background: var(--border);
-            border: 1px solid var(--border);
-            border-radius: 16px;
-            overflow: hidden;
-            backdrop-filter: blur(12px);
-        }
-        .stat {
-            background: var(--surface);
-            padding: 1.5rem 1.25rem;
-        }
-        .stat-num {
-            font-family: var(--display);
-            font-size: 2.5rem;
-            color: var(--text);
-            line-height: 1;
-            margin-bottom: 0.5rem;
-            font-weight: 700;
-        }
-        .stat-label {
-            font-family: var(--mono);
-            font-size: 0.75rem;
-            letter-spacing: 0.1em;
-            text-transform: uppercase;
-            color: var(--accent);
-        }
-
-        /* SECTIONS */
-        section { padding: 8rem 3rem; border-bottom: 1px solid var(--border); }
-        .section-header { display: flex; align-items: baseline; gap: 1.5rem; margin-bottom: 4rem; }
-        .section-num { font-family: var(--mono); font-size: 1rem; color: var(--accent); font-weight: 700;}
-        .section-title { font-family: var(--display); font-size: clamp(2.5rem, 5vw, 4rem); letter-spacing: -0.02em; line-height: 1; }
-
-        /* PROJECTS GRID (Glassmorphism & Gradients) */
-        .projects-grid {
-            display: grid;
-            grid-template-columns: repeat(12, 1fr);
-            gap: 1.5rem;
-        }
-
-        .project-card {
-            background: var(--surface);
-            border: 1px solid var(--border);
-            border-radius: 24px;
-            padding: 2.5rem;
-            text-decoration: none;
-            color: var(--text);
-            transition: transform 0.4s, border-color 0.4s;
-            position: relative;
-            overflow: hidden;
-            display: flex;
-            flex-direction: column;
-            justify-content: flex-end;
-            min-height: 400px;
-            backdrop-filter: blur(12px);
-            box-shadow: var(--glass-shadow);
-        }
-        .project-card:hover { transform: translateY(-8px); border-color: var(--accent); }
-
-        .project-card.span-7 { grid-column: span 7; }
-        .project-card.span-5 { grid-column: span 5; }
-        .project-card.span-4 { grid-column: span 4; }
-        .project-card.span-8 { grid-column: span 8; }
-
-        .card-img {
-            position: absolute; inset: 0;
-            background-size: cover; background-position: center;
-            opacity: 0.2;
-            transition: opacity 0.4s, transform 0.6s;
-            z-index: 0;
-        }
-        .project-card::before {
-            content: ''; position: absolute; inset: 0;
-            background: linear-gradient(to top, rgba(2,3,8,0.95) 0%, rgba(2,3,8,0.1) 100%);
-            z-index: 1;
-        }
-        .project-card:hover .card-img { opacity: 0.4; transform: scale(1.05); }
-
-        .card-content { position: relative; z-index: 2; }
+        .nav-links { display: flex; gap: 2.5rem; list-style: none; align-items: center; }
+        .nav-links a { font-size: 0.9rem; font-weight: 600; color: var(--text-muted); text-decoration: none; text-transform: uppercase; letter-spacing: 1px; transition: color 0.3s; }
+        .nav-links a:hover { color: var(--text-primary); }
         
-        .card-tags { display: flex; gap: 0.5rem; flex-wrap: wrap; margin-bottom: 1.5rem; }
-        .card-tag {
-            font-family: var(--mono); font-size: 0.75rem; letter-spacing: 1px;
-            text-transform: uppercase; color: var(--bg); background: var(--accent);
-            padding: 0.3rem 0.8rem; border-radius: 99px; font-weight: 700;
+        .theme-toggle {
+            background: transparent; border: 1px solid var(--border);
+            color: var(--text-primary); width: 40px; height: 40px;
+            border-radius: 50%; display: flex; align-items: center; justify-content: center;
+            cursor: pointer; transition: 0.3s;
+        }
+        .theme-toggle:hover { background: var(--text-primary); color: var(--bg-main); }
+        [data-theme="dark"] .icon-sun { display: block; }
+        [data-theme="dark"] .icon-moon { display: none; }
+        [data-theme="light"] .icon-sun { display: none; }
+        [data-theme="light"] .icon-moon { display: block; }
+
+        /* HERO SECTION (Split Layout with Profile Image) */
+        .hero {
+            min-height: 100vh; display: grid; grid-template-columns: 1.2fr 0.8fr;
+            gap: 4rem; align-items: center; padding-top: 6rem;
+        }
+        .hero-label { font-family: var(--font-heading); font-size: 1rem; color: var(--accent); text-transform: uppercase; letter-spacing: 2px; margin-bottom: 1rem; font-weight: 700;}
+        .hero-title { font-size: clamp(3.5rem, 6vw, 5.5rem); font-weight: 800; line-height: 1.1; margin-bottom: 1.5rem; }
+        .hero-desc { font-size: 1.2rem; color: var(--text-muted); margin-bottom: 2.5rem; max-width: 600px; line-height: 1.8; }
+        
+        .btn-primary {
+            display: inline-flex; align-items: center; gap: 0.8rem;
+            padding: 1rem 2.5rem; background: var(--text-primary); color: var(--bg-main);
+            border-radius: 999px; font-weight: 700; text-decoration: none; transition: 0.3s;
+            font-family: var(--font-body);
+        }
+        .btn-primary:hover { transform: translateY(-3px); box-shadow: 0 10px 20px rgba(0, 240, 255, 0.2); }
+
+        .hero-image-container { position: relative; display: flex; justify-content: center; align-items: center; }
+        .profile-img {
+            width: 100%; max-width: 400px; aspect-ratio: 4/5; object-fit: cover;
+            border-radius: 24px; border: 1px solid var(--border);
+            box-shadow: var(--glass-shadow); position: relative; z-index: 2;
+        }
+        .img-glow {
+            position: absolute; inset: -20px; background: radial-gradient(circle, var(--accent-glow) 0%, transparent 70%);
+            z-index: 1; filter: blur(30px); opacity: 0.6;
         }
 
-        .card-num { font-family: var(--mono); font-size: 0.85rem; color: var(--muted); margin-bottom: 0.5rem; }
-        .card-title { font-family: var(--display); font-size: 2.2rem; line-height: 1.2; margin-bottom: 1rem; font-weight: 700;}
-        .card-desc { font-size: 1rem; color: var(--muted); line-height: 1.6; }
+        /* SECTION HEADERS */
+        .section-header { margin-bottom: 4rem; display: flex; align-items: baseline; gap: 1rem; }
+        .section-num { font-family: var(--font-heading); font-size: 1.2rem; color: var(--accent); font-weight: 700; }
+        .section-title { font-size: clamp(2.5rem, 5vw, 4rem); font-weight: 700; }
+
+        /* BENTO PROJECTS */
+        .bento-grid { display: grid; grid-template-columns: repeat(12, 1fr); grid-auto-rows: 350px; gap: 1.5rem; }
+        .bento-card {
+            background: var(--surface); border: 1px solid var(--border);
+            border-radius: 24px; padding: 2.5rem; text-decoration: none; color: var(--text-primary);
+            transition: transform 0.4s, border-color 0.4s; position: relative; overflow: hidden;
+            display: flex; flex-direction: column; justify-content: flex-end;
+        }
+        .bento-card:hover { transform: translateY(-8px); border-color: var(--accent); }
+        .bento-card.span-7 { grid-column: span 7; }
+        .bento-card.span-5 { grid-column: span 5; }
+        .bento-card.span-4 { grid-column: span 4; }
+        .bento-card.span-8 { grid-column: span 8; }
+
+        /* Safe Image Layering for Projects */
+        .bento-bg {
+            position: absolute; inset: 0; background-size: cover; background-position: center;
+            opacity: 0.3; transition: transform 0.6s, opacity 0.4s; z-index: 1;
+            filter: grayscale(80%); /* Gives it a sleek, engineering watermark look */
+        }
+        .bento-card::before {
+            content: ''; position: absolute; inset: 0;
+            background: linear-gradient(to top, var(--bg-main) 10%, transparent 100%);
+            z-index: 2; /* Dark gradient at the bottom so text is perfectly readable */
+        }
+        .bento-card:hover .bento-bg { transform: scale(1.05); opacity: 0.5; filter: grayscale(0%); }
+
+        .bento-content { position: relative; z-index: 3; }
+        .card-tags { display: flex; gap: 0.6rem; flex-wrap: wrap; margin-bottom: 1rem; }
+        .card-tag { font-family: var(--font-heading); font-size: 0.8rem; background: var(--accent); color: #000; padding: 0.3rem 0.8rem; border-radius: 99px; font-weight: 700; text-transform: uppercase; }
+        .card-title { font-size: 2.2rem; font-weight: 700; margin-bottom: 0.5rem; line-height: 1.1; }
+        .card-desc { font-size: 1.1rem; color: var(--text-muted); line-height: 1.6; }
 
         /* TIMELINE */
-        .timeline-wrap { display: grid; grid-template-columns: 1fr 2fr; gap: 6rem; }
-        .timeline-nav p { font-family: var(--mono); font-size: 1rem; color: var(--muted); line-height: 1.8; }
-        .timeline { display: flex; flex-direction: column; }
-        .tl-item {
+        .timeline-wrap { display: grid; grid-template-columns: 1fr 2fr; gap: 4rem; }
+        .timeline-intro { font-size: 1.2rem; color: var(--text-muted); line-height: 1.8; }
+        .timeline-item {
             padding: 3rem; background: var(--surface); border: 1px solid var(--border);
-            border-radius: 24px; margin-bottom: 1.5rem; backdrop-filter: blur(12px);
-            transition: border-color 0.3s;
+            border-radius: 24px; margin-bottom: 1.5rem; transition: border-color 0.3s;
         }
-        .tl-item:hover { border-color: var(--accent); }
-        .tl-year { font-family: var(--mono); font-size: 1rem; color: var(--accent); font-weight: 700; margin-bottom: 1rem; }
-        .tl-role { font-family: var(--display); font-size: 2rem; line-height: 1; margin-bottom: 0.5rem; font-weight: 700;}
-        .tl-company { font-family: var(--mono); font-size: 0.9rem; color: var(--muted); margin-bottom: 1.5rem; }
-        .tl-list { list-style: none; display: flex; flex-direction: column; gap: 0.8rem; }
-        .tl-list li { font-size: 1rem; color: var(--text); display: flex; gap: 0.75rem; }
-        .tl-list li::before { content: '▹'; color: var(--accent); }
+        .timeline-item:hover { border-color: var(--accent); }
+        .tl-year { font-family: var(--font-heading); font-size: 1.1rem; color: var(--accent); font-weight: 700; margin-bottom: 0.5rem; }
+        .tl-role { font-size: 2rem; font-weight: 700; margin-bottom: 0.5rem; }
+        .tl-company { font-size: 1.1rem; color: var(--text-muted); margin-bottom: 1.5rem; font-weight: 500;}
+        .tl-list { list-style: none; display: flex; flex-direction: column; gap: 0.8rem; padding-left: 0;}
+        .tl-list li { font-size: 1.1rem; color: var(--text-muted); display: flex; gap: 0.8rem; line-height: 1.6;}
+        .tl-list li::before { content: '▹'; color: var(--accent); font-weight: bold;}
 
         /* SKILLS */
         .skills-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.5rem; }
-        .skill-cell { background: var(--surface); border: 1px solid var(--border); padding: 2rem; border-radius: 24px; backdrop-filter: blur(12px); }
-        .skill-cell-label { font-family: var(--mono); font-size: 0.9rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--accent); margin-bottom: 1.5rem; font-weight: 700;}
-        .skill-items { display: flex; flex-direction: column; gap: 0.8rem; }
-        .skill-item { font-size: 0.95rem; color: var(--text); display: flex; align-items: center; gap: 0.6rem; }
+        .skill-cell { background: var(--surface); border: 1px solid var(--border); padding: 2.5rem; border-radius: 24px; }
+        .skill-title { font-family: var(--font-heading); font-size: 1.2rem; color: var(--accent); margin-bottom: 1.5rem; font-weight: 700;}
+        .skill-list { display: flex; flex-direction: column; gap: 1rem; }
+        .skill-list div { font-size: 1.1rem; color: var(--text-primary); display: flex; align-items: center; gap: 0.6rem; }
+        .skill-list div::before { content: ''; width: 6px; height: 6px; background: var(--text-muted); border-radius: 50%; }
 
         /* FOOTER */
-        footer { padding: 4rem 3rem; display: flex; align-items: center; justify-content: space-between; border-top: 1px solid var(--border); }
-        .footer-name { font-family: var(--display); font-size: 2.5rem; color: var(--text); font-weight: 700;}
-        .footer-links { display: flex; gap: 2rem; }
-        .footer-links a { font-family: var(--mono); font-size: 0.9rem; color: var(--muted); text-decoration: none; transition: color 0.2s; }
+        footer { padding: 4rem 0; border-top: 1px solid var(--border); display: flex; justify-content: space-between; align-items: center; }
+        .footer-logo { font-family: var(--font-heading); font-size: 2rem; font-weight: 700; }
+        .footer-links a { color: var(--text-muted); text-decoration: none; font-size: 1.1rem; margin-left: 2rem; font-weight: 500; transition: color 0.3s;}
         .footer-links a:hover { color: var(--accent); }
 
-        /* Cyberpunk Scramble Font */
-        .scramble-text { font-family: monospace; }
-
         @media (max-width: 1024px) {
-            .hero { grid-template-columns: 1fr; padding-top: 8rem; }
-            .project-card.span-7, .project-card.span-5, .project-card.span-4, .project-card.span-8 { grid-column: span 12; }
-            .timeline-wrap { grid-template-columns: 1fr; gap: 2rem; }
+            .hero { grid-template-columns: 1fr; text-align: center; padding-top: 8rem; }
+            .hero-label { justify-content: center; }
+            .hero-desc { margin: 0 auto 2.5rem auto; }
+            .bento-card.span-7, .bento-card.span-5, .bento-card.span-4, .bento-card.span-8 { grid-column: span 12; }
+            .timeline-wrap { grid-template-columns: 1fr; }
             .skills-grid { grid-template-columns: repeat(2, 1fr); }
-            nav { padding: 1.25rem 1.5rem; }
-            section { padding: 4rem 1.5rem; }
+            nav { padding: 1rem 1.5rem; }
+            .nav-links { display: none; } /* Hide links on mobile, keep toggle */
         }
         @media (max-width: 600px) {
-            .nav-links { display: none; }
-            .hero-stats { grid-template-columns: 1fr; }
             .skills-grid { grid-template-columns: 1fr; }
+            footer { flex-direction: column; gap: 2rem; text-align: center; }
+            .footer-links a { margin: 0 1rem; }
         }
     </style>
 </head>
-<body>
+<body data-theme="dark">
 
-<canvas id="bg-canvas"></canvas>
+    <canvas id="bg-canvas"></canvas>
+    <div class="noise-overlay"></div>
 
-<div class="cursor" id="cursor"></div>
-<div class="cursor-ring" id="cursorRing"></div>
-
-<nav>
-    <div class="nav-logo">GK<span>.</span>ENG</div>
-    <ul class="nav-links">
-        <li><a href="#projects">Projects</a></li>
-        <li><a href="#career">Career</a></li>
-        <li><a href="#skills">Arsenal</a></li>
-    </ul>
-</nav>
-
-<section class="hero">
-    <div class="hero-left">
-        <div class="hero-label scramble-text" data-text="Melbourne VIC • Telecom • Civil">Melbourne VIC • Telecom • Civil</div>
-        <h1 class="hero-title">
-            <span class="outline">GANESH</span><br>
-            <span class="scramble-text" data-text="KALAL">KALAL</span>
-        </h1>
-    </div>
-
-    <div class="hero-right">
-        <p class="hero-desc">
-            Delivering Tier-1 projects with structural precision. Specialising in 5G rollouts, statutory approvals, industrial closures, and complex brownfield execution.
-        </p>
-
-        <div class="hero-stats">
-            <div class="stat">
-                <div class="stat-num">150+</div>
-                <div class="stat-label">Telecom Sites</div>
-            </div>
-            <div class="stat">
-                <div class="stat-num">$100M+</div>
-                <div class="stat-label">Portfolio Value</div>
-            </div>
-            <div class="stat">
-                <div class="stat-num">Zero</div>
-                <div class="stat-label">QA Defects</div>
-            </div>
+    <nav>
+        <div class="nav-logo">GK<span>.</span>ENG</div>
+        <div class="nav-links">
+            <a href="#projects">Projects</a>
+            <a href="#career">Career</a>
+            <a href="#skills">Competencies</a>
         </div>
-    </div>
-</section>
+        <button class="theme-toggle" id="themeBtn" aria-label="Toggle Theme">
+            <i data-lucide="sun" class="icon-sun"></i>
+            <i data-lucide="moon" class="icon-moon"></i>
+        </button>
+    </nav>
 
-<section id="projects">
-    <div class="section-header">
-        <span class="section-num">01</span>
-        <h2 class="section-title scramble-text" data-text="Key Projects">Key Projects</h2>
-    </div>
+    <div class="wrap">
+        <section class="hero">
+            <div class="hero-text">
+                <div class="hero-label">Melbourne VIC • Civil Infrastructure</div>
+                <h1 class="hero-title">
+                    <span class="outline">GANESH</span><br>
+                    KALAL
+                </h1>
+                <p class="hero-desc">
+                    Project Engineer delivering Tier-1 infrastructure with structural precision. Specialising in 5G rollouts, statutory approvals, industrial closures, and complex brownfield execution.
+                </p>
+                <a href="#projects" class="btn-primary">Explore Projects <i data-lucide="arrow-down"></i></a>
+            </div>
+            <div class="hero-image-container">
+                <div class="img-glow"></div>
+                <img src="profile.png" alt="Ganesh Kalal" class="profile-img" onerror="this.style.display='none'">
+            </div>
+        </section>
 
-    <div class="projects-grid">
-        <a href="#" class="project-card span-7">
-            <div class="card-img" style="background-image: url('https://images.unsplash.com/photo-1544006659-f0b21884ce1d?auto=format&fit=crop&w=1200&q=80');"></div>
-            <div class="card-content">
-                <div class="card-tags">
-                    <span class="card-tag">Telecom</span>
-                    <span class="card-tag">Structural</span>
+        <section id="projects">
+            <div class="section-header">
+                <span class="section-num">01 //</span>
+                <h2 class="section-title">Key Projects</h2>
+            </div>
+
+            <div class="bento-grid">
+                <a href="#" class="bento-card span-7">
+                    <div class="bento-bg" style="background-image: url('https://images.unsplash.com/photo-1544006659-f0b21884ce1d?auto=format&fit=crop&w=1200&q=80');"></div>
+                    <div class="bento-content">
+                        <div class="card-tags">
+                            <span class="card-tag">Telecom</span>
+                            <span class="card-tag">Structural</span>
+                        </div>
+                        <h3 class="card-title">National 5G Rollout</h3>
+                        <p class="card-desc">Delivered 150+ lattice tower and pole upgrades for Indara's national 5G expansion, ensuring full AS1170.2 structural compliance.</p>
+                    </div>
+                </a>
+
+                <a href="#" class="bento-card span-5">
+                    <div class="bento-bg" style="background-image: url('https://images.unsplash.com/photo-1534398079543-7ae6d016b86c?auto=format&fit=crop&w=800&q=80');"></div>
+                    <div class="bento-content">
+                        <div class="card-tags">
+                            <span class="card-tag">Industrial</span>
+                            <span class="card-tag">Demolition</span>
+                        </div>
+                        <h3 class="card-title">Tier-1 Industrial Closures</h3>
+                        <p class="card-desc">End-to-end delivery involving massive brownfield deconstruction scopes and 142,000 tonnes of steel.</p>
+                    </div>
+                </a>
+
+                <a href="#" class="bento-card span-4">
+                    <div class="bento-bg" style="background-image: url('https://images.unsplash.com/photo-1545558014-8692077e9b5c?auto=format&fit=crop&w=800&q=80');"></div>
+                    <div class="bento-content">
+                        <div class="card-tags">
+                            <span class="card-tag">Civil</span>
+                            <span class="card-tag">QA</span>
+                        </div>
+                        <h3 class="card-title">West Gate Freeway</h3>
+                        <p class="card-desc">Quality-critical infrastructure delivery ensuring VicRoads and AS 5100 compliance across major works.</p>
+                    </div>
+                </a>
+
+                <a href="#" class="bento-card span-8">
+                    <div class="bento-bg" style="background-image: url('https://images.unsplash.com/photo-1582298538104-e3facf70a256?auto=format&fit=crop&w=1200&q=80');"></div>
+                    <div class="bento-content">
+                        <div class="card-tags">
+                            <span class="card-tag">Metro</span>
+                            <span class="card-tag">Infrastructure</span>
+                        </div>
+                        <h3 class="card-title">Mumbai Metro Lines 4 & 5</h3>
+                        <p class="card-desc">Civil Site Engineer supporting independent verification and quality assurance on elevated viaduct construction.</p>
+                    </div>
+                </a>
+            </div>
+        </section>
+
+        <section id="career">
+            <div class="section-header">
+                <span class="section-num">02 //</span>
+                <h2 class="section-title">Career Trajectory</h2>
+            </div>
+
+            <div class="timeline-wrap">
+                <div class="timeline-intro">
+                    <p>Four years of progressive responsibility across structural, civil, and industrial engineering disciplines. Each role building on the last — from graduate designer to full project accountability.</p>
                 </div>
-                <div class="card-num">Victoria | 2023 - 2024 | $50M</div>
-                <h3 class="card-title">National 5G Rollout</h3>
-                <p class="card-desc">Delivered 150+ lattice tower and pole upgrades for Indara's national 5G expansion, ensuring full AS1170.2 structural compliance across diverse site conditions.</p>
-            </div>
-        </a>
 
-        <a href="#" class="project-card span-5">
-            <div class="card-img" style="background-image: url('https://images.unsplash.com/photo-1534398079543-7ae6d016b86c?auto=format&fit=crop&w=800&q=80');"></div>
-            <div class="card-content">
-                <div class="card-tags">
-                    <span class="card-tag">Industrial</span>
-                    <span class="card-tag">Demolition</span>
+                <div class="timeline">
+                    <div class="timeline-item">
+                        <div class="tl-year">03/2024 — Present</div>
+                        <div class="tl-role">Project Engineer</div>
+                        <div class="tl-company">Liberty Industrial | Altona VIC / Gove NT</div>
+                        <ul class="tl-list">
+                            <li>End-to-end delivery of $100M+ industrial decommissioning and demolition projects.</li>
+                            <li>Administered variations totalling $8M+, progress claims, and EOT events.</li>
+                            <li>Coordinated EPA and WorkSafe statutory approvals across multiple jurisdictions.</li>
+                        </ul>
+                    </div>
+
+                    <div class="timeline-item">
+                        <div class="tl-year">04/2023 — 03/2024</div>
+                        <div class="tl-role">Structural Project Engineer</div>
+                        <div class="tl-company">Indara | Melbourne VIC</div>
+                        <ul class="tl-list">
+                            <li>Delivered 150+ telecom infrastructure upgrades as part of a national 5G expansion.</li>
+                            <li>Managed civil interfaces for foundations, fibre backhaul, and ground installations.</li>
+                            <li>Ensured AS1170.2 wind code compliance across lattice tower structures.</li>
+                        </ul>
+                    </div>
+
+                    <div class="timeline-item">
+                        <div class="tl-year">11/2021 — 03/2023</div>
+                        <div class="tl-role">Graduate Structural Engineer</div>
+                        <div class="tl-company">Clive Steele Partners | Clayton VIC</div>
+                        <ul class="tl-list">
+                            <li>Designed steel framing and reinforced concrete structures to AS 4100 and AS 3600.</li>
+                            <li>Conducted site inspections and signed off QA hold points on infrastructure projects.</li>
+                        </ul>
+                    </div>
                 </div>
-                <div class="card-num">VIC & NT | 2024 - Present | $365M+</div>
-                <h3 class="card-title">Tier-1 Industrial Closures</h3>
-                <p class="card-desc">End-to-end delivery at Liberty Industrial involving massive brownfield deconstruction scopes, handling 142,000 tonnes of steel.</p>
             </div>
-        </a>
+        </section>
 
-        <a href="#" class="project-card span-4">
-            <div class="card-img" style="background-image: url('https://images.unsplash.com/photo-1545558014-8692077e9b5c?auto=format&fit=crop&w=800&q=80');"></div>
-            <div class="card-content">
-                <div class="card-tags">
-                    <span class="card-tag">Civil</span>
-                    <span class="card-tag">QA</span>
+        <section id="skills">
+            <div class="section-header">
+                <span class="section-num">03 //</span>
+                <h2 class="section-title">Core Competencies</h2>
+            </div>
+
+            <div class="skills-grid">
+                <div class="skill-cell">
+                    <h3 class="skill-title">Structural</h3>
+                    <div class="skill-list">
+                        <div>AS1170.2 Wind Design</div>
+                        <div>AS 4100 Steel</div>
+                        <div>AS 3600 Concrete</div>
+                        <div>Lattice Tower Assessment</div>
+                    </div>
                 </div>
-                <div class="card-num">Melbourne, VIC | 2022 - 2023</div>
-                <h3 class="card-title">West Gate Freeway</h3>
-                <p class="card-desc">Quality-critical infrastructure delivery ensuring VicRoads and AS 5100 compliance across major freeway works.</p>
-            </div>
-        </a>
-
-        <a href="#" class="project-card span-8">
-            <div class="card-img" style="background-image: url('https://images.unsplash.com/photo-1582298538104-e3facf70a256?auto=format&fit=crop&w=1200&q=80');"></div>
-            <div class="card-content">
-                <div class="card-tags">
-                    <span class="card-tag">Metro</span>
-                    <span class="card-tag">Infrastructure</span>
+                <div class="skill-cell">
+                    <h3 class="skill-title">Civil & Infrastructure</h3>
+                    <div class="skill-list">
+                        <div>AS 5100 Bridges</div>
+                        <div>VicRoads Standards</div>
+                        <div>Elevated Viaducts</div>
+                        <div>QA Hold Points</div>
+                    </div>
                 </div>
-                <div class="card-num">Mumbai, India | 2018 - 2019</div>
-                <h3 class="card-title">Mumbai Metro Lines 4 & 5</h3>
-                <p class="card-desc">Civil Site Engineer supporting independent verification and quality assurance on elevated viaduct construction — complex, high-stakes urban rail infrastructure.</p>
+                <div class="skill-cell">
+                    <h3 class="skill-title">Project Management</h3>
+                    <div class="skill-list">
+                        <div>Variation Administration</div>
+                        <div>EOT Management</div>
+                        <div>Programme Control</div>
+                        <div>Subcontractor Mgt.</div>
+                    </div>
+                </div>
+                <div class="skill-cell">
+                    <h3 class="skill-title">Regulatory</h3>
+                    <div class="skill-list">
+                        <div>EPA Approvals</div>
+                        <div>WorkSafe Victoria</div>
+                        <div>Council DA Process</div>
+                        <div>Risk Assessment</div>
+                    </div>
+                </div>
             </div>
-        </a>
-    </div>
-</section>
+        </section>
 
-<section id="career">
-    <div class="section-header">
-        <span class="section-num">02</span>
-        <h2 class="section-title scramble-text" data-text="Career Trajectory">Career Trajectory</h2>
-    </div>
-
-    <div class="timeline-wrap">
-        <div class="timeline-nav">
-            <p>Years of progressive responsibility across structural, civil, and industrial engineering disciplines. Each role building on the last — from graduate designer to full project accountability.</p>
-        </div>
-
-        <div class="timeline">
-            <div class="tl-item">
-                <div class="tl-year">03/2024 — Present</div>
-                <div class="tl-role">Project Engineer</div>
-                <div class="tl-company">Liberty Industrial | Altona VIC / Gove NT</div>
-                <ul class="tl-list">
-                    <li>End-to-end delivery of $100M+ industrial decommissioning and demolition projects.</li>
-                    <li>Administered variations totalling $8M+, progress claims, and EOT events.</li>
-                    <li>Managed subcontractor interfaces, programme controls, and client reporting.</li>
-                </ul>
+        <footer>
+            <div class="footer-logo">G.KALAL</div>
+            <div class="footer-links">
+                <a href="mailto:ganesh.r.kalal24@gmail.com">Email Me</a>
+                <a href="https://www.linkedin.com/in/ganesh-kalal/" target="_blank">LinkedIn</a>
             </div>
-
-            <div class="tl-item">
-                <div class="tl-year">04/2023 — 03/2024</div>
-                <div class="tl-role">Structural Project Engineer</div>
-                <div class="tl-company">Indara | Melbourne VIC</div>
-                <ul class="tl-list">
-                    <li>Delivered 150+ telecom infrastructure upgrades as part of a national 5G expansion.</li>
-                    <li>Managed civil interfaces for foundations, fibre backhaul, and ground installations.</li>
-                    <li>Ensured AS1170.2 wind code compliance across lattice tower structures.</li>
-                </ul>
-            </div>
-
-            <div class="tl-item">
-                <div class="tl-year">11/2021 — 03/2023</div>
-                <div class="tl-role">Graduate Structural Engineer</div>
-                <div class="tl-company">Clive Steele Partners | Clayton VIC</div>
-                <ul class="tl-list">
-                    <li>Designed steel framing and reinforced concrete structures to AS 4100 and AS 3600.</li>
-                    <li>Conducted site inspections and signed off QA hold points on infrastructure projects.</li>
-                </ul>
-            </div>
-        </div>
-    </div>
-</section>
-
-<section id="skills">
-    <div class="section-header">
-        <span class="section-num">03</span>
-        <h2 class="section-title scramble-text" data-text="Core Competencies">Core Competencies</h2>
+        </footer>
     </div>
 
-    <div class="skills-grid">
-        <div class="skill-cell">
-            <div class="skill-cell-label">Structural</div>
-            <div class="skill-items">
-                <div class="skill-item">AS1170.2 Wind Design</div>
-                <div class="skill-item">AS 4100 Steel</div>
-                <div class="skill-item">AS 3600 Concrete</div>
-                <div class="skill-item">Lattice Tower Assessment</div>
-            </div>
-        </div>
-        <div class="skill-cell">
-            <div class="skill-cell-label">Civil & Infrastructure</div>
-            <div class="skill-items">
-                <div class="skill-item">AS 5100 Bridges</div>
-                <div class="skill-item">VicRoads Standards</div>
-                <div class="skill-item">Elevated Viaducts</div>
-                <div class="skill-item">QA Hold Points</div>
-            </div>
-        </div>
-        <div class="skill-cell">
-            <div class="skill-cell-label">Project Management</div>
-            <div class="skill-items">
-                <div class="skill-item">Variation Administration</div>
-                <div class="skill-item">EOT Management</div>
-                <div class="skill-item">Programme Control</div>
-                <div class="skill-item">Subcontractor Mgt.</div>
-            </div>
-        </div>
-        <div class="skill-cell">
-            <div class="skill-cell-label">Regulatory</div>
-            <div class="skill-items">
-                <div class="skill-item">EPA Approvals</div>
-                <div class="skill-item">WorkSafe Victoria</div>
-                <div class="skill-item">Council DA Process</div>
-                <div class="skill-item">Risk Assessment</div>
-            </div>
-        </div>
-    </div>
-</section>
+    <script>
+        // 1. Initialize Icons
+        lucide.createIcons();
 
-<footer>
-    <div class="footer-name">GANESH KALAL</div>
-    <div class="footer-links">
-        <a href="mailto:ganesh.r.kalal24@gmail.com">ganesh.r.kalal24@gmail.com</a>
-        <a href="https://www.linkedin.com/in/ganesh-kalal/" target="_blank">LinkedIn</a>
-    </div>
-</footer>
+        // 2. Light / Dark Mode Toggle
+        const themeBtn = document.getElementById('themeBtn');
+        const currentTheme = localStorage.getItem('theme') || 'dark';
+        document.body.setAttribute('data-theme', currentTheme);
 
-<script>
-    // 1. CUSTOM CURSOR
-    const cursor = document.getElementById('cursor');
-    const ring = document.getElementById('cursorRing');
-    let mx = 0, my = 0, rx = 0, ry = 0;
-
-    document.addEventListener('mousemove', e => {
-        mx = e.clientX; my = e.clientY;
-        cursor.style.left = mx + 'px';
-        cursor.style.top = my + 'px';
-    });
-
-    function animateRing() {
-        rx += (mx - rx) * 0.15;
-        ry += (my - ry) * 0.15;
-        ring.style.left = rx + 'px';
-        ring.style.top = ry + 'px';
-        requestAnimationFrame(animateRing);
-    }
-    animateRing();
-
-    document.querySelectorAll('a, button, .project-card, .tl-item').forEach(el => {
-        el.addEventListener('mouseenter', () => ring.classList.add('hover'));
-        el.addEventListener('mouseleave', () => ring.classList.remove('hover'));
-    });
-
-    // 2. CYBERPUNK TEXT SCRAMBLE
-    const chars = '!<>-_\\\\/[]{}—=+*^?#________';
-    function scramble(el) {
-        const original = el.getAttribute('data-text');
-        if(!original) return;
-        let iter = 0; const maxIter = 15;
-        const interval = setInterval(() => {
-            el.innerText = original.split('').map((c, i) => {
-                if(c === ' ') return ' ';
-                if(i < (iter/maxIter)*original.length) return c;
-                return chars[Math.floor(Math.random() * chars.length)];
-            }).join('');
-            iter++;
-            if(iter > maxIter) clearInterval(interval);
-        }, 40);
-    }
-
-    const observer = new IntersectionObserver(entries => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                if(entry.target.classList.contains('scramble-text')) scramble(entry.target);
-                observer.unobserve(entry.target);
-            }
+        themeBtn.addEventListener('click', () => {
+            let theme = document.body.getAttribute('data-theme');
+            let newTheme = theme === 'dark' ? 'light' : 'dark';
+            document.body.setAttribute('data-theme', newTheme);
+            localStorage.setItem('theme', newTheme);
         });
-    }, { threshold: 0.5 });
 
-    document.querySelectorAll('.scramble-text').forEach(el => observer.observe(el));
+        // 3. FIBER OPTIC DATA STREAM CANVAS BACKGROUND (Recreates the video look)
+        const canvas = document.getElementById('bg-canvas');
+        const ctx = canvas.getContext('2d');
+        let width, height;
 
-    // 3. FIBER OPTIC DATA STREAM BACKGROUND (Replaces the broken video)
-    const canvas = document.getElementById('bg-canvas');
-    const ctx = canvas.getContext('2d');
-    let w, h;
-    
-    function resize() {
-        w = canvas.width = window.innerWidth;
-        h = canvas.height = window.innerHeight;
-    }
-    window.addEventListener('resize', resize);
-    resize();
-
-    class Particle {
-        constructor() {
-            this.x = Math.random() * w;
-            this.y = Math.random() * h;
-            // Particles flow upwards like data streams
-            this.speedY = -(Math.random() * 2 + 0.5);
-            this.size = Math.random() * 1.5 + 0.5;
-            this.alpha = Math.random() * 0.5 + 0.1;
+        function resizeCanvas() {
+            width = canvas.width = window.innerWidth;
+            height = canvas.height = window.innerHeight;
         }
-        update() {
-            this.y += this.speedY;
-            // Slight horizontal wave motion
-            this.x += Math.sin(this.y * 0.01) * 0.5;
+        window.addEventListener('resize', resizeCanvas);
+        resizeCanvas();
+
+        // Particles for the glowing dust effect
+        const particles = [];
+        for(let i=0; i<80; i++) {
+            particles.push({
+                x: Math.random() * width,
+                y: Math.random() * height,
+                radius: Math.random() * 2 + 0.5,
+                speedY: -(Math.random() * 1.5 + 0.5),
+                alpha: Math.random() * 0.5 + 0.1
+            });
+        }
+
+        // Lines for the High-Speed Data Transfer effect (from your video attachment)
+        const lines = [];
+        for(let i=0; i<30; i++) {
+            lines.push({
+                x: Math.random() * width,
+                y: Math.random() * height,
+                length: Math.random() * 100 + 50,
+                speedY: -(Math.random() * 5 + 3), // Move up fast
+                alpha: Math.random() * 0.3 + 0.1
+            });
+        }
+
+        function drawBackground() {
+            // Check theme to adjust background color
+            const isLight = document.body.getAttribute('data-theme') === 'light';
             
-            if (this.y < 0) {
-                this.y = h;
-                this.x = Math.random() * w;
-            }
-        }
-        draw() {
-            ctx.fillStyle = `rgba(0, 240, 255, ${this.alpha})`;
-            ctx.beginPath();
-            ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
-            ctx.fill();
-        }
-    }
+            // Clear screen with a slight trail effect
+            ctx.fillStyle = isLight ? 'rgba(248, 250, 252, 0.3)' : 'rgba(2, 3, 8, 0.3)';
+            ctx.fillRect(0, 0, width, height);
 
-    const particles = Array.from({ length: 150 }, () => new Particle());
+            const glowColor = isLight ? '0, 150, 255' : '0, 240, 255'; // Cyan glow
 
-    function animateBg() {
-        // Deep space dark background with slight trailing effect
-        ctx.fillStyle = 'rgba(2, 3, 8, 0.3)';
-        ctx.fillRect(0, 0, w, h);
-        
-        particles.forEach(p => {
-            p.update();
-            p.draw();
-        });
-        requestAnimationFrame(animateBg);
-    }
-    animateBg();
-</script>
+            // Draw Data Lines (Like Video 3)
+            lines.forEach(line => {
+                line.y += line.speedY;
+                if (line.y + line.length < 0) {
+                    line.y = height + line.length;
+                    line.x = Math.random() * width;
+                }
+                
+                const grad = ctx.createLinearGradient(line.x, line.y, line.x, line.y + line.length);
+                grad.addColorStop(0, `rgba(${glowColor}, ${line.alpha})`);
+                grad.addColorStop(1, `rgba(${glowColor}, 0)`);
+                
+                ctx.beginPath();
+                ctx.strokeStyle = grad;
+                ctx.lineWidth = 2;
+                ctx.moveTo(line.x, line.y);
+                ctx.lineTo(line.x, line.y + line.length);
+                ctx.stroke();
+            });
+
+            // Draw Drifting Particles (Like Video 1)
+            particles.forEach(p => {
+                p.y += p.speedY;
+                p.x += Math.sin(p.y * 0.01) * 0.5; // Slight wave motion
+                
+                if (p.y < 0) {
+                    p.y = height;
+                    p.x = Math.random() * width;
+                }
+
+                ctx.beginPath();
+                ctx.fillStyle = `rgba(${glowColor}, ${p.alpha})`;
+                ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
+                ctx.fill();
+            });
+
+            requestAnimationFrame(drawBackground);
+        }
+        drawBackground();
+    </script>
 </body>
 </html>
