@@ -111,6 +111,7 @@
             background: rgba(2, 3, 8, 0.85); backdrop-filter: blur(20px);
             -webkit-backdrop-filter: blur(20px);
         }
+        /* REMOVED GK.ENG */
         .nav-logo { font-family: var(--font-heading); font-size: 1.2rem; font-weight: 700; letter-spacing: 2px; }
         .nav-logo span { color: var(--accent); }
         .nav-links { display: flex; gap: 2.5rem; list-style: none; align-items: center; }
@@ -134,7 +135,8 @@
         .btn-primary {
             display: inline-flex; align-items: center; gap: 0.8rem; padding: 1rem 2.5rem;
             background: var(--text-primary); color: var(--bg-main); border-radius: 999px;
-            font-weight: 700; text-decoration: none; transition: 0.3s;
+            font-weight: 700; text-decoration: none; transition: 0.3s; cursor: pointer;
+            border: none; font-family: var(--font-body); font-size: 1rem;
         }
         @media (hover: hover) { .btn-primary:hover { transform: translateY(-3px); box-shadow: 0 10px 20px rgba(0, 240, 255, 0.2); } }
 
@@ -224,13 +226,55 @@
         .tl-list li { font-size: 1.05rem; color: var(--text-muted); display: flex; gap: 0.8rem; line-height: 1.6;}
         .tl-list li::before { content: '▹'; color: var(--accent); font-weight: bold;}
 
-        /* SKILLS */
-        .skills-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.5rem; }
-        .skill-cell { background: var(--surface); border: 1px solid var(--border); padding: 2rem; border-radius: 24px; backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);}
-        .skill-cell-label { font-family: var(--font-heading); font-size: 0.9rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--accent); margin-bottom: 1.5rem; font-weight: 700;}
-        .skill-items { display: flex; flex-direction: column; gap: 0.8rem; }
-        .skill-item { font-size: 1rem; color: var(--text-primary); display: flex; align-items: center; gap: 0.8rem; font-weight: 500;}
-        .skill-item::before { content: ''; width: 6px; height: 6px; background: var(--border); border-radius: 50%; flex-shrink: 0; }
+        /* CREDENTIALS GRID (NEW) */
+        .credentials-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 1.5rem; }
+        .cred-card { background: var(--surface); border: 1px solid var(--border); padding: 2.5rem; border-radius: 24px; backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); display: flex; flex-direction: column;}
+        .cred-title { font-family: var(--font-heading); font-size: 1.4rem; color: var(--text-primary); margin-bottom: 1.5rem; font-weight: 800; display: flex; align-items: center; gap: 0.8rem;}
+        
+        .cred-item { margin-bottom: 1.5rem; }
+        .cred-item:last-child { margin-bottom: 0; }
+        .cred-item h4 { font-size: 1.1rem; color: var(--accent); margin-bottom: 0.3rem; }
+        .cred-item p { font-size: 0.95rem; color: var(--text-muted); }
+        
+        .cred-list { list-style: none; display: flex; flex-direction: column; gap: 1rem; padding: 0;}
+        .cred-list li { display: flex; align-items: center; gap: 1rem; font-size: 1.05rem; color: var(--text-muted); font-weight: 500;}
+        .cred-list li i { color: var(--accent); }
+
+        .tags-container { display: flex; flex-wrap: wrap; gap: 0.8rem; }
+        .cert-tag { border: 1px solid var(--border); background: rgba(255,255,255,0.02); color: var(--text-primary); padding: 0.5rem 1rem; border-radius: 8px; font-size: 0.95rem; font-weight: 500; font-family: var(--font-body); display: flex; align-items: center; gap: 0.5rem;}
+        [data-theme="light"] .cert-tag { background: rgba(0,0,0,0.02); }
+
+        /* CONTACT TERMINAL (NEW) */
+        .contact-terminal {
+            background: rgba(0, 0, 0, 0.6); border: 1px solid var(--border); border-radius: 16px;
+            backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); overflow: hidden;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.5); max-width: 800px; margin: 0 auto;
+        }
+        [data-theme="light"] .contact-terminal { background: rgba(255, 255, 255, 0.8); }
+        .terminal-header {
+            background: var(--surface); padding: 1rem 1.5rem; display: flex; align-items: center; gap: 0.6rem;
+            border-bottom: 1px solid var(--border);
+        }
+        .term-dot { width: 12px; height: 12px; border-radius: 50%; }
+        .term-dot.close { background: #ff5f56; } .term-dot.min { background: #ffbd2e; } .term-dot.max { background: #27c93f; }
+        .term-title { margin-left: 1rem; font-family: var(--mono); font-size: 0.9rem; color: var(--text-muted); opacity: 0.7;}
+        
+        .terminal-body { padding: 2.5rem; }
+        .input-group { margin-bottom: 1.5rem; }
+        .input-group label { display: block; font-family: var(--mono); color: var(--accent); font-size: 0.9rem; margin-bottom: 0.5rem; font-weight: 700; letter-spacing: 1px;}
+        .input-group input, .input-group textarea {
+            width: 100%; background: transparent; border: none; border-bottom: 1px solid var(--border);
+            color: var(--text-primary); font-family: var(--mono); font-size: 1rem; padding: 0.5rem 0;
+            outline: none; transition: 0.3s; resize: vertical;
+        }
+        .input-group input:focus, .input-group textarea:focus { border-bottom-color: var(--accent); }
+        
+        .terminal-btn {
+            background: transparent; border: 1px solid var(--accent); color: var(--accent);
+            font-family: var(--mono); font-size: 1rem; font-weight: 700; padding: 1rem 2rem;
+            cursor: pointer; transition: 0.3s; width: 100%; margin-top: 1rem;
+        }
+        .terminal-btn:hover { background: var(--accent); color: #000; box-shadow: 0 0 15px var(--accent-glow); }
 
         /* FOOTER */
         footer { padding: 3rem 0; border-top: 1px solid var(--border); margin-top: 4rem; position: relative; z-index: 10; background: var(--bg-main);}
@@ -253,55 +297,34 @@
         .modal-list { list-style: none; padding-left: 0; }
         .modal-list li { position: relative; padding-left: 1.5rem; margin-bottom: 1rem; color: var(--text-muted); line-height: 1.6; font-size: 1.05rem;}
         .modal-list li::before { content: '▹'; position: absolute; left: 0; color: var(--accent); font-weight: bold;}
-        
-        .external-link-btn {
-            display: inline-flex; align-items: center; gap: 0.6rem; padding: 0.8rem 1.5rem;
-            background: var(--surface); border: 1px solid var(--border); border-radius: 8px;
-            color: var(--accent); text-decoration: none; font-weight: 600; font-size: 0.95rem;
-            transition: 0.3s; margin-top: 1rem;
-        }
-        .external-link-btn:hover { background: rgba(0, 240, 255, 0.1); border-color: var(--accent); }
 
         /* MOBILE OPTIMIZATION */
         @media (max-width: 768px) {
             nav { padding: 1rem 1.5rem; }
             .nav-links { display: none; }
-            
             .hero { grid-template-columns: 1fr; padding-top: 7rem; gap: 2rem; text-align: center; }
             .hero-label { justify-content: center; }
             .hero-title { font-size: 3rem; }
             .hero-desc { margin: 0 auto 2rem auto; font-size: 1.05rem; }
             .profile-img { max-width: 280px; } 
-            
             section { padding: 5rem 0; }
             .wrap { padding: 0 1.5rem; }
             .section-header { margin-bottom: 2rem; }
             .section-title { font-size: 2.2rem; }
-            
             .bento-card { padding: 1.5rem; min-height: 300px; }
-            .bento-card.span-7, .bento-card.span-5, .bento-card.span-4, .bento-card.span-8 { grid-column: span 12; }
-            
+            .bento-card.span-8, .bento-card.span-4 { grid-column: span 12; } 
             .timeline-wrap { grid-template-columns: 1fr; gap: 2rem; }
             .timeline-intro { position: static; font-size: 1.05rem; margin-bottom: 1rem; }
             .timeline { padding-left: 2rem; border-left: 2px solid var(--border); }
             .tl-item { padding: 1.5rem; margin-bottom: 1.5rem; }
             .tl-item::after { left: -2.6rem; top: 2rem; width: 14px; height: 14px; border-width: 2px; }
-            .tl-role { font-size: 1.5rem; }
-            .tl-list li { font-size: 1rem; }
-            
-            .skills-grid { grid-template-columns: 1fr; gap: 1rem; }
-            .skill-cell { padding: 1.5rem; }
-            
             .towers-background { height: 20vh; }
-            
             .modal-content { padding: 1.5rem; margin: 1rem; width: calc(100% - 2rem); }
-            .modal-title { font-size: 1.8rem; }
-            .modal-metrics-bar { font-size: 0.85rem; }
             .modal-split { grid-template-columns: 1fr; gap: 1.5rem; }
-            
+            .credentials-grid { grid-template-columns: 1fr; }
             footer { padding: 3rem 0; margin-top: 2rem;}
             .footer-wrap { flex-direction: column; gap: 1.5rem; text-align: center; }
-            .footer-links { display: flex; flex-direction: column; align-items: center; gap: 1rem; }
+            .footer-links { flex-direction: column; align-items: center; gap: 1rem; }
             .footer-links a { margin: 0; }
         }
     </style>
@@ -335,15 +358,17 @@
     </div>
 
     <div class="noise-overlay"></div>
+
     <div class="cursor-dot" id="cursorDot"></div>
     <div class="cursor-ring" id="cursorRing"></div>
 
     <nav>
-        <div class="nav-logo">GK<span>.</span>ENG</div>
+        <div class="nav-logo">G<span>.</span>KALAL</div>
         <ul class="nav-links">
             <li><a href="#projects">Projects</a></li>
             <li><a href="#career">Trajectory</a></li>
-            <li><a href="#skills">Competencies</a></li>
+            <li><a href="#credentials">Credentials</a></li>
+            <li><a href="#contact">Contact</a></li>
         </ul>
         <button class="theme-toggle" id="themeBtn" aria-label="Toggle Theme">
             <i data-lucide="sun" class="icon-sun"></i>
@@ -362,10 +387,11 @@
                 <p class="hero-desc fade-up" style="transition-delay: 0.2s;">
                     Delivering Tier-1 projects with structural precision. Specialising in 5G rollouts, statutory approvals, industrial closures, and complex brownfield execution across Melbourne and beyond.
                 </p>
-                <a href="#projects" class="hero-cta btn-primary fade-up" style="transition-delay: 0.3s;">
-                    View Projects
-                    <i data-lucide="arrow-down" style="width: 18px; height: 18px;"></i>
-                </a>
+                <div style="display: flex; gap: 1rem; margin-top: 2rem;">
+                    <a href="#projects" class="btn-primary fade-up" style="transition-delay: 0.3s;">
+                        View Projects <i data-lucide="arrow-down" style="width: 18px; height: 18px;"></i>
+                    </a>
+                </div>
             </div>
 
             <div class="hero-right fade-up" style="transition-delay: 0.2s;">
@@ -406,6 +432,7 @@
             </div>
 
             <div class="bento-grid fade-up" style="margin-bottom: 1.5rem;">
+                
                 <div class="bento-card span-8" data-id="p1">
                     <div class="card-img bento-bg" style="background-image: url('https://images.unsplash.com/photo-1578319439584-104c94d37305?auto=format&fit=crop&w=1200&q=80');"></div>
                     <div class="bento-content">
@@ -431,13 +458,14 @@
                         <div class="card-bottom">
                             <div class="card-num">Altona, VIC | 2024–Present | $65M</div>
                             <h3 class="card-title">ExxonMobil Refinery Decommissioning</h3>
-                            <p class="card-desc">Safe decommissioning and demolition of major refinery assets, stacks, and pipe racks.</p>
+                            <p class="card-desc">Safe decommissioning and demolition of major refinery assets and pipe racks.</p>
                         </div>
                     </div>
                 </div>
             </div>
 
             <div class="bento-grid fade-up" style="transition-delay: 0.1s;">
+                
                 <div class="bento-card span-4" data-id="p3">
                     <div class="card-img bento-bg" style="background-image: url('https://images.unsplash.com/photo-1544006659-f0b21884ce1d?auto=format&fit=crop&w=800&q=80');"></div>
                     <div class="bento-content">
@@ -463,7 +491,7 @@
                         <div class="card-bottom">
                             <div class="card-num">VIC & India | 2018–2023</div>
                             <h3 class="card-title">Major Civil Infrastructure</h3>
-                            <p class="card-desc">West Gate Freeway Upgrade & Mumbai Metro. High-stakes urban transport delivery.</p>
+                            <p class="card-desc">West Gate Freeway Upgrade & Mumbai Metro Line 4 & 5. High-stakes urban transport delivery.</p>
                         </div>
                     </div>
                 </div>
@@ -486,7 +514,7 @@
             </div>
         </section>
 
-        <section id="career" style="border-bottom: none;">
+        <section id="career">
             <div class="section-header fade-up">
                 <span class="section-num">02 //</span>
                 <h2 class="section-title scramble-text" data-text="Professional Trajectory">Professional Trajectory</h2>
@@ -498,6 +526,7 @@
                 </div>
 
                 <div class="timeline">
+                    
                     <div class="tl-item fade-up" data-id="c1">
                         <div class="tl-top">
                             <div>
@@ -572,52 +601,80 @@
                             <li>Assisted in pile integrity and dynamic load testing for deep metro foundations.</li>
                         </ul>
                     </div>
+
                 </div>
             </div>
         </section>
 
-        <section id="skills" style="border-bottom: none;">
+        <section id="credentials">
             <div class="section-header fade-up">
                 <span class="section-num">03 //</span>
-                <h2 class="section-title scramble-text" data-text="Core Competencies">Core Competencies</h2>
+                <h2 class="section-title scramble-text" data-text="Credentials & Clearances">Credentials & Clearances</h2>
             </div>
+            
+            <div class="credentials-grid fade-up">
+                <div class="cred-card">
+                    <h3 class="cred-title"><i data-lucide="graduation-cap"></i> Academic Background</h3>
+                    <div class="cred-item">
+                        <h4>Master of Engineering Science (Structural)</h4>
+                        <p>Swinburne University of Technology | 2019 - 2021</p>
+                    </div>
+                    <div class="cred-item">
+                        <h4>Bachelor of Civil Engineering</h4>
+                        <p>University of Pune, India | 2014 - 2018</p>
+                    </div>
+                </div>
+                
+                <div class="cred-card">
+                    <h3 class="cred-title"><i data-lucide="award"></i> Professional Memberships</h3>
+                    <ul class="cred-list">
+                        <li><i data-lucide="check-circle"></i> Engineers Australia (MIEAust)</li>
+                        <li><i data-lucide="check-circle"></i> Project Management Institute (PMI)</li>
+                        <li><i data-lucide="check-circle"></i> Institution of Structural Engineers</li>
+                    </ul>
+                </div>
+                
+                <div class="cred-card">
+                    <h3 class="cred-title"><i data-lucide="shield-check"></i> Site Clearances</h3>
+                    <div class="tags-container">
+                        <span class="cert-tag">White Card</span>
+                        <span class="cert-tag">Working at Heights</span>
+                        <span class="cert-tag">Asbestos Safety</span>
+                        <span class="cert-tag">Mental Health Awareness</span>
+                        <span class="cert-tag">Gen AI for PMs</span>
+                        <span class="cert-tag">Leadership Development</span>
+                    </div>
+                </div>
+            </div>
+        </section>
 
-            <div class="skills-grid">
-                <div class="skill-cell fade-up">
-                    <div class="skill-cell-label">Structural</div>
-                    <div class="skill-items">
-                        <div class="skill-item">AS1170.2 Wind Design</div>
-                        <div class="skill-item">AS 4100 Steel</div>
-                        <div class="skill-item">AS 3600 Concrete</div>
-                        <div class="skill-item">Lattice Tower Assessment</div>
-                    </div>
+        <section id="contact" style="border-bottom: none; padding-bottom: 2rem;">
+            <div class="section-header fade-up">
+                <span class="section-num">04 //</span>
+                <h2 class="section-title scramble-text" data-text="Initiate Contact">Initiate Contact</h2>
+            </div>
+            
+            <div class="contact-terminal fade-up">
+                <div class="terminal-header">
+                    <div class="term-dot close"></div>
+                    <div class="term-dot min"></div>
+                    <div class="term-dot max"></div>
+                    <div class="term-title">secure_transmission.exe</div>
                 </div>
-                <div class="skill-cell fade-up" style="transition-delay: 0.1s;">
-                    <div class="skill-cell-label">Civil & Infrastructure</div>
-                    <div class="skill-items">
-                        <div class="skill-item">AS 5100 Bridges</div>
-                        <div class="skill-item">VicRoads Standards</div>
-                        <div class="skill-item">Elevated Viaducts</div>
-                        <div class="skill-item">QA Hold Points</div>
-                    </div>
-                </div>
-                <div class="skill-cell fade-up" style="transition-delay: 0.2s;">
-                    <div class="skill-cell-label">Project Management</div>
-                    <div class="skill-items">
-                        <div class="skill-item">Variation Administration</div>
-                        <div class="skill-item">EOT Management</div>
-                        <div class="skill-item">Programme Control</div>
-                        <div class="skill-item">Subcontractor Mgt.</div>
-                    </div>
-                </div>
-                <div class="skill-cell fade-up" style="transition-delay: 0.3s;">
-                    <div class="skill-cell-label">Regulatory</div>
-                    <div class="skill-items">
-                        <div class="skill-item">EPA Approvals</div>
-                        <div class="skill-item">WorkSafe Victoria</div>
-                        <div class="skill-item">Council DA Process</div>
-                        <div class="skill-item">Risk Assessment</div>
-                    </div>
+                <div class="terminal-body">
+                    <form id="contactForm" onsubmit="sendEmail(event)">
+                        <div class="input-group">
+                            <label>> IDENTIFICATION (NAME)</label>
+                            <input type="text" id="senderName" required placeholder="Enter your name...">
+                        </div>
+                        <div class="input-group">
+                            <label>> TRANSMISSION PAYLOAD (MESSAGE)</label>
+                            <textarea id="senderMessage" rows="3" required placeholder="Type your message here..."></textarea>
+                        </div>
+                        <button type="submit" class="terminal-btn">
+                            [ SEND TRANSMISSION ]
+                        </button>
+                    </form>
                 </div>
             </div>
         </section>
@@ -651,12 +708,6 @@
                     <ul id="modalRightList" class="modal-list"></ul>
                 </div>
             </div>
-
-            <div id="modalLinksContainer" style="display: none; margin-top: 3rem; border-top: 1px solid var(--border); padding-top: 1.5rem;">
-                <h4 style="color: var(--text-primary); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 1rem; font-size: 0.9rem;">External References</h4>
-                <div id="modalLinks" style="display: flex; gap: 1rem; flex-wrap: wrap;"></div>
-            </div>
-
         </div>
     </div>
 
@@ -665,7 +716,15 @@
             // 1. ICONS
             lucide.createIcons();
 
-            // 2. NATIVE SCROLL ANIMATIONS
+            // 2. TERMINAL EMAIL FUNCTION
+            function sendEmail(e) {
+                e.preventDefault();
+                const name = document.getElementById('senderName').value;
+                const message = document.getElementById('senderMessage').value;
+                window.location.href = `mailto:ganesh.r.kalal24@gmail.com?subject=Incoming Transmission from ${encodeURIComponent(name)}&body=${encodeURIComponent(message)}`;
+            }
+
+            // 3. NATIVE SCROLL ANIMATIONS
             const observerOptions = { threshold: 0.1, rootMargin: "0px 0px -50px 0px" };
             const observer = new IntersectionObserver((entries) => {
                 entries.forEach(entry => {
@@ -696,7 +755,7 @@
 
             document.querySelectorAll('.fade-up, .scramble-text').forEach(el => observer.observe(el));
 
-            // 3. RADIATING FIBER OPTIC BACKGROUND
+            // 4. RADIATING FIBER OPTIC BACKGROUND
             const canvas = document.getElementById('bg-canvas');
             const ctx = canvas.getContext('2d');
             let w, h;
@@ -752,17 +811,14 @@
             }
             animateBg();
 
-            // 4. MODAL LOGIC WITH LINKS & DETAILED CV DATA
+            // 5. MODAL LOGIC WITH LINKS & DETAILED CV DATA
             const siteData = {
                 // PROJECTS
                 "p1": {
                     title: "Rio Tinto Bauxite Refinery Closure", tags: ["Mining", "Demolition", "Remediation"], meta: "Gove, NT | 2024 - Present | $300M+",
                     leftTitle: "Scope & Architecture", rightTitle: "Execution & Outcomes",
                     left: ["Project Engineer on Australia's largest industrial closure project.", "Prepared procurement documentation and reviewed structural design packages for AS 3600 & AS 4100 compliances.", "Supported environmental controls, risk management, and stakeholder engagement."],
-                    right: ["Delivered works to Rio Tinto's strict standards for safety and responsible site closure.", "Contributed heavily to massive mechanical and explosive demolition planning.", "Organised and executed massive scrap steel load-out logistics."],
-                    links: [
-                        { title: "Rio Tinto Recycling Record Steel", url: "https://libertyindustrial.com/" }
-                    ]
+                    right: ["Delivered works to Rio Tinto's strict standards for safety and responsible site closure.", "Contributed heavily to massive mechanical and explosive demolition planning.", "Organised and executed massive scrap steel load-out logistics."]
                 },
                 "p2": {
                     title: "ExxonMobil Refinery Decommissioning", tags: ["Oil & Gas", "Demolition"], meta: "Altona, VIC | 2024 - Present | $65M",
@@ -785,8 +841,8 @@
                 "p5": {
                     title: "Commercial Fitouts & Residential", tags: ["Commercial", "Residential", "Fitout"], meta: "Victoria | 2020 - 2021",
                     leftTitle: "Scope & Architecture", rightTitle: "Execution & Outcomes",
-                    left: ["Supported structural design and drafting for community centres, pavilions, courts and public transport assets.", "Designed stormwater drainage, OSD systems, and overall site grading.", "Drafted floor plans, connection details, and elevations for residential projects."],
-                    right: ["Delivered drainage, utilities and municipal infrastructure renewal projects in compliance with MRPV/VicRoads specifications.", "Coordinated approvals with council officers & developers; organised land surveys, Geotech, DBYD."]
+                    left: ["Structural design and drafting for retail fitouts including KFC and Hungry Jack's.", "Drafted floor plans, connection details, and elevations for residential projects."],
+                    right: ["Designed stormwater drainage, OSD systems, and overall site grading.", "Resolved compliance issues with contractors and architects, minimising delays."]
                 },
                 
                 // CAREER PATHWAY
@@ -841,22 +897,6 @@
                     document.getElementById('modalLeftList').innerHTML = data.left.map(b => `<li>${b}</li>`).join('');
                     document.getElementById('modalRightList').innerHTML = data.right.map(b => `<li>${b}</li>`).join('');
 
-                    // Handle External Links
-                    const linksContainer = document.getElementById('modalLinksContainer');
-                    const linksDiv = document.getElementById('modalLinks');
-                    if (data.links && data.links.length > 0) {
-                        linksContainer.style.display = 'block';
-                        linksDiv.innerHTML = data.links.map(l => 
-                            `<a href="${l.url}" target="_blank" class="external-link-btn">
-                                <i data-lucide="external-link" style="width: 16px; height: 16px;"></i> ${l.title}
-                            </a>`
-                        ).join('');
-                        lucide.createIcons(); // Re-render icon inside the new link
-                    } else {
-                        linksContainer.style.display = 'none';
-                        linksDiv.innerHTML = '';
-                    }
-
                     modal.classList.add('open');
                     document.body.style.overflow = 'hidden'; 
                 });
@@ -869,7 +909,7 @@
             document.getElementById('modalBackdrop').addEventListener('click', closeModal);
             document.getElementById('modalCloseBtn').addEventListener('click', closeModal);
 
-            // 5. SAFE TOUCH CURSOR
+            // 6. SAFE TOUCH CURSOR
             if(window.matchMedia("(pointer: fine)").matches) {
                 document.body.classList.add('custom-cursor-active');
                 const cursor = document.getElementById('cursorDot');
@@ -888,13 +928,13 @@
                 }
                 animateRing();
 
-                document.querySelectorAll('a, button, .bento-card, .tl-item, .modal-close').forEach(el => {
+                document.querySelectorAll('a, button, input, textarea, .bento-card, .tl-item, .modal-close').forEach(el => {
                     el.addEventListener('mouseenter', () => ring.classList.add('hover'));
                     el.addEventListener('mouseleave', () => ring.classList.remove('hover'));
                 });
             }
 
-            // 6. LIGHT / DARK MODE
+            // 7. LIGHT / DARK MODE
             const themeBtn = document.getElementById('themeBtn');
             const currentTheme = localStorage.getItem('theme') || 'dark';
             document.body.setAttribute('data-theme', currentTheme);
