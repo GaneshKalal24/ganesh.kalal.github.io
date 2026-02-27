@@ -13,201 +13,60 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
     
-    <link rel="stylesheet" href="styles.css">
-</head>
-<body data-theme="dark">
+    <style>
+        /* =========================================
+           ALL CSS STYLES ARE NOW SECURELY IN HERE
+        ========================================= */
+        :root {
+            --bg-main: #020308;
+            --bg-glass: rgba(10, 15, 25, 0.65);
+            --border-glass: rgba(255, 255, 255, 0.12);
+            --text-primary: #ffffff;
+            --text-muted: #cbd5e1; 
+            --accent: #00f0ff; 
+            --accent-dark: #0088ff; 
+            --accent-glow: rgba(0, 240, 255, 0.4);
+            --success: #10b981;
+            --glass-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.5);
+            --input-bg: rgba(255, 255, 255, 0.05);
+            --font-heading: 'Space Grotesk', sans-serif;
+            --font-body: 'Inter', sans-serif;
+            --ease-fluid: cubic-bezier(0.16, 1, 0.3, 1);
+        }
 
-    <div class="video-container">
-        <video autoplay loop muted playsinline id="bg-video">
-            <source src="./bg-video.mp4" type="video/mp4">
-        </video>
-        <div class="video-overlay"></div>
-    </div>
-    
-    <div class="noise-overlay"></div>
+        [data-theme="light"] {
+            --bg-main: #f8fafc;
+            --bg-glass: rgba(255, 255, 255, 0.85);
+            --border-glass: rgba(15, 23, 42, 0.15);
+            --text-primary: #0f172a;
+            --text-muted: #334155;
+            --accent: #0284c7; 
+            --accent-dark: #0369a1; 
+            --accent-glow: rgba(2, 132, 199, 0.2);
+            --input-bg: rgba(255,255,255,0.7);
+        }
 
-    <div class="cursor-dot" id="cursorDot"></div>
-    <div class="cursor-ring" id="cursorRing"></div>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html, body { overflow-x: hidden; width: 100%; background-color: transparent !important; }
+        body { font-family: var(--font-body); color: var(--text-primary); line-height: 1.7; -webkit-font-smoothing: antialiased; }
+        body.custom-cursor-active * { cursor: none !important; }
 
-    <nav class="floating-nav desktop-nav">
-        <div class="nav-inner glass-panel">
-            <div class="logo magnetic" data-strength="20">G<strong>K</strong></div>
-            <div class="nav-links">
-                <a href="#about" class="magnetic" data-strength="15">Profile</a>
-                <a href="#projects" class="magnetic" data-strength="15">Projects</a>
-                <a href="#career" class="magnetic" data-strength="15">Career</a>
-            </div>
-            <div class="nav-actions">
-                <button id="themeToggle" class="theme-btn magnetic" data-strength="20">
-                    <i data-lucide="sun" class="sun-icon"></i>
-                    <i data-lucide="moon" class="moon-icon"></i>
-                </button>
-                <a href="#contact" class="btn btn-primary btn-sm magnetic" data-strength="30">Connect</a>
-            </div>
-        </div>
-    </nav>
+        .wrap { max-width: 1280px; margin: 0 auto; padding: 0 2rem; position: relative; z-index: 10; }
+        .section { padding: 6rem 0; position: relative; z-index: 10; }
+        .mt-2 { margin-top: 2rem; }
+        .p-3 { padding: 2rem; }
+        .pb-large { padding-bottom: 8rem; }
 
-    <nav class="mobile-nav glass-panel">
-        <a href="#hero" class="nav-item"><i data-lucide="home"></i></a>
-        <a href="#about" class="nav-item"><i data-lucide="user"></i></a>
-        <a href="#projects" class="nav-item"><i data-lucide="briefcase"></i></a>
-        <a href="#contact" class="nav-item"><i data-lucide="mail"></i></a>
-        <button id="themeToggleMobile" class="nav-item theme-btn-mobile">
-            <i data-lucide="sun" class="sun-icon"></i>
-            <i data-lucide="moon" class="moon-icon"></i>
-        </button>
-    </nav>
+        /* VIDEO BACKGROUND SYSTEM */
+        .video-container { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; z-index: -999; overflow: hidden; background-color: #020308; }
+        .video-container video { width: 100vw; height: 100vh; object-fit: cover; opacity: 0.85; }
+        .video-overlay { position: absolute; top: 0; left: 0; width: 100vw; height: 100vh; background: linear-gradient(to bottom, rgba(2,3,8,0.2) 0%, rgba(2,3,8,0.9) 100%); pointer-events: none; z-index: 1; }
+        [data-theme="light"] .video-container video { opacity: 0.15; filter: invert(1); }
+        [data-theme="light"] .video-overlay { background: linear-gradient(to bottom, rgba(248,250,252,0.5) 0%, rgba(248,250,252,0.98) 100%); }
+        .noise-overlay { position: fixed; inset: 0; z-index: 2; pointer-events: none; opacity: 0.04; background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E"); }
 
-    <main id="main-content">
-        <section id="hero" class="hero">
-            <div class="wrap">
-                <div class="hero-grid">
-                    <div class="hero-text">
-                        <div class="hero-kicker gsap-fade-up scramble-text" data-text="Melbourne VIC • Telecom • Civil Infrastructure" id="heroPositioning">Melbourne VIC • Telecom • Civil Infrastructure</div>
-                        <h1 class="hero-title gsap-fade-up">
-                            Hi, I'm <span class="accent-text" id="heroName">Ganesh Kalal</span>.
-                        </h1>
-                        <h2 class="hero-role text-outline gsap-fade-up scramble-text" id="heroRole" data-text="Project Engineer">Project Engineer</h2>
-                        <p class="hero-subtitle gsap-fade-up" id="heroTagline">Delivering Tier-1 projects with structural precision. Specializing in 5G rollouts, statutory approvals, and complex brownfield execution.</p>
-                        <div class="hero-actions gsap-fade-up">
-                            <a href="#projects" class="btn btn-primary magnetic" data-strength="40">Explore Projects</a>
-                            <a href="https://www.linkedin.com/in/ganesh-kalal/" target="_blank" class="btn btn-ghost magnetic" data-strength="40">LinkedIn</a>
-                        </div>
-                    </div>
-                    <div class="hero-visual tilt-card gsap-fade-up">
-                        <div class="profile-frame glass-panel">
-                            <img id="heroPhoto" src="profile.png" alt="Ganesh Kalal" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
-                            <div class="fallback-avatar" style="display:none;"><i data-lucide="user" style="width: 64px; height: 64px;"></i></div>
-                            <div class="photo-glow"></div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
+        main, nav, footer, .modal { position: relative; z-index: 10; }
 
-        <section id="about" class="section">
-            <div class="wrap">
-                <div class="about-content">
-                    <div class="about-text gsap-fade-up">
-                        <h2 class="section-title scramble-text" data-text="Professional Profile">Professional Profile</h2>
-                        <p class="lead-text" id="aboutLead">Loading profile data...</p>
-                        <ul class="bullet-list" id="aboutBullets"></ul>
-                        
-                        <h4 class="sub-heading mt-2 scramble-text" data-text="Site Clearances & Logistics">Site Clearances & Logistics</h4>
-                        <div class="logistics-grid" id="logisticsGrid"></div>
-                    </div>
-                    <div class="about-stats grid-2 gsap-fade-up">
-                        <div id="statsGrid" style="display: contents;"></div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <section id="credentials" class="section">
-            <div class="wrap">
-                <h2 class="section-title gsap-fade-up scramble-text" data-text="Credentials & Arsenal">Credentials & Arsenal</h2>
-                <div class="credentials-grid gsap-fade-up">
-                    <div class="glass-panel p-3 spotlight-card">
-                        <h4 class="sub-heading"><i data-lucide="graduation-cap"></i> Academic Background</h4>
-                        <div id="educationList" class="edu-list"></div>
-                        <h4 class="sub-heading mt-2"><i data-lucide="award"></i> Professional Affiliations</h4>
-                        <div id="affiliationsList" class="affil-list"></div>
-                    </div>
-                    <div class="glass-panel p-3 spotlight-card">
-                        <h4 class="sub-heading"><i data-lucide="cpu"></i> Technical Stack</h4>
-                        <div id="techStackGrid" class="tech-stack"></div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <section id="projects" class="section">
-            <div class="wrap">
-                <div class="section-header gsap-fade-up">
-                    <h2 class="section-title scramble-text" data-text="Key Projects & Outcomes">Key Projects & Outcomes</h2>
-                    <div class="filter-chips" id="projectFilters"></div>
-                </div>
-                <div class="bento-grid" id="projectsBento"></div>
-            </div>
-        </section>
-
-        <section id="career" class="section">
-            <div class="wrap">
-                <h2 class="section-title gsap-fade-up scramble-text" data-text="Career Trajectory">Career Trajectory</h2>
-                <div class="timeline" id="careerTimeline"></div>
-            </div>
-        </section>
-
-        <section id="contact" class="section pb-large">
-            <div class="wrap">
-                <div class="contact-container glass-panel spotlight-card gsap-fade-up">
-                    <div class="contact-left">
-                        <h2 class="section-title scramble-text" style="margin-bottom: 1rem;" data-text="Initiate Contact">Initiate Contact</h2>
-                        <p class="contact-desc">Ready to deliver major infrastructure. Open to Project Engineering roles.</p>
-                        
-                        <div class="visa-badge" id="visaBadgeContact">
-                            <span class="pulse-dot"></span> <span id="visaText">Australian Permanent Resident</span>
-                        </div>
-
-                        <div class="social-links" id="socialLinks" style="margin-top: 2rem;"></div>
-                    </div>
-                    <div class="contact-right">
-                        <form class="premium-form" onsubmit="event.preventDefault(); window.location.href='mailto:ganesh.r.kalal24@gmail.com';">
-                            <div class="input-group">
-                                <input type="text" id="name" required placeholder=" ">
-                                <label for="name">Name</label>
-                            </div>
-                            <div class="input-group">
-                                <input type="email" id="email" required placeholder=" ">
-                                <label for="email">Email</label>
-                            </div>
-                            <div class="input-group">
-                                <textarea id="message" required rows="3" placeholder=" "></textarea>
-                                <label for="message">Message</label>
-                            </div>
-                            <button type="submit" class="btn btn-primary magnetic" data-strength="30">Send Transmission <i data-lucide="send" class="btn-icon-right"></i></button>
-                        </form>
-                    </div>
-                </div>
-            </div>
-        </section>
-    </main>
-
-    <footer class="premium-footer">
-        <div class="wrap footer-content">
-            <div class="footer-logo">G.KALAL</div>
-            <p id="footerText"></p>
-            <div class="footer-meta">MIEAust • Melbourne, VIC</div>
-        </div>
-    </footer>
-
-    <div id="projectModal" class="modal" aria-hidden="true">
-        <div class="modal-backdrop" id="modalBackdrop"></div>
-        <div class="modal-content glass-panel">
-            <button class="modal-close magnetic" data-strength="20" id="modalCloseBtn"><i data-lucide="x"></i></button>
-            <div class="modal-body">
-                <div class="modal-tags" id="modalTags"></div>
-                <h2 id="modalTitle" class="modal-title"></h2>
-                <div class="modal-metrics-bar" id="modalMetrics"></div>
-                
-                <div class="modal-split">
-                    <div class="modal-col">
-                        <h4>Scope & Architecture</h4>
-                        <ul id="modalScope" class="modal-list"></ul>
-                        <h4 class="mt-2">Role & Execution</h4>
-                        <ul id="modalRole" class="modal-list"></ul>
-                    </div>
-                    <div class="modal-col">
-                        <h4>Constraints & Outcomes</h4>
-                        <ul id="modalConstraints" class="modal-list"></ul>
-                        <h4 class="mt-2">External Links</h4>
-                        <div id="modalLinks" class="modal-links-container"></div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <script src="app.js"></script>
-</body>
-</html>
+        /* CURSOR */
+        .cursor-dot { width: 6px; height: 6px; background-color: var(--text-primary); position: fixed; border-radius: 50%; z-index: 10000; pointer-events: none; transform: translate(-50%, -50%); display: none; }
+        .cursor-ring { width: 36px; height: 36px; border: 1px solid rgba(255,255,255,0.4); position: fixed; border-radius: 50%; z-index: 9999; pointer-events: none; transform: translate(-50%, -50%); transition: width 0.3s, height 0.3s, background-color 0.3s; display: none; }
